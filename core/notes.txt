@@ -1,0 +1,13 @@
+Simple Syntax:
+
+Check.notNull(object);
+Check.that(object != other);
+
+Better Syntax:
+
+Check.that(object, "object").isUrl().beginsWith("http:");
+
+Short Better Syntax:
+
+check(object).notNull();
+check(object, "object").isUrl();
