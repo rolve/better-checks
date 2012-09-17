@@ -10,7 +10,7 @@ public class Config {
     /*
      * Default values
      */
-    private static final String DEFAULT_DEFAULT_ARG_NAME = "argument";
+    private static final String DEFAULT_DEFAULT_ARG_NAME = "arg";
     
     /*
      * Static initialization and global config access
@@ -30,8 +30,8 @@ public class Config {
         final Config defaultConfig = new Config();
         defaultConfig.defaultArgumentName = DEFAULT_DEFAULT_ARG_NAME;
         
-        final HashMap<MessageFormatType, String> formats = new HashMap<MessageFormatType, String>();
-        for(final MessageFormatType type : MessageFormatType.values())
+        final HashMap<MessageFormatId, String> formats = new HashMap<MessageFormatId, String>();
+        for(final MessageFormatId type : MessageFormatId.values())
             formats.put(type, type.getDefaultFormat());
         defaultConfig.messageFormats = Collections.unmodifiableMap(formats);
         
@@ -55,7 +55,7 @@ public class Config {
      * is therefore thread-safe after publication in the static initializer.
      */
     private String defaultArgumentName;
-    private Map<MessageFormatType, String> messageFormats;
+    private Map<MessageFormatId, String> messageFormats;
     
     private Config() {}
     
@@ -63,7 +63,7 @@ public class Config {
         return defaultArgumentName;
     }
     
-    public String getMessageFormat(final MessageFormatType type) {
+    public String getMessageFormat(final MessageFormatId type) {
         return messageFormats.get(type);
     }
 }

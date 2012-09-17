@@ -6,8 +6,9 @@ Check.that(object != other);
 Better Syntax:
 
 Check.that(object, "object").isUrl().beginsWith("http:");
+Check.that(object).named("object").isNullOr().isUrl().beginsWith("http:");
 
 Short Better Syntax:
 
-check(object).notNull();
+check(object).isNotNull();
 check(object, "object").isUrl();

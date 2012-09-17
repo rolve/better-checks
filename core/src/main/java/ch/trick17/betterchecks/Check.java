@@ -1,7 +1,12 @@
 package ch.trick17.betterchecks;
 
-import static ch.trick17.betterchecks.MessageFormatType.ARG_EMPTY;
-import static ch.trick17.betterchecks.MessageFormatType.ARG_NULL;
+import static ch.trick17.betterchecks.MessageFormatId.ARG_EMPTY;
+import static ch.trick17.betterchecks.MessageFormatId.ARG_NULL;
+import static ch.trick17.betterchecks.MsgFormatter.defaultArgName;
+import static ch.trick17.betterchecks.MsgFormatter.formatMsg;
+import ch.trick17.betterchecks.fluent.FluentChecks;
+import ch.trick17.betterchecks.fluent.ObjectCheck;
+import ch.trick17.betterchecks.fluent.StringCheck;
 
 public class Check {
     
@@ -18,41 +23,37 @@ public class Check {
     
     public static void notNull(final Object arg) {
         if(arg == null)
-            throw illegalArgException(ARG_NULL, defaultArgName());
+            throw new IllegalArgumentException(formatMsg(ARG_NULL,
+                    defaultArgName()));
     }
     
     public static void notNull(final Object arg, final String argName) {
         if(arg == null)
-            throw illegalArgException(ARG_NULL, argName);
+            throw new IllegalArgumentException(formatMsg(ARG_NULL, argName));
     }
     
     public static void notEmpty(final String arg) {
         if(arg == null || arg.isEmpty())
-            throw illegalArgException(ARG_EMPTY, defaultArgName());
+            throw new IllegalArgumentException(formatMsg(ARG_EMPTY,
+                    defaultArgName()));
     }
     
     public static void notEmpty(final String arg, final String argName) {
-        if(arg == null || arg.isEmpty())
-            throw illegalArgException(ARG_EMPTY, argName);
+        if(arg == null || arg.isEmpty()) {
+            throw new IllegalArgumentException(
+                    formatMsg(ARG_EMPTY, argName));
+        }
     }
     
     /*
-     * Helper methods
+     * Fluent checks
      */
     
-    private static IllegalArgumentException illegalArgException(
-            final MessageFormatType type, final Object... args) {
-        final String message = formatMessage(type, args);
-        return new IllegalArgumentException(message);
+    public static ObjectCheck that(final Object argument) {
+        return FluentChecks.newObjectCheck(argument);
     }
     
-    private static String formatMessage(final MessageFormatType msgType,
-            final Object... args) {
-        final String format = Config.getConfig().getMessageFormat(msgType);
-        return String.format(format, args);
-    }
-    
-    private static String defaultArgName() {
-        return Config.getConfig().getDefaultArgumentName();
+    public static StringCheck that(final String argument) {
+        return FluentChecks.newStringCheck(argument);
     }
 }
