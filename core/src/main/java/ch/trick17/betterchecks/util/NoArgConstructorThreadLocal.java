@@ -12,9 +12,9 @@ import java.lang.reflect.Constructor;
  */
 public class NoArgConstructorThreadLocal<T> extends ThreadLocal<T> {
     
-    private Constructor<T> constructor;
+    private Constructor<? extends T> constructor;
     
-    public NoArgConstructorThreadLocal(final Class<T> clazz) {
+    public NoArgConstructorThreadLocal(final Class<? extends T> clazz) {
         try {
             constructor = clazz.getConstructor();
         } catch(final ReflectiveOperationException e) {

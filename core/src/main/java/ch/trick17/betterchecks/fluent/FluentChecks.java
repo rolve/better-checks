@@ -1,24 +1,34 @@
 package ch.trick17.betterchecks.fluent;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import ch.trick17.betterchecks.util.NoArgConstructorThreadLocal;
 
 public class FluentChecks {
     
-    private static final ThreadLocal<ObjectCheck> objectCheck = new NoArgConstructorThreadLocal<ObjectCheck>(
-            ObjectCheck.class);
-    private static final ThreadLocal<StringCheck> stringCheck = new NoArgConstructorThreadLocal<StringCheck>(
-            StringCheck.class);
+    @SuppressWarnings("unchecked")
+    private static final List<Class<? extends BaseCheck<? extends Object, ?>>> CHECK_CLASSES = Arrays
+            .asList(ObjectCheck.class, StringCheck.class, CollectionCheck.class);
     
-    public static ObjectCheck newObjectCheck(final Object argument) {
-        final ObjectCheck check = objectCheck.get();
+    private static final Map<Class<?>, ThreadLocal<? extends BaseCheck<?, ?>>> classChecks;
+    
+    static {
+        final Map<Class<?>, ThreadLocal<? extends BaseCheck<?, ?>>> map = new HashMap<Class<?>, ThreadLocal<? extends BaseCheck<?, ?>>>();
+        for(final Class<? extends BaseCheck<? extends Object, ?>> checkClass : CHECK_CLASSES)
+            map.put(checkClass,
+                    new NoArgConstructorThreadLocal<BaseCheck<?, ?>>(checkClass));
+        classChecks = Collections.unmodifiableMap(map);
+    }
+    
+    public static <T, C extends BaseCheck<T, C>> C newClassCheck(
+            final Class<C> checkClass, final T argument) {
+        @SuppressWarnings("unchecked")
+        final C check = (C) classChecks.get(checkClass).get();
         check.reset(argument);
         return check;
     }
-    
-    public static StringCheck newStringCheck(final String argument) {
-        final StringCheck check = stringCheck.get();
-        check.reset(argument);
-        return check;
-    }
-    
 }

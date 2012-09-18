@@ -18,7 +18,7 @@ public class StringCheckTest {
         Check.that("bla").isNotEmpty();
         Check.that(" ").isNotEmpty();
         Check.that("bla").isNullOr().isNotEmpty();
-        Check.that(null).isNullOr().isNotEmpty();
+        Check.that((String) null).isNullOr().isNotEmpty();
         
         Exception thrown = null;
         try {
@@ -32,7 +32,7 @@ public class StringCheckTest {
         
         thrown = null;
         try {
-            Check.that(null).isNotEmpty();
+            Check.that((String) null).isNotEmpty();
         } catch(final Exception e) {
             thrown = e;
         }
@@ -87,6 +87,41 @@ public class StringCheckTest {
         assertEquals(MsgFormatter.formatMsg(MessageFormatId.ARG_LENGTH, Config
                 .getConfig().getDefaultArgumentName(), 2, "bla"), thrown
                 .getMessage());
+    }
+    
+    @Test
+    @SuppressWarnings("null")
+    public void testHasLengthBetween() {
+        Check.that("hello").hasLengthBetween(5, 5);
+        Check.that("hello").hasLengthBetween(0, 10);
+        Check.that("hello").hasLengthBetween(Integer.MIN_VALUE,
+                Integer.MAX_VALUE);
+        
+        Check.that("").hasLengthBetween(0, 0);
+        Check.that("").hasLengthBetween(-1, 1);
+        Check.that("").hasLengthBetween(Integer.MIN_VALUE, Integer.MAX_VALUE);
+        
+        Exception thrown = null;
+        try {
+            Check.that("bla").hasLengthBetween(0, 2);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(MsgFormatter.formatMsg(MessageFormatId.ARG_LENGTH_BETWEEN,
+                Config.getConfig().getDefaultArgumentName(), 0, 2, "bla"),
+                thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that("bla").hasLengthBetween(4, Integer.MAX_VALUE);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(MsgFormatter.formatMsg(MessageFormatId.ARG_LENGTH_BETWEEN,
+                Config.getConfig().getDefaultArgumentName(), 4,
+                Integer.MAX_VALUE, "bla"), thrown.getMessage());
     }
     
     @Test

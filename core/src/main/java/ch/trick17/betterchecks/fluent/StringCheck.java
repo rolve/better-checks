@@ -28,7 +28,13 @@ public class StringCheck extends BaseCheck<String, StringCheck> {
         return this;
     }
     
-    // TODO: Add hasLengthBetween(int, int)
+    public StringCheck hasLengthBetween(final int min, final int max) {
+        super.isNotNull();
+        if(arg != null && (arg.length() < min || arg.length() > max))
+            throw new IllegalArgumentException(formatMsg(ARG_LENGTH_BETWEEN,
+                    argName, min, max, arg));
+        return this;
+    }
     
     public StringCheck startsWith(final String prefix) {
         super.isNotNull();
