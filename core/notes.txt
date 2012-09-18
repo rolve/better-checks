@@ -7,8 +7,31 @@ Better Syntax:
 
 Check.that(object, "object").isUrl().beginsWith("http:");
 Check.that(object).named("object").isNullOr().isUrl().beginsWith("http:");
+Check.that(object).not().beginsWith("https:");
 
 Short Better Syntax:
 
 check(object).isNotNull();
 check(object, "object").isUrl();
+
+Annotations:
+
+public void setSomething(@NotNull Object something)
+public void setHello(@Matches("hello .*!", not=true) String hello)
+
+---
+
+Check object hierarchy
+
+ObjectCheck
+     ^
+     |
+StringCheck
+
+or:
+
+            Check<T>
+             ^     ^
+             |     |
+    StringCheck   ObjectCheck
+(Check<String>)   (Check<Object>)

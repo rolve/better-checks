@@ -3,44 +3,18 @@ package ch.trick17.betterchecks.fluent;
 import static ch.trick17.betterchecks.MessageFormatId.*;
 import static ch.trick17.betterchecks.MsgFormatter.formatMsg;
 
-public class StringCheck extends ObjectCheck {
-    
-    /*
-     * State methods
-     */
-    
-    @Override
-    public StringCheck named(final String argumentName) {
-        super.named(argumentName);
-        return this;
-    }
-    
-    @Override
-    public StringCheck isNullOr() {
-        super.isNullOr();
-        return this;
-    }
-    
-    /*
-     * Checks
-     */
-    
-    @Override
-    public StringCheck isNotNull() {
-        super.isNotNull();
-        return this;
-    }
+public class StringCheck extends BaseCheck<String, StringCheck> {
     
     public StringCheck isNotEmpty() {
         super.isNotNull();
-        if(arg != null && ((String) arg).isEmpty())
+        if(arg != null && arg.isEmpty())
             throw new IllegalArgumentException(formatMsg(ARG_EMPTY, argName));
         return this;
     }
     
     public StringCheck isNotWhitespace() {
         super.isNotNull();
-        if(arg != null && ((String) arg).trim().isEmpty())
+        if(arg != null && arg.trim().isEmpty())
             throw new IllegalArgumentException(formatMsg(ARG_WHITESPACE,
                     argName));
         return this;
@@ -48,7 +22,7 @@ public class StringCheck extends ObjectCheck {
     
     public StringCheck hasLength(final int length) {
         super.isNotNull();
-        if(arg != null && ((String) arg).length() != length)
+        if(arg != null && arg.length() != length)
             throw new IllegalArgumentException(formatMsg(ARG_LENGTH, argName,
                     length, arg));
         return this;
@@ -58,7 +32,7 @@ public class StringCheck extends ObjectCheck {
     
     public StringCheck startsWith(final String prefix) {
         super.isNotNull();
-        if(arg != null && !((String) arg).startsWith(prefix))
+        if(arg != null && !arg.startsWith(prefix))
             throw new IllegalArgumentException(formatMsg(ARG_STARTS, argName,
                     prefix, arg));
         return this;
@@ -66,7 +40,7 @@ public class StringCheck extends ObjectCheck {
     
     public StringCheck endsWith(final String suffix) {
         super.isNotNull();
-        if(arg != null && !((String) arg).endsWith(suffix))
+        if(arg != null && !arg.endsWith(suffix))
             throw new IllegalArgumentException(formatMsg(ARG_ENDS, argName,
                     suffix, arg));
         return this;
@@ -75,7 +49,7 @@ public class StringCheck extends ObjectCheck {
     public StringCheck matches(final String regex) {
         super.isNotNull();
         // IMPROVE: Cache compiled patterns?
-        if(arg != null && !((String) arg).matches(regex))
+        if(arg != null && !arg.matches(regex))
             throw new IllegalArgumentException(formatMsg(ARG_MATCHES, argName,
                     regex, arg));
         return this;
