@@ -12,22 +12,23 @@ public class FluentChecks {
     
     @SuppressWarnings("unchecked")
     private static final List<Class<? extends BaseCheck<? extends Object, ?>>> CHECK_CLASSES = Arrays
-            .asList(ObjectCheck.class, StringCheck.class, CollectionCheck.class);
+            .asList(ObjectCheck.class, StringCheck.class,
+                    ObjectArrayCheck.class, CollectionCheck.class);
     
-    private static final Map<Class<?>, ThreadLocal<? extends BaseCheck<?, ?>>> classChecks;
+    private static final Map<Class<?>, ThreadLocal<? extends BaseCheck<?, ?>>> objectChecks;
     
     static {
         final Map<Class<?>, ThreadLocal<? extends BaseCheck<?, ?>>> map = new HashMap<Class<?>, ThreadLocal<? extends BaseCheck<?, ?>>>();
         for(final Class<? extends BaseCheck<? extends Object, ?>> checkClass : CHECK_CLASSES)
             map.put(checkClass,
                     new NoArgConstructorThreadLocal<BaseCheck<?, ?>>(checkClass));
-        classChecks = Collections.unmodifiableMap(map);
+        objectChecks = Collections.unmodifiableMap(map);
     }
     
-    public static <T, C extends BaseCheck<T, C>> C newClassCheck(
+    public static <T, C extends BaseCheck<T, C>> C newObjectCheck(
             final Class<C> checkClass, final T argument) {
         @SuppressWarnings("unchecked")
-        final C check = (C) classChecks.get(checkClass).get();
+        final C check = (C) objectChecks.get(checkClass).get();
         check.reset(argument);
         return check;
     }

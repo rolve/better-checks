@@ -10,7 +10,7 @@ public class Config {
     /*
      * Default values
      */
-    private static final String DEFAULT_DEFAULT_ARG_NAME = "arg";
+    private static final String DEFAULT_DEFAULT_ARG_NAME = "argument";
     
     /*
      * Static initialization and global config access
