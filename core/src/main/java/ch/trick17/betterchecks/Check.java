@@ -10,6 +10,83 @@ import ch.trick17.betterchecks.fluent.ObjectCheck;
 import ch.trick17.betterchecks.fluent.PrimitiveArrayCheck;
 import ch.trick17.betterchecks.fluent.StringCheck;
 
+/**
+ * This is the primary entry point to the Better Checks library. Its intention
+ * is to provide a light-weight and compact, but powerful way for precodition
+ * checking, in particular regarding method arguments. Checks are written in a
+ * fluent API way like this:
+ * <p>
+ * <code>Check.that(<em>argument</em>).<em>check1</em>().<em>check2</em>()<em>...</em>;</code>
+ * <p>
+ * Examples:
+ * <p>
+ * <code>Check.that(name).matches("hello .*!").hasLenghtBetween(0, 20);</code><br>
+ * <code>Check.that(list).isNullOr().hasSize(0);</code><br>
+ * <code>Check.that(args).named("arguments").isNotEmpty();</code>
+ * <p>
+ * The actual checking methods (such as <code>matches(...)</code> or
+ * <code>hasSize(...)</code>) all throw an exception if the check fails. The
+ * exact type of exception depends on the kind of check that is called but in
+ * most cases it is {@link IllegalArgumentException}.
+ * <h3>Check Objects</h3>
+ * <p>
+ * There are various overloaded variants of the <code>that(...)</code> method,
+ * each one returning a *Check object that suits the argument's type. For
+ * instance, if you pass a {@link String}, you will get a {@link StringCheck}
+ * object, with methods like {@link StringCheck#isNotEmpty()},
+ * {@link StringCheck#hasLength(int)} or {@link StringCheck#matches(String)}.
+ * <p>
+ * If there is no specific *Check class suiting the passed argument, a standard
+ * {@link ObjectCheck} is returned, supporting only
+ * {@link ObjectCheck#isNotNull()} and the state-modifying methods.
+ * <h3>Check Modification</h3>
+ * <p>
+ * In addition to the checking methods, the *Check objects provide some modifier
+ * methods that affect the subsequent checks. For example all checks by default
+ * also check that the argument is not <code>null</code>, throwing an exception
+ * if it is. To allow <code>null</code> as an accepted value, you can prepend
+ * the actual checks with <code>isNullOr()</code>, like in the second example
+ * above.
+ * <p>
+ * It is also possible to name the arguments that you are checking. By doing
+ * this, the exception messages will be more meaningful and debugging becomes
+ * easier. To name an argument, prepend all checks with
+ * <code>named("<em>argument name</em>")</code>, just like in the third example
+ * at the top.
+ * <h3>Intended Use and Thread Safety</h3>
+ * <p>
+ * To provide optimal performance, the <code>that(...)</code> methods do not
+ * create a new *Check object for every call. Instead, each overloaded method
+ * always returns the same (but modified) object (in a given thread). Therefore,
+ * you should always use those object right after getting them using the fluent
+ * API. Never should you store them and using them later, not even in local
+ * variables, as <em>any</em> method called in between may also use them.
+ * <p>
+ * Thread safety is guaranteed by means of thread confinement. As each thread
+ * receives its own *Check objects, and as long as they are not shared, those
+ * objects are thread safe.
+ * <h3>Compact Syntax</h3>
+ * <p>
+ * Instead of the <code>Check.that(...)</code> syntax, you can use a even more
+ * compact syntax, provided by the {@link CompactChecks} class.
+ * <h3>Configuration and Use in Libraries</h3>
+ * <p>
+ * It is intentionally not possible to configure the type of exception the
+ * checking methods throw. Because of this, the Better Checks library may safely
+ * be used in libraries (as opposed to applications) as well, without the risk
+ * that the application reconfigures the behavior of the library methods,
+ * possibly breaking their specification.
+ * <p>
+ * In general, the configuration of this library is rather limited. The only
+ * thing possible to configure are the exception messages. And the <em>way</em>
+ * to configure those is via a properties file on the classpath. This is also a
+ * design decision that makes it possible to safely use Better Checks in
+ * libraries and, more generally, in all code that potentially runs before the
+ * application's initialization, such as static initializers.
+ * 
+ * @author Michael Faes
+ * @see CompactChecks
+ */
 public class Check {
     
     private Check() {}

@@ -9,6 +9,26 @@ import ch.trick17.betterchecks.fluent.ObjectCheck;
 import ch.trick17.betterchecks.fluent.PrimitiveArrayCheck;
 import ch.trick17.betterchecks.fluent.StringCheck;
 
+/**
+ * This class provides the same functionality as the {@link Check} class, but
+ * with even more compact syntax.
+ * <p>
+ * To use it, statically import the {@link CompactChecks#check(Object)} method
+ * and write your checks like this:
+ * <p>
+ * <code>check(<em>argument</em>).<em>check1</em>().<em>check2</em>()<em>...</em>;</code>
+ * <p>
+ * Examples:
+ * <p>
+ * <code>check(name).matches("hello .*!").hasLenghtBetween(0, 20);</code><br>
+ * <code>check(list).isNullOr().hasSize(0);</code><br>
+ * <code>check(args).named("arguments").isNotEmpty();</code>
+ * <p>
+ * <strong>Note:</strong> For use case and thread safety issues, check the
+ * documentation of the {@link Check} class.
+ * 
+ * @author Michael Faes
+ */
 public class CompactChecks {
     
     public static ObjectCheck check(final Object argument) {
