@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.Config;
-import ch.trick17.betterchecks.MessageFormatId;
+import ch.trick17.betterchecks.MsgFormatId;
 import ch.trick17.betterchecks.MsgFormatter;
 
 public class ObjectCheckTest {
@@ -30,7 +30,7 @@ public class ObjectCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MessageFormatId.ARG_NULL, Config
+        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_NULL, Config
                 .getConfig().getDefaultArgumentName()), thrown.getMessage());
     }
     
@@ -45,7 +45,7 @@ public class ObjectCheckTest {
         }
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(
-                MsgFormatter.formatMsg(MessageFormatId.ARG_NULL, "my arg"),
+                MsgFormatter.formatMsg(MsgFormatId.ARG_NULL, "my arg"),
                 thrown.getMessage());
     }
 }

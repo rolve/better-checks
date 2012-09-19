@@ -1,6 +1,6 @@
 package ch.trick17.betterchecks;
 
-public enum MessageFormatId {
+public enum MsgFormatId {
     
     ARG_NULL("%s must not be null"),
     ARG_EMPTY("%s must not be empty"),
@@ -15,7 +15,7 @@ public enum MessageFormatId {
     
     private final String defaultFormat;
     
-    private MessageFormatId(final String defaultFormat) {
+    private MsgFormatId(final String defaultFormat) {
         this.defaultFormat = defaultFormat;
     }
     

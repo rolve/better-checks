@@ -1,6 +1,6 @@
 package ch.trick17.betterchecks.fluent;
 
-import static ch.trick17.betterchecks.MessageFormatId.*;
+import static ch.trick17.betterchecks.MsgFormatId.*;
 import static ch.trick17.betterchecks.MsgFormatter.formatMsg;
 
 import java.util.Collection;

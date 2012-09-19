@@ -2,7 +2,7 @@ package ch.trick17.betterchecks;
 
 public class MsgFormatter {
     
-    public static String formatMsg(final MessageFormatId formatId,
+    public static String formatMsg(final MsgFormatId formatId,
             final Object... args) {
         final String format = Config.getConfig().getMessageFormat(formatId);
         return String.format(format, args);

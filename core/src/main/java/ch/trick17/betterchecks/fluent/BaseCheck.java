@@ -1,6 +1,6 @@
 package ch.trick17.betterchecks.fluent;
 
-import static ch.trick17.betterchecks.MessageFormatId.ARG_NULL;
+import static ch.trick17.betterchecks.MsgFormatId.ARG_NULL;
 import static ch.trick17.betterchecks.MsgFormatter.defaultArgName;
 import static ch.trick17.betterchecks.MsgFormatter.formatMsg;
 
