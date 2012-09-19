@@ -58,13 +58,14 @@ import ch.trick17.betterchecks.fluent.StringCheck;
  * To provide optimal performance, the <code>that(...)</code> methods do not
  * create a new *Check object for every call. Instead, each overloaded method
  * always returns the same (but modified) object (in a given thread). Therefore,
- * you should always use those object right after getting them using the fluent
- * API. Never should you store them and using them later, not even in local
- * variables, as <em>any</em> method called in between may also use them.
+ * you should always use those objects right after getting them by using the
+ * fluent API. Never should you store them and using them later, not even in
+ * local variables, as <em>any</em> method called in between may also use and
+ * therefore modify them.
  * <p>
  * Thread safety is guaranteed by means of thread confinement. As each thread
- * receives its own *Check objects, and as long as they are not shared, those
- * objects are thread safe.
+ * receives its own *Check objects, and as long as they are not shared, the use
+ * of those objects is thread safe.
  * <h3>Compact Syntax</h3>
  * <p>
  * Instead of the <code>Check.that(...)</code> syntax, you can use a even more
@@ -72,17 +73,17 @@ import ch.trick17.betterchecks.fluent.StringCheck;
  * <h3>Configuration and Use in Libraries</h3>
  * <p>
  * It is intentionally not possible to configure the type of exception the
- * checking methods throw. Because of this, the Better Checks library may safely
- * be used in libraries (as opposed to applications) as well, without the risk
+ * checking methods throw. Because of this, the Better Checks library may also
+ * safely be used in libraries (as opposed to applications), without the risk
  * that the application reconfigures the behavior of the library methods,
  * possibly breaking their specification.
  * <p>
- * In general, the configuration of this library is rather limited. The only
- * thing possible to configure are the exception messages. And the <em>way</em>
- * to configure those is via a properties file on the classpath. This is also a
- * design decision that makes it possible to safely use Better Checks in
- * libraries and, more generally, in all code that potentially runs before the
- * application's initialization, such as static initializers.
+ * In general, the configuration possibilities of this library are rather
+ * limited. The only thing possible to configure are the exception messages. And
+ * the only way to configure those is via a properties file on the classpath.
+ * This is also a design decision that makes it possible to safely use Better
+ * Checks in libraries and, more generally, in all code that potentially runs
+ * before the application's initialization, such as static initializers.
  * 
  * @author Michael Faes
  * @see CompactChecks
