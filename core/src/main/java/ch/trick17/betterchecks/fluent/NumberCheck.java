@@ -37,4 +37,6 @@ public class NumberCheck extends BaseCheck<Number, NumberCheck> {
         }
         return this;
     }
+    
+    // TODO: isBetween, isGreaterThan, isLessThan, not()
 }

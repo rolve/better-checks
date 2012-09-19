@@ -13,8 +13,8 @@ public class FluentChecks {
     @SuppressWarnings("unchecked")
     private static final List<Class<? extends BaseCheck<? extends Object, ?>>> CHECK_CLASSES = Arrays
             .asList(ObjectCheck.class, StringCheck.class,
-                    ObjectArrayCheck.class, CollectionCheck.class,
-                    NumberCheck.class);
+                    ObjectArrayCheck.class, PrimitiveArrayCheck.class,
+                    CollectionCheck.class, NumberCheck.class);
     
     private static final Map<Class<?>, ThreadLocal<? extends BaseCheck<?, ?>>> objectChecks;
     
@@ -26,15 +26,26 @@ public class FluentChecks {
         objectChecks = Collections.unmodifiableMap(map);
     }
     
-    public static <T, C extends BaseCheck<T, C>> C newObjectCheck(
+    public static <T, C extends BaseCheck<T, C>> C getObjectCheck(
             final Class<C> checkClass, final T argument) {
+        final C check = getCheck(checkClass);
+        check.reset(argument);
+        return check;
+    }
+    
+    public static PrimitiveArrayCheck getPrimitiveArrayCheck(
+            final Object argument, final int argumentLength) {
+        final PrimitiveArrayCheck check = getCheck(PrimitiveArrayCheck.class);
+        check.reset(argument, argumentLength);
+        return check;
+    }
+    
+    @SuppressWarnings("unchecked")
+    protected static <T, C extends BaseCheck<T, C>> C getCheck(
+            final Class<C> checkClass) {
         final ThreadLocal<? extends BaseCheck<?, ?>> threadLocal = objectChecks
                 .get(checkClass);
         assert threadLocal != null;
-        
-        @SuppressWarnings("unchecked")
-        final C check = (C) threadLocal.get();
-        check.reset(argument);
-        return check;
+        return (C) threadLocal.get();
     }
 }
