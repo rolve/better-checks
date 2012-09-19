@@ -13,7 +13,8 @@ public class FluentChecks {
     @SuppressWarnings("unchecked")
     private static final List<Class<? extends BaseCheck<? extends Object, ?>>> CHECK_CLASSES = Arrays
             .asList(ObjectCheck.class, StringCheck.class,
-                    ObjectArrayCheck.class, CollectionCheck.class);
+                    ObjectArrayCheck.class, CollectionCheck.class,
+                    NumberCheck.class);
     
     private static final Map<Class<?>, ThreadLocal<? extends BaseCheck<?, ?>>> objectChecks;
     
@@ -27,8 +28,12 @@ public class FluentChecks {
     
     public static <T, C extends BaseCheck<T, C>> C newObjectCheck(
             final Class<C> checkClass, final T argument) {
+        final ThreadLocal<? extends BaseCheck<?, ?>> threadLocal = objectChecks
+                .get(checkClass);
+        assert threadLocal != null;
+        
         @SuppressWarnings("unchecked")
-        final C check = (C) objectChecks.get(checkClass).get();
+        final C check = (C) threadLocal.get();
         check.reset(argument);
         return check;
     }

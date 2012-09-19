@@ -7,9 +7,10 @@ import static ch.trick17.betterchecks.MsgFormatter.formatMsg;
 
 import java.util.Collection;
 
-import ch.trick17.betterchecks.fluent.ObjectArrayCheck;
 import ch.trick17.betterchecks.fluent.CollectionCheck;
 import ch.trick17.betterchecks.fluent.FluentChecks;
+import ch.trick17.betterchecks.fluent.NumberCheck;
+import ch.trick17.betterchecks.fluent.ObjectArrayCheck;
 import ch.trick17.betterchecks.fluent.ObjectCheck;
 import ch.trick17.betterchecks.fluent.StringCheck;
 
@@ -68,5 +69,9 @@ public class Check {
     public static CollectionCheck that(final Collection<?> argument) {
         return FluentChecks.<Collection<?>, CollectionCheck> newObjectCheck(
                 CollectionCheck.class, argument);
+    }
+    
+    public static NumberCheck that(final Number argument) {
+        return FluentChecks.newObjectCheck(NumberCheck.class, argument);
     }
 }

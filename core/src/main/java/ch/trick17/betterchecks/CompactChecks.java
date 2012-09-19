@@ -2,8 +2,9 @@ package ch.trick17.betterchecks;
 
 import java.util.Collection;
 
-import ch.trick17.betterchecks.fluent.ObjectArrayCheck;
 import ch.trick17.betterchecks.fluent.CollectionCheck;
+import ch.trick17.betterchecks.fluent.NumberCheck;
+import ch.trick17.betterchecks.fluent.ObjectArrayCheck;
 import ch.trick17.betterchecks.fluent.ObjectCheck;
 import ch.trick17.betterchecks.fluent.StringCheck;
 
@@ -22,6 +23,10 @@ public class CompactChecks {
     }
     
     public static CollectionCheck check(final Collection<?> argument) {
+        return Check.that(argument);
+    }
+    
+    public static NumberCheck check(final Number argument) {
         return Check.that(argument);
     }
 }

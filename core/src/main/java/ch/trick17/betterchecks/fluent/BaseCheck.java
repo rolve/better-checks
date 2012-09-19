@@ -18,22 +18,22 @@ public class BaseCheck<T, C extends BaseCheck<T, C>> {
     
     public final C named(final String argumentName) {
         this.argName = argumentName;
-        return castMe();
+        return me();
     }
     
     public final C isNullOr() {
         nullAllowed = true;
-        return castMe();
+        return me();
     }
     
     public final C isNotNull() {
         if(!nullAllowed && arg == null)
             throw new IllegalArgumentException(formatMsg(ARG_NULL, argName));
-        return castMe();
+        return me();
     }
     
     @SuppressWarnings("unchecked")
-    private C castMe() {
+    private C me() {
         return (C) this; // Why is a cast needed here?
     }
 }

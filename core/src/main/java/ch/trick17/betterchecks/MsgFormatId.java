@@ -11,7 +11,9 @@ public enum MsgFormatId {
     ARG_SIZE_BETWEEN("%s must have a size between %d and %d (value: %s)"),
     ARG_STARTS("%s must start with \"%s\" (value: %s)"),
     ARG_ENDS("%s must end with \"%s\" (value: %s)"),
-    ARG_MATCHES("%s must match the regex pattern \"%s\" (value: %s)");
+    ARG_MATCHES("%s must match the regex pattern \"%s\" (value: %s)"),
+    ARG_POSITIVE("%s must be positive (value: %s)"),
+    ARG_NEGATIVE("%s must be negative (value: %s)");
     
     private final String defaultFormat;
     
