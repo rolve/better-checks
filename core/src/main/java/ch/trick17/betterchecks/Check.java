@@ -12,7 +12,7 @@ import ch.trick17.betterchecks.fluent.StringCheck;
 
 /**
  * This is the primary entry point to the Better Checks library. Its intention
- * is to provide a light-weight and compact, but powerful way for precodition
+ * is to provide a lightweight and compact, but powerful way for precodition
  * checking, in particular regarding method arguments. Checks are written in a
  * fluent API way like this:
  * <p>
