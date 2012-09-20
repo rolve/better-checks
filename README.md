@@ -12,4 +12,6 @@ The actual checking methods (such as `matches(...)` or `hasSize(...)`) all throw
 
 ## Project Website
 
+For more information, visit the project's website:
+
 <http://better-checks.trick17.ch>
