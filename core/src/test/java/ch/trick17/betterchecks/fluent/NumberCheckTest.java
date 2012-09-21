@@ -10,9 +10,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.Test;
 
 import ch.trick17.betterchecks.Check;
-import ch.trick17.betterchecks.Config;
+import ch.trick17.betterchecks.Exceptions;
 import ch.trick17.betterchecks.MsgFormatId;
-import ch.trick17.betterchecks.MsgFormatter;
 
 public class NumberCheckTest {
     
@@ -52,8 +51,8 @@ public class NumberCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_POSITIVE, Config
-                .getConfig().getDefaultArgumentName(), 0), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_POSITIVE, Exceptions
+                .defaultArgName(), 0), thrown.getMessage());
         
         thrown = null;
         try {
@@ -62,8 +61,8 @@ public class NumberCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_POSITIVE, Config
-                .getConfig().getDefaultArgumentName(), -1), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_POSITIVE, Exceptions
+                .defaultArgName(), -1), thrown.getMessage());
     }
     
     @Test
@@ -102,8 +101,8 @@ public class NumberCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_NEGATIVE, Config
-                .getConfig().getDefaultArgumentName(), 0), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NEGATIVE, Exceptions
+                .defaultArgName(), 0), thrown.getMessage());
         
         thrown = null;
         try {
@@ -112,7 +111,7 @@ public class NumberCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_NEGATIVE, Config
-                .getConfig().getDefaultArgumentName(), 1), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NEGATIVE, Exceptions
+                .defaultArgName(), 1), thrown.getMessage());
     }
 }

@@ -1,7 +1,7 @@
 package ch.trick17.betterchecks.fluent;
 
+import static ch.trick17.betterchecks.Exceptions.illegalArgumentException;
 import static ch.trick17.betterchecks.MsgFormatId.*;
-import static ch.trick17.betterchecks.MsgFormatter.formatMsg;
 
 import java.util.Arrays;
 
@@ -17,23 +17,23 @@ public class PrimitiveArrayCheck extends BaseCheck<Object, PrimitiveArrayCheck> 
     public PrimitiveArrayCheck isNotEmpty() {
         super.isNotNull();
         if(arg != null && argLength == 0)
-            throw new IllegalArgumentException(formatMsg(ARG_EMPTY, argName));
+            throw illegalArgumentException(ARG_EMPTY, argName);
         return this;
     }
     
     public PrimitiveArrayCheck hasLength(final int length) {
         super.isNotNull();
         if(arg != null && argLength != length)
-            throw new IllegalArgumentException(formatMsg(ARG_LENGTH, argName,
-                    length, arrayToString()));
+            throw illegalArgumentException(ARG_LENGTH, argName, length,
+                    arrayToString());
         return this;
     }
     
     public PrimitiveArrayCheck hasLengthBetween(final int min, final int max) {
         super.isNotNull();
         if(arg != null && (argLength < min || argLength > max))
-            throw new IllegalArgumentException(formatMsg(ARG_LENGTH_BETWEEN,
-                    argName, min, max, arrayToString()));
+            throw illegalArgumentException(ARG_LENGTH_BETWEEN, argName, min,
+                    max, arrayToString());
         return this;
     }
     

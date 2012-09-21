@@ -6,9 +6,8 @@ import static junit.framework.Assert.assertTrue;
 import org.junit.Test;
 
 import ch.trick17.betterchecks.Check;
-import ch.trick17.betterchecks.Config;
+import ch.trick17.betterchecks.Exceptions;
 import ch.trick17.betterchecks.MsgFormatId;
-import ch.trick17.betterchecks.MsgFormatter;
 
 public class ObjectCheckTest {
     
@@ -30,8 +29,8 @@ public class ObjectCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_NULL, Config
-                .getConfig().getDefaultArgumentName()), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, Exceptions
+                .defaultArgName()), thrown.getMessage());
     }
     
     @Test
@@ -44,8 +43,7 @@ public class ObjectCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(
-                MsgFormatter.formatMsg(MsgFormatId.ARG_NULL, "my arg"),
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, "my arg"),
                 thrown.getMessage());
     }
 }

@@ -6,9 +6,8 @@ import static junit.framework.Assert.assertTrue;
 import org.junit.Test;
 
 import ch.trick17.betterchecks.Check;
-import ch.trick17.betterchecks.Config;
+import ch.trick17.betterchecks.Exceptions;
 import ch.trick17.betterchecks.MsgFormatId;
-import ch.trick17.betterchecks.MsgFormatter;
 
 public class StringCheckTest {
     
@@ -27,8 +26,8 @@ public class StringCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_EMPTY, Config
-                .getConfig().getDefaultArgumentName()), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_EMPTY, Exceptions
+                .defaultArgName()), thrown.getMessage());
         
         thrown = null;
         try {
@@ -37,8 +36,8 @@ public class StringCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_NULL, Config
-                .getConfig().getDefaultArgumentName()), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, Exceptions
+                .defaultArgName()), thrown.getMessage());
     }
     
     @Test
@@ -54,9 +53,8 @@ public class StringCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_WHITESPACE,
-                Config.getConfig().getDefaultArgumentName()), thrown
-                .getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_WHITESPACE,
+                Exceptions.defaultArgName()), thrown.getMessage());
         
         thrown = null;
         try {
@@ -65,9 +63,8 @@ public class StringCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_WHITESPACE,
-                Config.getConfig().getDefaultArgumentName()), thrown
-                .getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_WHITESPACE,
+                Exceptions.defaultArgName()), thrown.getMessage());
     }
     
     @Test
@@ -84,9 +81,8 @@ public class StringCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_LENGTH, Config
-                .getConfig().getDefaultArgumentName(), 2, "bla"), thrown
-                .getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_LENGTH, Exceptions
+                .defaultArgName(), 2, "bla"), thrown.getMessage());
     }
     
     @Test
@@ -108,9 +104,8 @@ public class StringCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_LENGTH_BETWEEN,
-                Config.getConfig().getDefaultArgumentName(), 0, 2, "bla"),
-                thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_LENGTH_BETWEEN,
+                Exceptions.defaultArgName(), 0, 2, "bla"), thrown.getMessage());
         
         thrown = null;
         try {
@@ -119,9 +114,9 @@ public class StringCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_LENGTH_BETWEEN,
-                Config.getConfig().getDefaultArgumentName(), 4,
-                Integer.MAX_VALUE, "bla"), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_LENGTH_BETWEEN,
+                Exceptions.defaultArgName(), 4, Integer.MAX_VALUE, "bla"),
+                thrown.getMessage());
     }
     
     @Test
@@ -138,9 +133,8 @@ public class StringCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_STARTS, Config
-                .getConfig().getDefaultArgumentName(), "x", "hello"), thrown
-                .getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_STARTS, Exceptions
+                .defaultArgName(), "x", "hello"), thrown.getMessage());
     }
     
     @Test
@@ -157,9 +151,8 @@ public class StringCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_ENDS, Config
-                .getConfig().getDefaultArgumentName(), "x", "hello"), thrown
-                .getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_ENDS, Exceptions
+                .defaultArgName(), "x", "hello"), thrown.getMessage());
     }
     
     @Test
@@ -175,8 +168,7 @@ public class StringCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_MATCHES, Config
-                .getConfig().getDefaultArgumentName(), "hi", "hello"), thrown
-                .getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_MATCHES, Exceptions
+                .defaultArgName(), "hi", "hello"), thrown.getMessage());
     }
 }

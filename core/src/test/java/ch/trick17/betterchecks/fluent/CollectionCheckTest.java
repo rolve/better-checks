@@ -9,9 +9,8 @@ import java.util.Collection;
 import org.junit.Test;
 
 import ch.trick17.betterchecks.Check;
-import ch.trick17.betterchecks.Config;
+import ch.trick17.betterchecks.Exceptions;
 import ch.trick17.betterchecks.MsgFormatId;
-import ch.trick17.betterchecks.MsgFormatter;
 
 public class CollectionCheckTest {
     
@@ -30,8 +29,8 @@ public class CollectionCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_EMPTY, Config
-                .getConfig().getDefaultArgumentName()), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_EMPTY, Exceptions
+                .defaultArgName()), thrown.getMessage());
         
         thrown = null;
         try {
@@ -40,8 +39,8 @@ public class CollectionCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_NULL, Config
-                .getConfig().getDefaultArgumentName()), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, Exceptions
+                .defaultArgName()), thrown.getMessage());
     }
     
     @Test
@@ -58,9 +57,8 @@ public class CollectionCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_SIZE, Config
-                .getConfig().getDefaultArgumentName(), 2, Arrays.asList(1)),
-                thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_SIZE, Exceptions
+                .defaultArgName(), 2, Arrays.asList(1)), thrown.getMessage());
     }
     
     @Test
@@ -83,9 +81,9 @@ public class CollectionCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_SIZE_BETWEEN,
-                Config.getConfig().getDefaultArgumentName(), 0, 2, Arrays
-                        .asList(1, 2, 3)), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_SIZE_BETWEEN,
+                Exceptions.defaultArgName(), 0, 2, Arrays.asList(1, 2, 3)),
+                thrown.getMessage());
         
         thrown = null;
         try {
@@ -95,8 +93,8 @@ public class CollectionCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_SIZE_BETWEEN,
-                Config.getConfig().getDefaultArgumentName(), 4,
-                Integer.MAX_VALUE, Arrays.asList(1, 2, 3)), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_SIZE_BETWEEN,
+                Exceptions.defaultArgName(), 4, Integer.MAX_VALUE, Arrays
+                        .asList(1, 2, 3)), thrown.getMessage());
     }
 }

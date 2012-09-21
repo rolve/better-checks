@@ -1,8 +1,8 @@
 package ch.trick17.betterchecks.fluent;
 
+import static ch.trick17.betterchecks.Exceptions.defaultArgName;
+import static ch.trick17.betterchecks.Exceptions.illegalArgumentException;
 import static ch.trick17.betterchecks.MsgFormatId.ARG_NULL;
-import static ch.trick17.betterchecks.MsgFormatter.defaultArgName;
-import static ch.trick17.betterchecks.MsgFormatter.formatMsg;
 
 public class BaseCheck<T, C extends BaseCheck<T, C>> {
     
@@ -28,7 +28,7 @@ public class BaseCheck<T, C extends BaseCheck<T, C>> {
     
     public final C isNotNull() {
         if(!nullAllowed && arg == null)
-            throw new IllegalArgumentException(formatMsg(ARG_NULL, argName));
+            throw illegalArgumentException(ARG_NULL, argName);
         return me();
     }
     

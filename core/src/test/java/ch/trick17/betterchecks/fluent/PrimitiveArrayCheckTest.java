@@ -6,9 +6,8 @@ import static junit.framework.Assert.assertTrue;
 import org.junit.Test;
 
 import ch.trick17.betterchecks.Check;
-import ch.trick17.betterchecks.Config;
+import ch.trick17.betterchecks.Exceptions;
 import ch.trick17.betterchecks.MsgFormatId;
-import ch.trick17.betterchecks.MsgFormatter;
 
 public class PrimitiveArrayCheckTest {
     
@@ -39,8 +38,8 @@ public class PrimitiveArrayCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_EMPTY, Config
-                .getConfig().getDefaultArgumentName()), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_EMPTY, Exceptions
+                .defaultArgName()), thrown.getMessage());
         
         thrown = null;
         try {
@@ -49,8 +48,8 @@ public class PrimitiveArrayCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_NULL, Config
-                .getConfig().getDefaultArgumentName()), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, Exceptions
+                .defaultArgName()), thrown.getMessage());
     }
     
     @Test
@@ -67,9 +66,8 @@ public class PrimitiveArrayCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_LENGTH, Config
-                .getConfig().getDefaultArgumentName(), 2, "[1, 2, 3]"), thrown
-                .getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_LENGTH, Exceptions
+                .defaultArgName(), 2, "[1, 2, 3]"), thrown.getMessage());
     }
     
     @Test
@@ -92,9 +90,9 @@ public class PrimitiveArrayCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_LENGTH_BETWEEN,
-                Config.getConfig().getDefaultArgumentName(), 0, 2,
-                "[10, 20, 30]"), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_LENGTH_BETWEEN,
+                Exceptions.defaultArgName(), 0, 2, "[10, 20, 30]"), thrown
+                .getMessage());
         
         thrown = null;
         try {
@@ -104,8 +102,8 @@ public class PrimitiveArrayCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(MsgFormatter.formatMsg(MsgFormatId.ARG_LENGTH_BETWEEN,
-                Config.getConfig().getDefaultArgumentName(), 4,
-                Integer.MAX_VALUE, "[-1, -2, -3]"), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_LENGTH_BETWEEN,
+                Exceptions.defaultArgName(), 4, Integer.MAX_VALUE,
+                "[-1, -2, -3]"), thrown.getMessage());
     }
 }
