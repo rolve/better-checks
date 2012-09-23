@@ -29,9 +29,7 @@ import ch.trick17.betterchecks.fluent.StringCheck;
  * 
  * @author Michael Faes
  */
-public final class CompactChecks {
-    
-    private CompactChecks() {}
+public abstract class CompactChecks {
     
     public static ObjectCheck check(final Object argument) {
         return Check.that(argument);

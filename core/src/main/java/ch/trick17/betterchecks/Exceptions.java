@@ -2,7 +2,7 @@ package ch.trick17.betterchecks;
 
 import java.util.Arrays;
 
-public final class Exceptions {
+public abstract class Exceptions {
     
     private Exceptions() {}
     
