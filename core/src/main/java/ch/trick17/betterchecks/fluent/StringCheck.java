@@ -3,7 +3,7 @@ package ch.trick17.betterchecks.fluent;
 import static ch.trick17.betterchecks.Exceptions.illegalArgumentException;
 import static ch.trick17.betterchecks.MsgFormatId.*;
 
-public class StringCheck extends BaseCheck<String, StringCheck> {
+public final class StringCheck extends BaseCheck<String, StringCheck> {
     
     public StringCheck isNotEmpty() {
         super.isNotNull();

@@ -5,7 +5,8 @@ import static ch.trick17.betterchecks.MsgFormatId.*;
 
 import java.util.Collection;
 
-public class CollectionCheck extends BaseCheck<Collection<?>, CollectionCheck> {
+public final class CollectionCheck extends
+        BaseCheck<Collection<?>, CollectionCheck> {
     
     public CollectionCheck isNotEmpty() {
         super.isNotNull();

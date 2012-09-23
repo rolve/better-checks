@@ -88,7 +88,7 @@ import ch.trick17.betterchecks.fluent.StringCheck;
  * @author Michael Faes
  * @see CompactChecks
  */
-public class Check {
+public final class Check {
     
     private Check() {}
     

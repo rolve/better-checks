@@ -5,7 +5,8 @@ import static ch.trick17.betterchecks.MsgFormatId.*;
 
 import java.util.Arrays;
 
-public class ObjectArrayCheck extends BaseCheck<Object[], ObjectArrayCheck> {
+public final class ObjectArrayCheck extends
+        BaseCheck<Object[], ObjectArrayCheck> {
     
     public ObjectArrayCheck isNotEmpty() {
         super.isNotNull();

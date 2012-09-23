@@ -2,7 +2,9 @@ package ch.trick17.betterchecks;
 
 import java.util.Arrays;
 
-public class Exceptions {
+public final class Exceptions {
+    
+    private Exceptions() {}
     
     private static final String BASE_PACKAGE = Check.class.getPackage()
             .getName();

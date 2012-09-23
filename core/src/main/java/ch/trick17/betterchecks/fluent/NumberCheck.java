@@ -6,7 +6,7 @@ import static ch.trick17.betterchecks.MsgFormatId.ARG_POSITIVE;
 
 import java.math.BigDecimal;
 
-public class NumberCheck extends BaseCheck<Number, NumberCheck> {
+public final class NumberCheck extends BaseCheck<Number, NumberCheck> {
     
     public NumberCheck isPositive() {
         super.isNotNull();

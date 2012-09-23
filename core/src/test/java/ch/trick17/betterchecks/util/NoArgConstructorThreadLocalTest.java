@@ -49,6 +49,5 @@ public class NoArgConstructorThreadLocalTest {
         public ThrowingHelper() {
             throw new RuntimeException();
         }
-        
     }
 }
