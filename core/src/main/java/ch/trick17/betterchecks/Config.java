@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public final class Config {
     
@@ -30,9 +31,9 @@ public final class Config {
         final Config defaultConfig = new Config();
         defaultConfig.defaultArgumentName = DEFAULT_DEFAULT_ARG_NAME;
         
-        final HashMap<MsgFormatId, String> formats = new HashMap<MsgFormatId, String>();
+        final HashMap<MsgFormatId, FormatPair> formats = new HashMap<MsgFormatId, FormatPair>();
         for(final MsgFormatId type : MsgFormatId.values())
-            formats.put(type, type.getDefaultFormat());
+            formats.put(type, new FormatPair(type.getDefaultFormat()));
         defaultConfig.messageFormats = Collections.unmodifiableMap(formats);
         
         return defaultConfig;
@@ -50,12 +51,13 @@ public final class Config {
     /*
      * Config object
      */
+    
     /*
      * Note that a Config object is *effectively* immutable. The static config
      * is therefore thread-safe after publication in the static initializer.
      */
     private String defaultArgumentName;
-    private Map<MsgFormatId, String> messageFormats;
+    private Map<MsgFormatId, FormatPair> messageFormats;
     
     private Config() {}
     
@@ -63,7 +65,34 @@ public final class Config {
         return defaultArgumentName;
     }
     
-    public String getMessageFormat(final MsgFormatId type) {
-        return messageFormats.get(type);
+    public String getMessageFormat(final MsgFormatId type,
+            final boolean inverted) {
+        return messageFormats.get(type).getFormat(inverted);
+    }
+    
+    private static class FormatPair {
+        
+        private static final Pattern POSITIVE_PATTERN = Pattern
+                .compile("\\+\\((.*)\\)\\+");
+        private static final Pattern NEGATIVE_PATTERN = Pattern
+                .compile("-\\((.*)\\)-");
+        
+        private final String positive;
+        private final String negative;
+        
+        public FormatPair(final String rawFormat) {
+            final String negativeRemoved = NEGATIVE_PATTERN.matcher(rawFormat)
+                    .replaceAll("");
+            positive = POSITIVE_PATTERN.matcher(negativeRemoved).replaceAll(
+                    "$1");
+            final String positiveRemoved = POSITIVE_PATTERN.matcher(rawFormat)
+                    .replaceAll("");
+            negative = NEGATIVE_PATTERN.matcher(positiveRemoved).replaceAll(
+                    "$1");
+        }
+        
+        public String getFormat(final boolean inverted) {
+            return inverted ? negative : positive;
+        }
     }
 }

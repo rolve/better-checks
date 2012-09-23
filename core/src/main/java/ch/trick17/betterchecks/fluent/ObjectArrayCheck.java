@@ -1,6 +1,5 @@
 package ch.trick17.betterchecks.fluent;
 
-import static ch.trick17.betterchecks.Exceptions.illegalArgumentException;
 import static ch.trick17.betterchecks.MsgFormatId.*;
 
 import java.util.Arrays;
@@ -9,25 +8,16 @@ public final class ObjectArrayCheck extends
         BaseCheck<Object[], ObjectArrayCheck> {
     
     public ObjectArrayCheck isNotEmpty() {
-        super.isNotNull();
-        if(arg != null && arg.length == 0)
-            throw illegalArgumentException(ARG_EMPTY, argName);
-        return this;
+        return check(arg == null || arg.length != 0, ARG_EMPTY, argName);
     }
     
     public ObjectArrayCheck hasLength(final int length) {
-        super.isNotNull();
-        if(arg != null && arg.length != length)
-            throw illegalArgumentException(ARG_LENGTH, argName, length, Arrays
-                    .toString(arg));
-        return this;
+        return check(arg == null || arg.length == length, ARG_LENGTH, argName,
+                length, Arrays.toString(arg));
     }
     
     public ObjectArrayCheck hasLengthBetween(final int min, final int max) {
-        super.isNotNull();
-        if(arg != null && (arg.length < min || arg.length > max))
-            throw illegalArgumentException(ARG_LENGTH_BETWEEN, argName, min,
-                    max, Arrays.toString(arg));
-        return this;
+        return check(arg == null || (arg.length >= min && arg.length <= max),
+                ARG_LENGTH_BETWEEN, argName, min, max, Arrays.toString(arg));
     }
 }

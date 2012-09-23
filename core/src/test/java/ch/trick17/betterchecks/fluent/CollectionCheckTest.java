@@ -29,8 +29,8 @@ public class CollectionCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_EMPTY, Exceptions
-                .defaultArgName()), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_EMPTY, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
         
         thrown = null;
         try {
@@ -39,8 +39,8 @@ public class CollectionCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, Exceptions
-                .defaultArgName()), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
     }
     
     @Test
@@ -57,8 +57,9 @@ public class CollectionCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_SIZE, Exceptions
-                .defaultArgName(), 2, Arrays.asList(1)), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_SIZE, false,
+                Exceptions.defaultArgName(), 2, Arrays.asList(1)), thrown
+                .getMessage());
     }
     
     @Test
@@ -81,7 +82,7 @@ public class CollectionCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_SIZE_BETWEEN,
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_SIZE_BETWEEN, false,
                 Exceptions.defaultArgName(), 0, 2, Arrays.asList(1, 2, 3)),
                 thrown.getMessage());
         
@@ -93,7 +94,7 @@ public class CollectionCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_SIZE_BETWEEN,
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_SIZE_BETWEEN, false,
                 Exceptions.defaultArgName(), 4, Integer.MAX_VALUE, Arrays
                         .asList(1, 2, 3)), thrown.getMessage());
     }

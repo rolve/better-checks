@@ -51,8 +51,8 @@ public class NumberCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_POSITIVE, Exceptions
-                .defaultArgName(), 0), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_POSITIVE, false,
+                Exceptions.defaultArgName(), 0), thrown.getMessage());
         
         thrown = null;
         try {
@@ -61,8 +61,18 @@ public class NumberCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_POSITIVE, Exceptions
-                .defaultArgName(), -1), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_POSITIVE, false,
+                Exceptions.defaultArgName(), -1), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((Number) null).isPositive();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
     }
     
     @Test
@@ -101,8 +111,8 @@ public class NumberCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NEGATIVE, Exceptions
-                .defaultArgName(), 0), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NEGATIVE, false,
+                Exceptions.defaultArgName(), 0), thrown.getMessage());
         
         thrown = null;
         try {
@@ -111,7 +121,17 @@ public class NumberCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NEGATIVE, Exceptions
-                .defaultArgName(), 1), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NEGATIVE, false,
+                Exceptions.defaultArgName(), 1), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((Number) null).isNegative();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
     }
 }

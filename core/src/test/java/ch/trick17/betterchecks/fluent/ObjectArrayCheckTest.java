@@ -26,8 +26,8 @@ public class ObjectArrayCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_EMPTY, Exceptions
-                .defaultArgName()), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_EMPTY, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
         
         thrown = null;
         try {
@@ -36,8 +36,8 @@ public class ObjectArrayCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, Exceptions
-                .defaultArgName()), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
     }
     
     @Test
@@ -54,8 +54,19 @@ public class ObjectArrayCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_LENGTH, Exceptions
-                .defaultArgName(), 2, "[A, B, C]"), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_LENGTH, false,
+                Exceptions.defaultArgName(), 2, "[A, B, C]"), thrown
+                .getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((String[]) null).hasLength(0);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
     }
     
     @Test
@@ -79,7 +90,7 @@ public class ObjectArrayCheckTest {
         }
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_LENGTH_BETWEEN,
-                Exceptions.defaultArgName(), 0, 2, "[a, b, c]"), thrown
+                false, Exceptions.defaultArgName(), 0, 2, "[a, b, c]"), thrown
                 .getMessage());
         
         thrown = null;
@@ -90,9 +101,18 @@ public class ObjectArrayCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(
-                Exceptions.formatMsg(MsgFormatId.ARG_LENGTH_BETWEEN, Exceptions
-                        .defaultArgName(), 4, Integer.MAX_VALUE, "[1, 2, 3]"),
-                thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_LENGTH_BETWEEN,
+                false, Exceptions.defaultArgName(), 4, Integer.MAX_VALUE,
+                "[1, 2, 3]"), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((String[]) null).hasLengthBetween(0, 2);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
     }
 }

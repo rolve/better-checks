@@ -10,16 +10,18 @@ public abstract class Exceptions {
             .getName();
     
     public static IllegalArgumentException illegalArgumentException(
-            final MsgFormatId formatId, final Object... msgArgs) {
+            final MsgFormatId formatId, final boolean inverted,
+            final Object... msgArgs) {
         final IllegalArgumentException exception = new IllegalArgumentException(
-                formatMsg(formatId, msgArgs));
+                formatMsg(formatId, inverted, msgArgs));
         cleanUpStackTrace(exception);
         return exception;
     }
     
     public static String formatMsg(final MsgFormatId formatId,
-            final Object... msgArgs) {
-        final String format = Config.getConfig().getMessageFormat(formatId);
+            final boolean inverted, final Object... msgArgs) {
+        final String format = Config.getConfig().getMessageFormat(formatId,
+                inverted);
         return String.format(format, msgArgs);
     }
     

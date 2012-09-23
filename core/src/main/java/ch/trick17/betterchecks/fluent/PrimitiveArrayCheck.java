@@ -1,6 +1,5 @@
 package ch.trick17.betterchecks.fluent;
 
-import static ch.trick17.betterchecks.Exceptions.illegalArgumentException;
 import static ch.trick17.betterchecks.MsgFormatId.*;
 
 import java.util.Arrays;
@@ -16,29 +15,20 @@ public final class PrimitiveArrayCheck extends
     }
     
     public PrimitiveArrayCheck isNotEmpty() {
-        super.isNotNull();
-        if(arg != null && argLength == 0)
-            throw illegalArgumentException(ARG_EMPTY, argName);
-        return this;
+        return check(arg == null || argLength != 0, ARG_EMPTY, argName);
     }
     
     public PrimitiveArrayCheck hasLength(final int length) {
-        super.isNotNull();
-        if(arg != null && argLength != length)
-            throw illegalArgumentException(ARG_LENGTH, argName, length,
-                    arrayToString());
-        return this;
+        return check(arg == null || argLength == length, ARG_LENGTH, argName,
+                length, arrayToString(arg));
     }
     
     public PrimitiveArrayCheck hasLengthBetween(final int min, final int max) {
-        super.isNotNull();
-        if(arg != null && (argLength < min || argLength > max))
-            throw illegalArgumentException(ARG_LENGTH_BETWEEN, argName, min,
-                    max, arrayToString());
-        return this;
+        return check(arg == null || (argLength >= min && argLength <= max),
+                ARG_LENGTH_BETWEEN, argName, min, max, arrayToString(arg));
     }
     
-    private String arrayToString() {
+    private static String arrayToString(final Object arg) {
         if(arg instanceof boolean[])
             return Arrays.toString((boolean[]) arg);
         if(arg instanceof byte[])
