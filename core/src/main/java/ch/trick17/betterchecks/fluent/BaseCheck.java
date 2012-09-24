@@ -10,7 +10,7 @@ public class BaseCheck<T, C extends BaseCheck<T, C>> {
     protected T arg;
     protected Class<?> argClass;
     protected String argName;
-    protected boolean nullAllowed;
+    private boolean nullAllowed;
     private boolean inverted;
     
     protected final void reset(final T argument) {

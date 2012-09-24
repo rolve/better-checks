@@ -71,5 +71,4 @@ public class ExceptionsTest {
                         new StringBuilder("the list"), 3, 4, Arrays.asList(
                                 "abc d", "hello")));
     }
-    
 }

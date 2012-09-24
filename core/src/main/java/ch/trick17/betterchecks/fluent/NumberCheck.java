@@ -25,5 +25,5 @@ public final class NumberCheck extends BaseCheck<Number, NumberCheck> {
             return check(arg.doubleValue() < 0, ARG_NEGATIVE, argName, arg);
     }
     
-    // TODO: isBetween, isGreaterThan, isLessThan, not()
+    // TODO: isBetween, isGreaterThan, isLessThan
 }

@@ -4,8 +4,6 @@ import java.util.Arrays;
 
 public abstract class Exceptions {
     
-    private Exceptions() {}
-    
     private static final String BASE_PACKAGE = Check.class.getPackage()
             .getName();
     
@@ -25,11 +23,19 @@ public abstract class Exceptions {
         return String.format(format, msgArgs);
     }
     
+    public static String defaultArgName() {
+        return Config.getConfig().getDefaultArgumentName();
+    }
+    
+    /*
+     * Implementation methods
+     */
+    
     private static void cleanUpStackTrace(final Exception exception) {
         StackTraceElement[] trace = exception.getStackTrace();
         int minIndex = 0;
         for(int i = 0; i < trace.length; i++) {
-            if(removeElement(trace[i]))
+            if(isBetterChecksElement(trace[i]))
                 minIndex = i + 1;
             else
                 break;
@@ -39,13 +45,9 @@ public abstract class Exceptions {
         exception.setStackTrace(trace);
     }
     
-    private static boolean removeElement(final StackTraceElement element) {
+    private static boolean isBetterChecksElement(final StackTraceElement element) {
         final String className = element.getClassName();
         return className.startsWith(BASE_PACKAGE)
                 && !className.endsWith("Test");
-    }
-    
-    public static String defaultArgName() {
-        return Config.getConfig().getDefaultArgumentName();
     }
 }
