@@ -1,5 +1,7 @@
 package ch.trick17.betterchecks;
 
+import static ch.trick17.betterchecks.Exceptions.illegalArgumentException;
+
 import java.util.Collection;
 
 import ch.trick17.betterchecks.fluent.CollectionCheck;
@@ -13,8 +15,8 @@ import ch.trick17.betterchecks.fluent.StringCheck;
 /**
  * This is the primary entry point to the Better Checks library. Its intention
  * is to provide a lightweight and compact, but powerful way for precodition
- * checking, in particular regarding method arguments. Checks are written in a
- * fluent API way like this:
+ * checking, in particular regarding method arguments. Argument checks are
+ * written in a fluent way like this:
  * <p>
  * <code>Check.that(<em>argument</em>).<em>check1</em>().<em>check2</em>()<em>...</em>;</code>
  * <p>
@@ -91,7 +93,16 @@ import ch.trick17.betterchecks.fluent.StringCheck;
 public abstract class Check {
     
     /*
-     * Fluent checks
+     * Simple checks
+     */
+    
+    public static void that(final boolean condition, final String message) {
+        if(!condition)
+            throw illegalArgumentException(message);
+    }
+    
+    /*
+     * Fluent argument checks
      */
     
     public static ObjectCheck that(final Object argument) {

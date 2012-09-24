@@ -8,6 +8,14 @@ public abstract class Exceptions {
             .getName();
     
     public static IllegalArgumentException illegalArgumentException(
+            final String message) {
+        final IllegalArgumentException exception = new IllegalArgumentException(
+                message);
+        cleanUpStackTrace(exception);
+        return exception;
+    }
+    
+    public static IllegalArgumentException illegalArgumentException(
             final MessageType msgType, final boolean inverted,
             final Object... msgArgs) {
         final IllegalArgumentException exception = new IllegalArgumentException(
