@@ -2,18 +2,23 @@ package ch.trick17.betterchecks.fluent;
 
 import static ch.trick17.betterchecks.Exceptions.defaultArgName;
 import static ch.trick17.betterchecks.Exceptions.illegalArgumentException;
-import static ch.trick17.betterchecks.MsgFormatId.ARG_NULL;
+import static ch.trick17.betterchecks.MsgFormatId.*;
 import ch.trick17.betterchecks.MsgFormatId;
 
 public class BaseCheck<T, C extends BaseCheck<T, C>> {
     
     protected T arg;
+    protected Class<?> argClass;
     protected String argName;
     protected boolean nullAllowed;
     private boolean inverted;
     
     protected final void reset(final T argument) {
         this.arg = argument;
+        if(argument == null)
+            argClass = null;
+        else
+            argClass = argument.getClass();
         this.argName = defaultArgName();
         this.nullAllowed = false;
         this.inverted = false;
@@ -47,6 +52,16 @@ public class BaseCheck<T, C extends BaseCheck<T, C>> {
             throw illegalArgumentException(ARG_NULL, inverted, argName);
         inverted = false;
         return me();
+    }
+    
+    public final C isInstanceOf(final Class<?> type) {
+        return check(arg == null || type.isAssignableFrom(arg.getClass()),
+                ARG_INSTANCE, argName, type, argClass);
+    }
+    
+    public final C hasClass(final Class<?> clazz) {
+        return check(arg == null || arg.getClass() == clazz, ARG_CLASS,
+                argName, clazz, argClass);
     }
     
     /*

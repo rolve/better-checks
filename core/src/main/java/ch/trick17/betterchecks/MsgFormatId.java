@@ -3,6 +3,8 @@ package ch.trick17.betterchecks;
 public enum MsgFormatId {
     
     ARG_NULL("%s must +(not )+be null"),
+    ARG_INSTANCE("%s must -(not )-be an instance of class %s (class: %s)"),
+    ARG_CLASS("%s must -(not )-have the class %s (class: %s)"),
     ARG_EMPTY("%s must +(not )+be empty"),
     ARG_WHITESPACE("%s must +(not )+consist of whitespace only"),
     ARG_LENGTH("%s must -(not )-have a length of %d (value: %s)"),

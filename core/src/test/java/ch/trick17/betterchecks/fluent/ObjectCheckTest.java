@@ -3,6 +3,8 @@ package ch.trick17.betterchecks.fluent;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
+import java.io.Serializable;
+
 import org.junit.Test;
 
 import ch.trick17.betterchecks.Check;
@@ -10,6 +12,117 @@ import ch.trick17.betterchecks.Exceptions;
 import ch.trick17.betterchecks.MsgFormatId;
 
 public class ObjectCheckTest {
+    
+    @Test
+    @SuppressWarnings("null")
+    public void testIsNotNull() {
+        Check.that(new Object()).isNotNull();
+        
+        Exception thrown = null;
+        try {
+            Check.that((Object) null).isNotNull();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+    }
+    
+    @Test
+    @SuppressWarnings("null")
+    public void testIsInstanceOf() {
+        Check.that(new Object()).isInstanceOf(Object.class);
+        Check.that(new Object() {}).isInstanceOf(Object.class);
+        Check.that("").isInstanceOf(Object.class);
+        Check.that("").isInstanceOf(String.class);
+        Check.that("").isInstanceOf(Serializable.class);
+        Check.that((Object) null).isNullOr().isInstanceOf(String.class);
+        
+        Exception thrown = null;
+        try {
+            Check.that((Object) null).isInstanceOf(Object.class);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that(new Object()).isInstanceOf(String.class);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_INSTANCE, false,
+                Exceptions.defaultArgName(), String.class, Object.class),
+                thrown.getMessage());
+    }
+    
+    @Test
+    @SuppressWarnings("null")
+    public void testHasClass() {
+        Check.that(new Object()).hasClass(Object.class);
+        Check.that("").hasClass(String.class);
+        Check.that((Object) null).isNullOr().hasClass(String.class);
+        
+        Exception thrown = null;
+        try {
+            Check.that((Object) null).hasClass(Object.class);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that(new Object()).hasClass(String.class);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_CLASS, false,
+                Exceptions.defaultArgName(), String.class, Object.class),
+                thrown.getMessage());
+        
+        thrown = null;
+        Object anon = new Object() {};
+        try {
+            Check.that(anon).hasClass(Object.class);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_CLASS, false,
+                Exceptions.defaultArgName(), Object.class, anon
+                        .getClass()), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that("").hasClass(Object.class);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_CLASS, false,
+                Exceptions.defaultArgName(), Object.class, String.class),
+                thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that("").hasClass(Serializable.class);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_CLASS, false,
+                Exceptions.defaultArgName(), Serializable.class, String.class),
+                thrown.getMessage());
+    }
     
     @Test
     public void testIsNullOr() {
@@ -73,22 +186,6 @@ public class ObjectCheckTest {
         }
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_EMPTY, true,
-                Exceptions.defaultArgName()), thrown.getMessage());
-    }
-    
-    @Test
-    @SuppressWarnings("null")
-    public void testIsNotNull() {
-        Check.that(new Object()).isNotNull();
-        
-        Exception thrown = null;
-        try {
-            Check.that((Object) null).isNotNull();
-        } catch(final Exception e) {
-            thrown = e;
-        }
-        assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, false,
                 Exceptions.defaultArgName()), thrown.getMessage());
     }
     
