@@ -15,6 +15,11 @@ public enum MessageType {
             "%s must -(not )-have a size between %d and %d (value: %s)"),
     ARG_STARTS("%s must -(not )-start with \"%s\" (value: %s)"),
     ARG_ENDS("%s must -(not )-end with \"%s\" (value: %s)"),
+    ARG_CONTAINS("%s must -(not )-contain \"%s\" (value: %s)"),
+    ARG_CONTAINS_ANY(
+            "%s must -(not )-contain any of the following sequences: %s (value: %s)"),
+    ARG_CONTAINS_ALL(
+            "%s must -(not )-contain all of the following sequences: %s (value: %s)"),
     ARG_MATCHES("%s must -(not )-match the regex pattern \"%s\" (value: %s)"),
     ARG_POSITIVE("%s must -(not )-be positive (value: %s)"),
     ARG_NEGATIVE("%s must -(not )-be negative (value: %s)");

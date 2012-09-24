@@ -65,6 +65,16 @@ public class StringCheckTest {
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MessageType.ARG_WHITESPACE, false,
                 Exceptions.defaultArgName()), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((String) null).isNotWhitespace();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
     }
     
     @Test
@@ -83,6 +93,16 @@ public class StringCheckTest {
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MessageType.ARG_LENGTH, false,
                 Exceptions.defaultArgName(), 2, "bla"), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((String) null).hasLength(0);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
     }
     
     @Test
@@ -119,6 +139,17 @@ public class StringCheckTest {
                 .formatMsg(MessageType.ARG_LENGTH_BETWEEN, false, Exceptions
                         .defaultArgName(), 4, Integer.MAX_VALUE, "bla"), thrown
                 .getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((String) null).hasLengthBetween(Integer.MIN_VALUE,
+                    Integer.MAX_VALUE);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
     }
     
     @Test
@@ -137,6 +168,16 @@ public class StringCheckTest {
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MessageType.ARG_STARTS, false,
                 Exceptions.defaultArgName(), "x", "hello"), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((String) null).startsWith("");
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
     }
     
     @Test
@@ -155,6 +196,118 @@ public class StringCheckTest {
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MessageType.ARG_ENDS, false,
                 Exceptions.defaultArgName(), "x", "hello"), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((String) null).endsWith("");
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+    }
+    
+    @Test
+    @SuppressWarnings("null")
+    public void testContains() {
+        Check.that("hello").contains("o");
+        Check.that("hello").contains("");
+        Check.that("hello").contains("hello");
+        
+        Exception thrown = null;
+        try {
+            Check.that("hello").contains("x");
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_CONTAINS, false,
+                Exceptions.defaultArgName(), "x", "hello"), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((String) null).contains("");
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+    }
+    
+    @Test
+    @SuppressWarnings("null")
+    public void testContainsAny() {
+        Check.that("hello").containsAny("o");
+        Check.that("hello").containsAny("o", "x", "y");
+        Check.that("hello").containsAny("hello", "x", "y");
+        Check.that("hello").containsAny("");
+        Check.that("hello").containsAny(new StringBuilder("h"));
+        
+        Exception thrown = null;
+        try {
+            Check.that("hello").containsAny("x", "y");
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_CONTAINS_ANY, false,
+                Exceptions.defaultArgName(), "[x, y]", "hello"), thrown
+                .getMessage());
+        
+        thrown = null;
+        try {
+            Check.that("hello").containsAny();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_CONTAINS_ANY, false,
+                Exceptions.defaultArgName(), "[]", "hello"), thrown
+                .getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((String) null).containsAny("");
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+    }
+    
+    @Test
+    @SuppressWarnings("null")
+    public void testContainsAll() {
+        Check.that("hello").containsAll("o");
+        Check.that("hello").containsAll("o", "h", "e");
+        Check.that("hello").containsAll("hello", "ello", "ll");
+        Check.that("hello").containsAll("");
+        Check.that("hello").containsAll(new StringBuilder("h"));
+        Check.that("hello").containsAll();
+        
+        Exception thrown = null;
+        try {
+            Check.that("hello").containsAll("h", "y");
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_CONTAINS_ALL, false,
+                Exceptions.defaultArgName(), "[h, y]", "hello"), thrown
+                .getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((String) null).containsAll("");
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
     }
     
     @Test
@@ -173,5 +326,15 @@ public class StringCheckTest {
         assertEquals(Exceptions.formatMsg(MessageType.ARG_MATCHES, false,
                 Exceptions.defaultArgName(), "hi", "hello"), thrown
                 .getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((String) null).matches(".*");
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
     }
 }
