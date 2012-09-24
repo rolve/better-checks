@@ -1,47 +1,64 @@
 package ch.trick17.betterchecks;
 
-import java.net.URL;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 public final class Config {
     
     /*
+     * Constants
+     */
+    private static final String CONFIG_RESOURCE_NAME = "ch.trick17.betterchecks.config";
+    private static final String DEFAULT_ARG_NAME_KEY = "defaultArgumentName";
+    private static final String MSG_FORMAT_SUFFIX = ".format";
+    
+    /*
      * Default values
      */
-    private static final String DEFAULT_DEFAULT_ARG_NAME = "argument";
+    private static final String DEFAULT_DEFAULT_ARG_NAME = "Argument";
     
     /*
      * Static initialization and global config access
      */
-    private static final Config config;
+    private static final Config config = loadConfig();
     
-    static {
-        final URL configUrl = Config.class
-                .getResource("/better-checks.properties");
-        if(configUrl == null)
-            config = createDefaultConfig();
+    private static Config loadConfig() {
+        final Config theConfig = new Config();
+        
+        ResourceBundle bundle;
+        try {
+            bundle = ResourceBundle.getBundle(CONFIG_RESOURCE_NAME);
+        } catch(final MissingResourceException e) {
+            bundle = null;
+        }
+        
+        theConfig.defaultArgumentName = getFromBundle(bundle,
+                DEFAULT_ARG_NAME_KEY, DEFAULT_DEFAULT_ARG_NAME);
+        
+        theConfig.messageFormats = new HashMap<MessageType, Config.FormatPair>();
+        for(final MessageType msgType : MessageType.values()) {
+            final String key = msgType.name() + MSG_FORMAT_SUFFIX;
+            final String format = getFromBundle(bundle, key, msgType
+                    .getDefaultFormat());
+            theConfig.messageFormats.put(msgType, new FormatPair(format));
+        }
+        
+        return theConfig;
+    }
+    
+    private static String getFromBundle(final ResourceBundle bundle,
+            final String key, final String defaultValue) {
+        if(bundle == null)
+            return defaultValue;
         else
-            config = loadConfig(configUrl);
-    }
-    
-    private static Config createDefaultConfig() {
-        final Config defaultConfig = new Config();
-        defaultConfig.defaultArgumentName = DEFAULT_DEFAULT_ARG_NAME;
-        
-        final HashMap<MessageType, FormatPair> formats = new HashMap<MessageType, FormatPair>();
-        for(final MessageType type : MessageType.values())
-            formats.put(type, new FormatPair(type.getDefaultFormat()));
-        defaultConfig.messageFormats = Collections.unmodifiableMap(formats);
-        
-        return defaultConfig;
-    }
-    
-    private static Config loadConfig(final URL configUrl) {
-        // TODO
-        return null;
+            try {
+                return bundle.getString(key);
+            } catch(final MissingResourceException e) {
+                return defaultValue;
+            }
     }
     
     public static Config getConfig() {
