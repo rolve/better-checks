@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.Exceptions;
-import ch.trick17.betterchecks.MsgFormatId;
+import ch.trick17.betterchecks.MessageType;
 
 public class ObjectCheckTest {
     
@@ -25,7 +25,7 @@ public class ObjectCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
                 Exceptions.defaultArgName()), thrown.getMessage());
     }
     
@@ -46,7 +46,7 @@ public class ObjectCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
                 Exceptions.defaultArgName()), thrown.getMessage());
         
         thrown = null;
@@ -56,7 +56,7 @@ public class ObjectCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_INSTANCE, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_INSTANCE, false,
                 Exceptions.defaultArgName(), String.class, Object.class),
                 thrown.getMessage());
     }
@@ -75,7 +75,7 @@ public class ObjectCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
                 Exceptions.defaultArgName()), thrown.getMessage());
         
         thrown = null;
@@ -85,7 +85,7 @@ public class ObjectCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_CLASS, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_CLASS, false,
                 Exceptions.defaultArgName(), String.class, Object.class),
                 thrown.getMessage());
         
@@ -97,7 +97,7 @@ public class ObjectCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_CLASS, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_CLASS, false,
                 Exceptions.defaultArgName(), Object.class, anon
                         .getClass()), thrown.getMessage());
         
@@ -108,7 +108,7 @@ public class ObjectCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_CLASS, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_CLASS, false,
                 Exceptions.defaultArgName(), Object.class, String.class),
                 thrown.getMessage());
         
@@ -119,7 +119,7 @@ public class ObjectCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_CLASS, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_CLASS, false,
                 Exceptions.defaultArgName(), Serializable.class, String.class),
                 thrown.getMessage());
     }
@@ -155,7 +155,7 @@ public class ObjectCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, true,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, true,
                 Exceptions.defaultArgName()), thrown.getMessage());
         
         thrown = null;
@@ -165,7 +165,7 @@ public class ObjectCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, true,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, true,
                 Exceptions.defaultArgName()), thrown.getMessage());
         
         thrown = null;
@@ -175,7 +175,7 @@ public class ObjectCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_EMPTY, true,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_EMPTY, true,
                 Exceptions.defaultArgName()), thrown.getMessage());
         
         thrown = null;
@@ -185,7 +185,7 @@ public class ObjectCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_EMPTY, true,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_EMPTY, true,
                 Exceptions.defaultArgName()), thrown.getMessage());
     }
     
@@ -200,7 +200,7 @@ public class ObjectCheckTest {
         }
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions
-                .formatMsg(MsgFormatId.ARG_NULL, false, "my arg"), thrown
+                .formatMsg(MessageType.ARG_NULL, false, "my arg"), thrown
                 .getMessage());
     }
 }

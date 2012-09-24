@@ -11,10 +11,10 @@ public class ExceptionsTest {
     @Test
     public void testIllegalArgumentException() {
         IllegalArgumentException exception = Exceptions
-                .illegalArgumentException(MsgFormatId.ARG_EMPTY, false,
+                .illegalArgumentException(MessageType.ARG_EMPTY, false,
                         "the argument");
         
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_EMPTY, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_EMPTY, false,
                 "the argument"), exception.getMessage());
         
         /*
@@ -42,7 +42,7 @@ public class ExceptionsTest {
     private static class ExceptionsTestHelper {
         
         private static IllegalArgumentException help() {
-            return Exceptions.illegalArgumentException(MsgFormatId.ARG_NULL,
+            return Exceptions.illegalArgumentException(MessageType.ARG_NULL,
                     false, "arg");
         }
     }
@@ -51,23 +51,23 @@ public class ExceptionsTest {
     public void testFormatMsg() {
         /* Not inverted */
         assertEquals("the argument must not be null", Exceptions.formatMsg(
-                MsgFormatId.ARG_NULL, false, "the argument"));
+                MessageType.ARG_NULL, false, "the argument"));
         assertEquals("argument must not be empty", Exceptions.formatMsg(
-                MsgFormatId.ARG_EMPTY, false, Exceptions.defaultArgName()));
+                MessageType.ARG_EMPTY, false, Exceptions.defaultArgName()));
         assertEquals(
                 "the list must have a size between 3 and 4 (value: [abc d, hello])",
-                Exceptions.formatMsg(MsgFormatId.ARG_SIZE_BETWEEN, false,
+                Exceptions.formatMsg(MessageType.ARG_SIZE_BETWEEN, false,
                         new StringBuilder("the list"), 3, 4, Arrays.asList(
                                 "abc d", "hello")));
         
         /* Inverted */
         assertEquals("the argument must be null", Exceptions.formatMsg(
-                MsgFormatId.ARG_NULL, true, "the argument"));
+                MessageType.ARG_NULL, true, "the argument"));
         assertEquals("argument must be empty", Exceptions.formatMsg(
-                MsgFormatId.ARG_EMPTY, true, Exceptions.defaultArgName()));
+                MessageType.ARG_EMPTY, true, Exceptions.defaultArgName()));
         assertEquals(
                 "the list must not have a size between 3 and 4 (value: [abc d, hello])",
-                Exceptions.formatMsg(MsgFormatId.ARG_SIZE_BETWEEN, true,
+                Exceptions.formatMsg(MessageType.ARG_SIZE_BETWEEN, true,
                         new StringBuilder("the list"), 3, 4, Arrays.asList(
                                 "abc d", "hello")));
     }

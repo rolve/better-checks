@@ -2,8 +2,8 @@ package ch.trick17.betterchecks.fluent;
 
 import static ch.trick17.betterchecks.Exceptions.defaultArgName;
 import static ch.trick17.betterchecks.Exceptions.illegalArgumentException;
-import static ch.trick17.betterchecks.MsgFormatId.*;
-import ch.trick17.betterchecks.MsgFormatId;
+import static ch.trick17.betterchecks.MessageType.*;
+import ch.trick17.betterchecks.MessageType;
 
 public class BaseCheck<T, C extends BaseCheck<T, C>> {
     
@@ -69,7 +69,7 @@ public class BaseCheck<T, C extends BaseCheck<T, C>> {
      */
     
     protected final C check(final boolean condition,
-            final MsgFormatId formatId, final Object... msgArgs) {
+            final MessageType formatId, final Object... msgArgs) {
         checkNull();
         if(!(nullAllowed && arg == null) && (inverted ? condition : !condition))
             throw illegalArgumentException(formatId, inverted, msgArgs);

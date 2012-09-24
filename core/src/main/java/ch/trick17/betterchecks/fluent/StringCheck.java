@@ -1,6 +1,6 @@
 package ch.trick17.betterchecks.fluent;
 
-import static ch.trick17.betterchecks.MsgFormatId.*;
+import static ch.trick17.betterchecks.MessageType.*;
 
 public final class StringCheck extends BaseCheck<String, StringCheck> {
     

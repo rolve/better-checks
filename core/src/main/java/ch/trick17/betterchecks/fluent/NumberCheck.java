@@ -1,7 +1,7 @@
 package ch.trick17.betterchecks.fluent;
 
-import static ch.trick17.betterchecks.MsgFormatId.ARG_NEGATIVE;
-import static ch.trick17.betterchecks.MsgFormatId.ARG_POSITIVE;
+import static ch.trick17.betterchecks.MessageType.ARG_NEGATIVE;
+import static ch.trick17.betterchecks.MessageType.ARG_POSITIVE;
 
 import java.math.BigDecimal;
 

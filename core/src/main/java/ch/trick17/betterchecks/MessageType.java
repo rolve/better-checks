@@ -1,6 +1,6 @@
 package ch.trick17.betterchecks;
 
-public enum MsgFormatId {
+public enum MessageType {
     
     ARG_NULL("%s must +(not )+be null"),
     ARG_INSTANCE("%s must -(not )-be an instance of class %s (class: %s)"),
@@ -21,7 +21,7 @@ public enum MsgFormatId {
     
     private final String defaultFormat;
     
-    private MsgFormatId(final String defaultFormat) {
+    private MessageType(final String defaultFormat) {
         this.defaultFormat = defaultFormat;
     }
     

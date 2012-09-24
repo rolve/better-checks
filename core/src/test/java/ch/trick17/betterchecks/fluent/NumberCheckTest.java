@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.Exceptions;
-import ch.trick17.betterchecks.MsgFormatId;
+import ch.trick17.betterchecks.MessageType;
 
 public class NumberCheckTest {
     
@@ -51,7 +51,7 @@ public class NumberCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_POSITIVE, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_POSITIVE, false,
                 Exceptions.defaultArgName(), 0), thrown.getMessage());
         
         thrown = null;
@@ -61,7 +61,7 @@ public class NumberCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_POSITIVE, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_POSITIVE, false,
                 Exceptions.defaultArgName(), -1), thrown.getMessage());
         
         thrown = null;
@@ -71,7 +71,7 @@ public class NumberCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
                 Exceptions.defaultArgName()), thrown.getMessage());
     }
     
@@ -111,7 +111,7 @@ public class NumberCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NEGATIVE, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NEGATIVE, false,
                 Exceptions.defaultArgName(), 0), thrown.getMessage());
         
         thrown = null;
@@ -121,7 +121,7 @@ public class NumberCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NEGATIVE, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NEGATIVE, false,
                 Exceptions.defaultArgName(), 1), thrown.getMessage());
         
         thrown = null;
@@ -131,7 +131,7 @@ public class NumberCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MsgFormatId.ARG_NULL, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
                 Exceptions.defaultArgName()), thrown.getMessage());
     }
 }

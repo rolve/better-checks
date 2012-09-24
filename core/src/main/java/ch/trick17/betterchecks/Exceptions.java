@@ -8,17 +8,17 @@ public abstract class Exceptions {
             .getName();
     
     public static IllegalArgumentException illegalArgumentException(
-            final MsgFormatId formatId, final boolean inverted,
+            final MessageType msgType, final boolean inverted,
             final Object... msgArgs) {
         final IllegalArgumentException exception = new IllegalArgumentException(
-                formatMsg(formatId, inverted, msgArgs));
+                formatMsg(msgType, inverted, msgArgs));
         cleanUpStackTrace(exception);
         return exception;
     }
     
-    public static String formatMsg(final MsgFormatId formatId,
+    public static String formatMsg(final MessageType msgType,
             final boolean inverted, final Object... msgArgs) {
-        final String format = Config.getConfig().getMessageFormat(formatId,
+        final String format = Config.getConfig().getMessageFormat(msgType,
                 inverted);
         return String.format(format, msgArgs);
     }
