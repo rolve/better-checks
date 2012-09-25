@@ -157,7 +157,7 @@ public class StringCheckTest {
     
     @Test
     public void testHasLengthWhich() {
-        Check.that("hello").hasLengthWhich().isBetween(5, 5);
+        Check.that("hello").hasLengthWhich().isEqualTo(5);
         assertEquals(5, Check.that("hello").hasLengthWhich().arg);
         assertEquals(
                 "Length of " + Config.getConfig().getDefaultArgumentName(),

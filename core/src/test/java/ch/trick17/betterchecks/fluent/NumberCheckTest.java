@@ -157,6 +157,34 @@ public class NumberCheckTest {
     
     @Test
     @SuppressWarnings("null")
+    public void testIsEqualTo() {
+        Check.that(1).isEqualTo(1);
+        Check.that(1).isEqualTo(1.0);
+        Check.that(0).isEqualTo(new BigDecimal("0"));
+        
+        Exception thrown = null;
+        try {
+            Check.that(-1).isEqualTo(0);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_EQUAL, false,
+                Exceptions.defaultArgName(), 0, -1), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((Number) null).isEqualTo(0);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+    }
+    
+    @Test
+    @SuppressWarnings("null")
     public void testIsGreaterThan() {
         Check.that(1).isGreaterThan(0);
         Check.that(1).isGreaterThan(0.5);
@@ -228,35 +256,6 @@ public class NumberCheckTest {
                 "The given number (unparsable of class ch.trick17.betterchecks.fluent.NumberCheckTest$WeirdNumber) does not have a parsable string representation",
                 thrown.getMessage());
         assertTrue(thrown.getCause() instanceof NumberFormatException);
-    }
-    
-    @SuppressWarnings("serial")
-    private static class WeirdNumber extends Number {
-        
-        @Override
-        public int intValue() {
-            return 0;
-        }
-        
-        @Override
-        public long longValue() {
-            return 0;
-        }
-        
-        @Override
-        public float floatValue() {
-            return 0;
-        }
-        
-        @Override
-        public double doubleValue() {
-            return 0;
-        }
-        
-        @Override
-        public String toString() {
-            return "unparsable";
-        }
     }
     
     @Test
@@ -359,5 +358,34 @@ public class NumberCheckTest {
         assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
                 Exceptions.defaultArgName()), thrown.getMessage());
         
+    }
+    
+    @SuppressWarnings("serial")
+    private static class WeirdNumber extends Number {
+        
+        @Override
+        public int intValue() {
+            return 0;
+        }
+        
+        @Override
+        public long longValue() {
+            return 0;
+        }
+        
+        @Override
+        public float floatValue() {
+            return 0;
+        }
+        
+        @Override
+        public double doubleValue() {
+            return 0;
+        }
+        
+        @Override
+        public String toString() {
+            return "unparsable";
+        }
     }
 }

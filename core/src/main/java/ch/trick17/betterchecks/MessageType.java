@@ -24,6 +24,7 @@ public enum MessageType {
     ARG_URL("%s must -(not )-be a valid url (value: %s)"),
     ARG_POSITIVE("%s must -(not )-be positive (value: %s)"),
     ARG_NEGATIVE("%s must -(not )-be negative (value: %s)"),
+    ARG_EQUAL("%s must -(not )-be equal to %s (value: %s)"),
     ARG_GREATER("%s must -(not )-be greater than %s (value: %s)"),
     ARG_LESS("%s must -(not )-be less than %s (value: %s)"),
     ARG_BETWEEN("%s must -(not )-be between %s and %s (value: %s)");

@@ -25,6 +25,11 @@ public final class NumberCheck extends BaseCheck<Number, NumberCheck> {
             return check(arg.doubleValue() < 0, ARG_NEGATIVE, argName, arg);
     }
     
+    public NumberCheck isEqualTo(final Number number) {
+        return check(arg == null || compare(arg, number) == 0, ARG_EQUAL,
+                argName, number, arg);
+    }
+    
     public NumberCheck isGreaterThan(final Number number) {
         return check(arg == null || compare(arg, number) > 0, ARG_GREATER,
                 argName, number, arg);
