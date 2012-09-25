@@ -27,7 +27,8 @@ public enum MessageType {
     ARG_EQUAL("%s must -(not )-be equal to %s (value: %s)"),
     ARG_GREATER("%s must -(not )-be greater than %s (value: %s)"),
     ARG_LESS("%s must -(not )-be less than %s (value: %s)"),
-    ARG_BETWEEN("%s must -(not )-be between %s and %s (value: %s)");
+    ARG_BETWEEN("%s must -(not )-be between %s and %s (value: %s)"),
+    ARG_PROTOCOL("%s must -(not )-have the protocol %s (value: %s)");
     
     private final String defaultFormat;
     
