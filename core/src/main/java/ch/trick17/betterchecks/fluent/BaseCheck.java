@@ -49,7 +49,8 @@ public class BaseCheck<T, C extends BaseCheck<T, C>> {
     
     public final C isNotNull() {
         if(!nullAllowed && (inverted ? arg != null : arg == null))
-            throw illegalArgumentException(ARG_NULL, inverted, argName);
+            throw illegalArgumentException(ARG_NULL, inverted,
+                    new Object[] {argName});
         inverted = false;
         return me();
     }
@@ -77,9 +78,20 @@ public class BaseCheck<T, C extends BaseCheck<T, C>> {
         return me();
     }
     
+    protected final C checkWithCause(final boolean condition,
+            final MessageType formatId, final Throwable cause,
+            final Object... msgArgs) {
+        checkNull();
+        if(!(nullAllowed && arg == null) && (inverted ? condition : !condition))
+            throw illegalArgumentException(formatId, inverted, msgArgs, cause);
+        inverted = false;
+        return me();
+    }
+    
     protected final void checkNull() {
         if(!nullAllowed && arg == null)
-            throw illegalArgumentException(ARG_NULL, inverted, argName);
+            throw illegalArgumentException(ARG_NULL, inverted,
+                    new Object[] {argName});
     }
     
     @SuppressWarnings("unchecked")

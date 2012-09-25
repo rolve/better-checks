@@ -12,7 +12,7 @@ public class ExceptionsTest {
     public void testIllegalArgumentException() {
         IllegalArgumentException exception = Exceptions
                 .illegalArgumentException(MessageType.ARG_EMPTY, false,
-                        "the argument");
+                        new Object[] {"the argument"});
         
         assertEquals(Exceptions.formatMsg(MessageType.ARG_EMPTY, false,
                 "the argument"), exception.getMessage());
@@ -43,7 +43,7 @@ public class ExceptionsTest {
         
         private static IllegalArgumentException help() {
             return Exceptions.illegalArgumentException(MessageType.ARG_NULL,
-                    false, "arg");
+                    false, new Object[] {"arg"});
         }
     }
     

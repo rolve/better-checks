@@ -1,7 +1,9 @@
 package ch.trick17.betterchecks.fluent;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.*;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.junit.Test;
 
@@ -330,6 +332,77 @@ public class StringCheckTest {
         thrown = null;
         try {
             Check.that((String) null).matches(".*");
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+    }
+    
+    @Test
+    @SuppressWarnings("null")
+    public void testIsUrl() {
+        Check.that("http://").isUrl();
+        Check.that("https://example").isUrl();
+        Check.that("file://file").isUrl();
+        Check.that("ftp://me:pw@example.com:8080/some%20path/?and-a-query=1")
+                .isUrl();
+        
+        Exception thrown = null;
+        try {
+            Check.that("").isUrl();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_URL, false,
+                Exceptions.defaultArgName(), ""), thrown.getMessage());
+        assertTrue(thrown.getCause() instanceof MalformedURLException);
+        
+        thrown = null;
+        try {
+            Check.that("nonexistingprotocol://example.com").isUrl();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_URL, false,
+                Exceptions.defaultArgName(),
+                "nonexistingprotocol://example.com"), thrown.getMessage());
+        assertTrue(thrown.getCause() instanceof MalformedURLException);
+        
+        thrown = null;
+        try {
+            Check.that((String) null).isUrl();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+    }
+    
+    @Test
+    @SuppressWarnings("null")
+    public void testIsUrlWhich() throws MalformedURLException {
+        final UrlCheck urlCheck = Check.that("https://example").isUrlWhich();
+        assertSame(Check.that(new URL("https:// example")), urlCheck);
+        
+        Exception thrown = null;
+        try {
+            Check.that("").isUrl();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_URL, false,
+                Exceptions.defaultArgName(), ""), thrown.getMessage());
+        assertTrue(thrown.getCause() instanceof MalformedURLException);
+        
+        thrown = null;
+        try {
+            Check.that((String) null).isUrl();
         } catch(final Exception e) {
             thrown = e;
         }

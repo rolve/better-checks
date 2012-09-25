@@ -2,6 +2,8 @@ package ch.trick17.betterchecks.fluent;
 
 import static ch.trick17.betterchecks.MessageType.*;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 
 public final class StringCheck extends BaseCheck<String, StringCheck> {
@@ -42,12 +44,12 @@ public final class StringCheck extends BaseCheck<String, StringCheck> {
     }
     
     public StringCheck containsAny(final CharSequence... sequences) {
-        return check(arg == null || checkContainsAny(sequences),
+        return check(arg == null || testContainsAny(sequences),
                 ARG_CONTAINS_ANY, argName, Arrays.toString(sequences), arg);
     }
     
     public StringCheck containsAll(final CharSequence... sequences) {
-        return check(arg == null || checkContainsAll(sequences),
+        return check(arg == null || testContainsAll(sequences),
                 ARG_CONTAINS_ALL, argName, Arrays.toString(sequences), arg);
     }
     
@@ -57,11 +59,37 @@ public final class StringCheck extends BaseCheck<String, StringCheck> {
                 regex, arg);
     }
     
+    public StringCheck isUrl() {
+        checkNull();
+        URL url = null;
+        Exception cause = null;
+        try {
+            url = new URL(arg);
+        } catch(final MalformedURLException e) {
+            cause = e;
+        }
+        return checkWithCause(arg == null || url != null, ARG_URL, cause,
+                argName, arg);
+    }
+    
+    public UrlCheck isUrlWhich() {
+        checkNull();
+        URL url = null;
+        Exception cause = null;
+        try {
+            url = new URL(arg);
+        } catch(final MalformedURLException e) {
+            cause = e;
+        }
+        checkWithCause(arg == null || url != null, ARG_URL, cause, argName, arg);
+        return FluentChecks.getObjectCheck(UrlCheck.class, url).named(argName);
+    }
+    
     /*
      * Implementation methods
      */
     
-    private boolean checkContainsAll(final CharSequence... sequences) {
+    private boolean testContainsAll(final CharSequence... sequences) {
         for(final CharSequence sequence : sequences) {
             if(!arg.contains(sequence))
                 return false;
@@ -69,7 +97,7 @@ public final class StringCheck extends BaseCheck<String, StringCheck> {
         return true;
     }
     
-    private boolean checkContainsAny(final CharSequence... sequences) {
+    private boolean testContainsAny(final CharSequence... sequences) {
         for(final CharSequence sequence : sequences) {
             if(arg.contains(sequence))
                 return true;

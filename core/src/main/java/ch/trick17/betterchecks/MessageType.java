@@ -21,6 +21,7 @@ public enum MessageType {
     ARG_CONTAINS_ALL(
             "%s must -(not )-contain all of the following sequences: %s (value: %s)"),
     ARG_MATCHES("%s must -(not )-match the regex pattern \"%s\" (value: %s)"),
+    ARG_URL("%s must -(not )-be a valid url (value: %s)"),
     ARG_POSITIVE("%s must -(not )-be positive (value: %s)"),
     ARG_NEGATIVE("%s must -(not )-be negative (value: %s)"),
     ARG_GREATER("%s must -(not )-be greater than %s (value: %s)"),
