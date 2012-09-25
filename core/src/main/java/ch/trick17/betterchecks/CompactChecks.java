@@ -1,5 +1,6 @@
 package ch.trick17.betterchecks;
 
+import java.net.URL;
 import java.util.Collection;
 
 import ch.trick17.betterchecks.fluent.CollectionCheck;
@@ -8,6 +9,7 @@ import ch.trick17.betterchecks.fluent.ObjectArrayCheck;
 import ch.trick17.betterchecks.fluent.ObjectCheck;
 import ch.trick17.betterchecks.fluent.PrimitiveArrayCheck;
 import ch.trick17.betterchecks.fluent.StringCheck;
+import ch.trick17.betterchecks.fluent.UrlCheck;
 
 /**
  * This class provides the same functionality as the {@link Check} class, but
@@ -80,6 +82,10 @@ public abstract class CompactChecks {
     }
     
     public static NumberCheck check(final Number argument) {
+        return Check.that(argument);
+    }
+    
+    public static UrlCheck check(final URL argument) {
         return Check.that(argument);
     }
 }

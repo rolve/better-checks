@@ -230,6 +230,7 @@ public class NumberCheckTest {
         assertTrue(thrown.getCause() instanceof NumberFormatException);
     }
     
+    @SuppressWarnings("serial")
     private static class WeirdNumber extends Number {
         
         @Override

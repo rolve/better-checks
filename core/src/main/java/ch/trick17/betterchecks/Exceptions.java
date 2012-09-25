@@ -16,10 +16,27 @@ public abstract class Exceptions {
     }
     
     public static IllegalArgumentException illegalArgumentException(
+            final String message, final Throwable cause) {
+        final IllegalArgumentException exception = new IllegalArgumentException(
+                message, cause);
+        cleanUpStackTrace(exception);
+        return exception;
+    }
+    
+    public static IllegalArgumentException illegalArgumentException(
             final MessageType msgType, final boolean inverted,
-            final Object... msgArgs) {
+            final Object[] msgArgs) {
         final IllegalArgumentException exception = new IllegalArgumentException(
                 formatMsg(msgType, inverted, msgArgs));
+        cleanUpStackTrace(exception);
+        return exception;
+    }
+    
+    public static IllegalArgumentException illegalArgumentException(
+            final MessageType msgType, final boolean inverted,
+            final Object[] msgArgs, final Throwable cause) {
+        final IllegalArgumentException exception = new IllegalArgumentException(
+                formatMsg(msgType, inverted, msgArgs), cause);
         cleanUpStackTrace(exception);
         return exception;
     }

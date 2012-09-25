@@ -14,7 +14,7 @@ public class FluentChecks {
     private static final List<Class<? extends BaseCheck<? extends Object, ?>>> CHECK_CLASSES = Arrays
             .asList(ObjectCheck.class, StringCheck.class,
                     ObjectArrayCheck.class, PrimitiveArrayCheck.class,
-                    CollectionCheck.class, NumberCheck.class);
+                    CollectionCheck.class, NumberCheck.class, UrlCheck.class);
     
     private static final Map<Class<?>, ThreadLocal<? extends BaseCheck<?, ?>>> objectChecks;
     
@@ -41,7 +41,7 @@ public class FluentChecks {
     }
     
     @SuppressWarnings("unchecked")
-    protected static <T, C extends BaseCheck<T, C>> C getCheck(
+    private static <T, C extends BaseCheck<T, C>> C getCheck(
             final Class<C> checkClass) {
         final ThreadLocal<? extends BaseCheck<?, ?>> threadLocal = objectChecks
                 .get(checkClass);

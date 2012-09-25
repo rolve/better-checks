@@ -2,6 +2,7 @@ package ch.trick17.betterchecks;
 
 import static ch.trick17.betterchecks.Exceptions.illegalArgumentException;
 
+import java.net.URL;
 import java.util.Collection;
 
 import ch.trick17.betterchecks.fluent.CollectionCheck;
@@ -11,6 +12,7 @@ import ch.trick17.betterchecks.fluent.ObjectArrayCheck;
 import ch.trick17.betterchecks.fluent.ObjectCheck;
 import ch.trick17.betterchecks.fluent.PrimitiveArrayCheck;
 import ch.trick17.betterchecks.fluent.StringCheck;
+import ch.trick17.betterchecks.fluent.UrlCheck;
 
 /**
  * This is the primary entry point to the Better Checks library. Its intention
@@ -166,4 +168,7 @@ public abstract class Check {
         return FluentChecks.getObjectCheck(NumberCheck.class, argument);
     }
     
+    public static UrlCheck that(final URL argument) {
+        return FluentChecks.getObjectCheck(UrlCheck.class, argument);
+    }
 }
