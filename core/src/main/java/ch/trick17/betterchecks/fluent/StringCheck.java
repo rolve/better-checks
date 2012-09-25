@@ -6,6 +6,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 
+import ch.trick17.betterchecks.Check;
+
 public final class StringCheck extends BaseCheck<String, StringCheck> {
     
     public StringCheck isNotEmpty() {
@@ -26,6 +28,10 @@ public final class StringCheck extends BaseCheck<String, StringCheck> {
         return check(arg == null
                 || (arg.length() >= min && arg.length() <= max),
                 ARG_LENGTH_BETWEEN, argName, min, max, arg);
+    }
+    
+    public NumberCheck hasLengthWhich() {
+        return Check.that(arg.length()).named("Length of " + argName);
     }
     
     public StringCheck startsWith(final String prefix) {
@@ -82,7 +88,7 @@ public final class StringCheck extends BaseCheck<String, StringCheck> {
             cause = e;
         }
         checkWithCause(arg == null || url != null, ARG_URL, cause, argName, arg);
-        return FluentChecks.getObjectCheck(UrlCheck.class, url).named(argName);
+        return Check.that(url).named(argName);
     }
     
     /*

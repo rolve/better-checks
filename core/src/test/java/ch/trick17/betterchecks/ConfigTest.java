@@ -26,6 +26,5 @@ public class ConfigTest {
                 .getMessageFormat(MessageType.ARG_POSITIVE, false));
         assertEquals("%s should not be negative", Config.getConfig()
                 .getMessageFormat(MessageType.ARG_NEGATIVE, true));
-        
     }
 }

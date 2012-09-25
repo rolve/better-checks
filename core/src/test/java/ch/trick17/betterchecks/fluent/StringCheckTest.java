@@ -1,13 +1,14 @@
 package ch.trick17.betterchecks.fluent;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 
 import org.junit.Test;
 
 import ch.trick17.betterchecks.Check;
+import ch.trick17.betterchecks.Config;
 import ch.trick17.betterchecks.Exceptions;
 import ch.trick17.betterchecks.MessageType;
 
@@ -152,6 +153,17 @@ public class StringCheckTest {
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
                 Exceptions.defaultArgName()), thrown.getMessage());
+    }
+    
+    @Test
+    public void testHasLengthWhich() {
+        Check.that("hello").hasLengthWhich().isBetween(5, 5);
+        assertEquals(5, Check.that("hello").hasLengthWhich().arg);
+        assertEquals(
+                "Length of " + Config.getConfig().getDefaultArgumentName(),
+                Check.that("hello").hasLengthWhich().argName);
+        assertEquals("Length of string", Check.that("hello").named("string")
+                .hasLengthWhich().argName);
     }
     
     @Test
@@ -385,9 +397,10 @@ public class StringCheckTest {
     
     @Test
     @SuppressWarnings("null")
-    public void testIsUrlWhich() throws MalformedURLException {
-        final UrlCheck urlCheck = Check.that("https://example").isUrlWhich();
-        assertSame(Check.that(new URL("https:// example")), urlCheck);
+    public void testIsUrlWhich() {
+        final UrlCheck urlCheck = Check.that("https://example").named("string")
+                .isUrlWhich();
+        assertEquals("string", urlCheck.argName);
         
         Exception thrown = null;
         try {

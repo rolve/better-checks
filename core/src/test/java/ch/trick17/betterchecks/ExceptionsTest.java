@@ -52,7 +52,7 @@ public class ExceptionsTest {
         /* Not inverted */
         assertEquals("the argument must not be null", Exceptions.formatMsg(
                 MessageType.ARG_NULL, false, "the argument"));
-        assertEquals("Argument must not be empty", Exceptions.formatMsg(
+        assertEquals("Your argument must not be empty", Exceptions.formatMsg(
                 MessageType.ARG_EMPTY, false, Exceptions.defaultArgName()));
         assertEquals(
                 "the list must have a size between 3 and 4 (value: [abc d, hello])",
@@ -63,7 +63,7 @@ public class ExceptionsTest {
         /* Inverted */
         assertEquals("the argument must be null", Exceptions.formatMsg(
                 MessageType.ARG_NULL, true, "the argument"));
-        assertEquals("Argument must be empty", Exceptions.formatMsg(
+        assertEquals("Your argument must be empty", Exceptions.formatMsg(
                 MessageType.ARG_EMPTY, true, Exceptions.defaultArgName()));
         assertEquals(
                 "the list must not have a size between 3 and 4 (value: [abc d, hello])",
