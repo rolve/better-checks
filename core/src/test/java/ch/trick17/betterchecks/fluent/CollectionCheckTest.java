@@ -9,6 +9,7 @@ import java.util.Collection;
 import org.junit.Test;
 
 import ch.trick17.betterchecks.Check;
+import ch.trick17.betterchecks.Config;
 import ch.trick17.betterchecks.Exceptions;
 import ch.trick17.betterchecks.MessageType;
 
@@ -97,5 +98,32 @@ public class CollectionCheckTest {
         assertEquals(Exceptions.formatMsg(MessageType.ARG_SIZE_BETWEEN, false,
                 Exceptions.defaultArgName(), 4, Integer.MAX_VALUE, Arrays
                         .asList(1, 2, 3)), thrown.getMessage());
+    }
+    
+    @Test
+    @SuppressWarnings("null")
+    public void testHasSizeWhich() {
+        Check.that(Arrays.asList(1, 2, 3, 4, 5)).hasSizeWhich().isEqualTo(5);
+        assertEquals(5,
+                Check.that(Arrays.asList(1, 2, 3, 4, 5)).hasSizeWhich().arg);
+        assertEquals("the size of "
+                + Config.getConfig().getDefaultArgumentName(), Check.that(
+                Arrays.asList(1, 2, 3, 4, 5)).hasSizeWhich().argName);
+        assertEquals("the size of the list",
+                Check.that(Arrays.asList(1, 2, 3, 4, 5)).named("the list")
+                        .hasSizeWhich().argName);
+        
+        Check.that((Collection<?>) null).isNullOr().hasSizeWhich().isEqualTo(
+                100);
+        
+        Exception thrown = null;
+        try {
+            Check.that((Collection<?>) null).hasSizeWhich();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
     }
 }

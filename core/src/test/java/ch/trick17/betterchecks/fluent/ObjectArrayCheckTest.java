@@ -6,6 +6,7 @@ import static junit.framework.Assert.assertTrue;
 import org.junit.Test;
 
 import ch.trick17.betterchecks.Check;
+import ch.trick17.betterchecks.Config;
 import ch.trick17.betterchecks.Exceptions;
 import ch.trick17.betterchecks.MessageType;
 
@@ -108,6 +109,32 @@ public class ObjectArrayCheckTest {
         thrown = null;
         try {
             Check.that((String[]) null).hasLengthBetween(0, 2);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+    }
+    
+    @Test
+    @SuppressWarnings("null")
+    public void testHasLengthWhich() {
+        Check.that(new Object[] {0, 1, 2, 3, 4}).hasLengthWhich().isEqualTo(5);
+        assertEquals(5, Check.that(new Integer[] {0, 1, 2, 3, 4})
+                .hasLengthWhich().arg);
+        assertEquals("the length of "
+                + Config.getConfig().getDefaultArgumentName(), Check.that(
+                new Object[] {0, 1, 2, 3, 4}).hasLengthWhich().argName);
+        assertEquals("the length of the array", Check.that(
+                new Object[] {0, 1, 2, 3, 4}).named("the array")
+                .hasLengthWhich().argName);
+        
+        Check.that((Object[]) null).isNullOr().hasLengthWhich().isEqualTo(100);
+        
+        Exception thrown = null;
+        try {
+            Check.that((Object[]) null).hasLengthWhich();
         } catch(final Exception e) {
             thrown = e;
         }
