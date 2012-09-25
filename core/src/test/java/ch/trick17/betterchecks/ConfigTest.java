@@ -9,7 +9,7 @@ public class ConfigTest {
     @Test
     public void testGetDefaultArgumentName() {
         // TODO: Find a way to test with and without config file
-        assertEquals("Your argument", Config.getConfig()
+        assertEquals("your argument", Config.getConfig()
                 .getDefaultArgumentName());
     }
     

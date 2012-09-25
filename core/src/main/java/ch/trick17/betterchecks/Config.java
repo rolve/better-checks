@@ -18,7 +18,7 @@ public final class Config {
     /*
      * Default values
      */
-    private static final String DEFAULT_DEFAULT_ARG_NAME = "Argument";
+    private static final String DEFAULT_DEFAULT_ARG_NAME = "argument";
     
     /*
      * Static initialization and global config access

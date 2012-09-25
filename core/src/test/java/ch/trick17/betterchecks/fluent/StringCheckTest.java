@@ -156,14 +156,27 @@ public class StringCheckTest {
     }
     
     @Test
+    @SuppressWarnings("null")
     public void testHasLengthWhich() {
         Check.that("hello").hasLengthWhich().isEqualTo(5);
         assertEquals(5, Check.that("hello").hasLengthWhich().arg);
-        assertEquals(
-                "Length of " + Config.getConfig().getDefaultArgumentName(),
-                Check.that("hello").hasLengthWhich().argName);
-        assertEquals("Length of string", Check.that("hello").named("string")
-                .hasLengthWhich().argName);
+        assertEquals("the length of "
+                + Config.getConfig().getDefaultArgumentName(), Check.that(
+                "hello").hasLengthWhich().argName);
+        assertEquals("the length of string", Check.that("hello")
+                .named("string").hasLengthWhich().argName);
+        
+        Check.that((String) null).isNullOr().hasLengthWhich().isEqualTo(100);
+        
+        Exception thrown = null;
+        try {
+            Check.that((String) null).hasLengthWhich();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
     }
     
     @Test
@@ -404,7 +417,7 @@ public class StringCheckTest {
         
         Exception thrown = null;
         try {
-            Check.that("").isUrl();
+            Check.that("").isUrlWhich();
         } catch(final Exception e) {
             thrown = e;
         }
@@ -415,7 +428,7 @@ public class StringCheckTest {
         
         thrown = null;
         try {
-            Check.that((String) null).isUrl();
+            Check.that((String) null).isUrlWhich();
         } catch(final Exception e) {
             thrown = e;
         }

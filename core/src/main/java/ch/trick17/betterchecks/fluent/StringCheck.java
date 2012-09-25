@@ -10,6 +10,8 @@ import ch.trick17.betterchecks.Check;
 
 public final class StringCheck extends BaseCheck<String, StringCheck> {
     
+    private static final String LENGTH_PREFIX = "the length of ";
+    
     public StringCheck isNotEmpty() {
         return check(arg == null || !arg.isEmpty(), ARG_EMPTY, argName);
     }
@@ -31,7 +33,11 @@ public final class StringCheck extends BaseCheck<String, StringCheck> {
     }
     
     public NumberCheck hasLengthWhich() {
-        return Check.that(arg.length()).named("Length of " + argName);
+        checkNull();
+        final NumberCheck check = Check.that(arg == null ? null : arg.length());
+        if(nullAllowed)
+            check.isNullOr();
+        return check.named(LENGTH_PREFIX + argName);
     }
     
     public StringCheck startsWith(final String prefix) {
