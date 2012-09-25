@@ -33,11 +33,8 @@ public final class StringCheck extends BaseCheck<String, StringCheck> {
     }
     
     public NumberCheck hasLengthWhich() {
-        checkNull();
-        final NumberCheck check = Check.that(arg == null ? null : arg.length());
-        if(nullAllowed)
-            check.isNullOr();
-        return check.named(LENGTH_PREFIX + argName);
+        return propertyCheck(NumberCheck.class,
+                arg == null ? null : (Number) arg.length(), "length");
     }
     
     public StringCheck startsWith(final String prefix) {
@@ -69,6 +66,11 @@ public final class StringCheck extends BaseCheck<String, StringCheck> {
         // IMPROVE: Cache compiled patterns?
         return check(arg == null || arg.matches(regex), ARG_MATCHES, argName,
                 regex, arg);
+    }
+    
+    public StringCheck isEqualTo(final String string) {
+        return check(arg == null || arg.equals(string), ARG_EQUAL, argName,
+                string, arg);
     }
     
     public StringCheck isUrl() {

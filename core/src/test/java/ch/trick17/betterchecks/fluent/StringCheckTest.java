@@ -367,6 +367,34 @@ public class StringCheckTest {
     
     @Test
     @SuppressWarnings("null")
+    public void testIsEqualTo() {
+        Check.that("hello").isEqualTo("hello");
+        Check.that("").isEqualTo("");
+        
+        Exception thrown = null;
+        try {
+            Check.that("hello").isEqualTo("hella");
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_EQUAL, false,
+                Exceptions.defaultArgName(), "hella", "hello"), thrown
+                .getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((String) null).isEqualTo("");
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+    }
+    
+    @Test
+    @SuppressWarnings("null")
     public void testIsUrl() {
         Check.that("http://").isUrl();
         Check.that("https://example").isUrl();

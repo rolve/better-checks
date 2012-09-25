@@ -4,12 +4,8 @@ import static ch.trick17.betterchecks.MessageType.*;
 
 import java.util.Collection;
 
-import ch.trick17.betterchecks.Check;
-
 public final class CollectionCheck extends
         BaseCheck<Collection<?>, CollectionCheck> {
-    
-    private static final String SIZE_PREFIX = "the size of ";
     
     public CollectionCheck isNotEmpty() {
         return check(arg == null || !arg.isEmpty(), ARG_EMPTY, argName);
@@ -26,10 +22,7 @@ public final class CollectionCheck extends
     }
     
     public NumberCheck hasSizeWhich() {
-        checkNull();
-        final NumberCheck check = Check.that(arg == null ? null : arg.size());
-        if(nullAllowed)
-            check.isNullOr();
-        return check.named(SIZE_PREFIX + argName);
+        return propertyCheck(NumberCheck.class,
+                arg == null ? null : (Number) arg.size(), "size");
     }
 }

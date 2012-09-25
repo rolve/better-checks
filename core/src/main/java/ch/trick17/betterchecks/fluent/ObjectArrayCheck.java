@@ -4,12 +4,8 @@ import static ch.trick17.betterchecks.MessageType.*;
 
 import java.util.Arrays;
 
-import ch.trick17.betterchecks.Check;
-
 public final class ObjectArrayCheck extends
         BaseCheck<Object[], ObjectArrayCheck> {
-    
-    private static final String LENGTH_PREFIX = "the length of ";
     
     public ObjectArrayCheck isNotEmpty() {
         return check(arg == null || arg.length != 0, ARG_EMPTY, argName);
@@ -26,10 +22,7 @@ public final class ObjectArrayCheck extends
     }
     
     public NumberCheck hasLengthWhich() {
-        checkNull();
-        final NumberCheck check = Check.that(arg == null ? null : arg.length);
-        if(nullAllowed)
-            check.isNullOr();
-        return check.named(LENGTH_PREFIX + argName);
+        return propertyCheck(NumberCheck.class,
+                arg == null ? null : (Number) arg.length, "length");
     }
 }

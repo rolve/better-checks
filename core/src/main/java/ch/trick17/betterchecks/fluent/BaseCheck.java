@@ -92,6 +92,17 @@ public class BaseCheck<T, C extends BaseCheck<T, C>> {
         if(!nullAllowed && arg == null)
             throw illegalArgumentException(ARG_NULL, inverted,
                     new Object[] {argName});
+        assert arg == null ? nullAllowed : true;
+    }
+    
+    protected final <T1, C1 extends BaseCheck<T1, C1>> C1 propertyCheck(
+            final Class<C1> checkClass, final T1 property,
+            final String propertyName) {
+        checkNull();
+        final C1 check = FluentChecks.getObjectCheck(checkClass, property);
+        if(nullAllowed)
+            check.isNullOr();
+        return check.named("the " + propertyName + " of " + argName);
     }
     
     @SuppressWarnings("unchecked")
