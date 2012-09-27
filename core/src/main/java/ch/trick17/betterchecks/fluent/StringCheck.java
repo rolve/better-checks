@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 import ch.trick17.betterchecks.Check;
 
-public final class StringCheck extends BaseCheck<String, StringCheck> {
+public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
     
     public StringCheck isNotEmpty() {
         return check(arg == null || !arg.isEmpty(), ARG_EMPTY, argName);

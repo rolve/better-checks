@@ -5,7 +5,7 @@ import static ch.trick17.betterchecks.MessageType.*;
 import java.util.Arrays;
 
 public final class PrimitiveArrayCheck extends
-        BaseCheck<Object, PrimitiveArrayCheck> {
+        ObjectBaseCheck<Object, PrimitiveArrayCheck> {
     
     private int argLength;
     

@@ -1,3 +1,3 @@
 package ch.trick17.betterchecks.fluent;
 
-public final class ObjectCheck extends BaseCheck<Object, ObjectCheck> {}
+public final class ObjectCheck extends ObjectBaseCheck<Object, ObjectCheck> {}

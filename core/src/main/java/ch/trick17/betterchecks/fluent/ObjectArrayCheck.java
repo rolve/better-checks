@@ -5,7 +5,7 @@ import static ch.trick17.betterchecks.MessageType.*;
 import java.util.Arrays;
 
 public final class ObjectArrayCheck extends
-        BaseCheck<Object[], ObjectArrayCheck> {
+        ObjectBaseCheck<Object[], ObjectArrayCheck> {
     
     public ObjectArrayCheck isNotEmpty() {
         return check(arg == null || arg.length != 0, ARG_EMPTY, argName);

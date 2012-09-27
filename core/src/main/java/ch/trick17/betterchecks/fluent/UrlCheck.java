@@ -4,7 +4,7 @@ import static ch.trick17.betterchecks.MessageType.ARG_PROTOCOL;
 
 import java.net.URL;
 
-public class UrlCheck extends BaseCheck<URL, UrlCheck> {
+public class UrlCheck extends ObjectBaseCheck<URL, UrlCheck> {
     
     public UrlCheck hasProtocol(final String protocol) {
         return check(arg == null || arg.getProtocol().equals(protocol),

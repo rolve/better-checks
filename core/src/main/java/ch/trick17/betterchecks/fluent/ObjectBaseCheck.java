@@ -5,7 +5,7 @@ import static ch.trick17.betterchecks.Exceptions.illegalArgumentException;
 import static ch.trick17.betterchecks.MessageType.*;
 import ch.trick17.betterchecks.MessageType;
 
-public class BaseCheck<T, C extends BaseCheck<T, C>> {
+public class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>> {
     
     protected T arg;
     protected Class<?> argClass;
@@ -95,7 +95,7 @@ public class BaseCheck<T, C extends BaseCheck<T, C>> {
         assert arg == null ? nullAllowed : true;
     }
     
-    protected final <T1, C1 extends BaseCheck<T1, C1>> C1 propertyCheck(
+    protected final <T1, C1 extends ObjectBaseCheck<T1, C1>> C1 propertyCheck(
             final Class<C1> checkClass, final T1 property,
             final String propertyName) {
         checkNull();

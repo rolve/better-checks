@@ -5,7 +5,7 @@ import static ch.trick17.betterchecks.MessageType.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-public final class NumberCheck extends BaseCheck<Number, NumberCheck> {
+public final class NumberCheck extends ObjectBaseCheck<Number, NumberCheck> {
     
     public NumberCheck isPositive() {
         checkNull();
