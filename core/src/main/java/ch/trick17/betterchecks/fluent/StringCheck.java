@@ -10,8 +10,6 @@ import ch.trick17.betterchecks.Check;
 
 public final class StringCheck extends BaseCheck<String, StringCheck> {
     
-    private static final String LENGTH_PREFIX = "the length of ";
-    
     public StringCheck isNotEmpty() {
         return check(arg == null || !arg.isEmpty(), ARG_EMPTY, argName);
     }
