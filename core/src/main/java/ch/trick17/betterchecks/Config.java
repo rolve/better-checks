@@ -11,7 +11,7 @@ public final class Config {
     /*
      * Constants
      */
-    private static final String CONFIG_RESOURCE_NAME = "ch.trick17.betterchecks.config";
+    public static final String CONFIG_BASE_NAME = "better-checks-config";
     private static final String DEFAULT_ARG_NAME_KEY = "defaultArgumentName";
     private static final String MSG_FORMAT_SUFFIX = ".format";
     
@@ -25,12 +25,12 @@ public final class Config {
      */
     private static final Config config = loadConfig();
     
-    private static Config loadConfig() {
+    protected static Config loadConfig() {
         final Config theConfig = new Config();
         
         ResourceBundle bundle;
         try {
-            bundle = ResourceBundle.getBundle(CONFIG_RESOURCE_NAME);
+            bundle = ResourceBundle.getBundle(CONFIG_BASE_NAME);
         } catch(final MissingResourceException e) {
             bundle = null;
         }
