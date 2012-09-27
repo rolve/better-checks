@@ -7,6 +7,7 @@ import java.util.Collection;
 
 import ch.trick17.betterchecks.fluent.CollectionCheck;
 import ch.trick17.betterchecks.fluent.FluentChecks;
+import ch.trick17.betterchecks.fluent.IntCheck;
 import ch.trick17.betterchecks.fluent.NumberCheck;
 import ch.trick17.betterchecks.fluent.ObjectArrayCheck;
 import ch.trick17.betterchecks.fluent.ObjectCheck;
@@ -170,5 +171,9 @@ public abstract class Check {
     
     public static UrlCheck that(final URL argument) {
         return FluentChecks.getObjectCheck(UrlCheck.class, argument);
+    }
+    
+    public static IntCheck that(final int argument) {
+        return FluentChecks.getIntCheck(argument);
     }
 }

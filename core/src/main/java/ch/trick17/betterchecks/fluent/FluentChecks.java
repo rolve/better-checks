@@ -11,18 +11,19 @@ import ch.trick17.betterchecks.util.NoArgConstructorThreadLocal;
 public class FluentChecks {
     
     @SuppressWarnings("unchecked")
-    private static final List<Class<? extends ObjectBaseCheck<? extends Object, ?>>> CHECK_CLASSES = Arrays
+    private static final List<Class<? extends BaseCheck<?>>> CHECK_CLASSES = Arrays
             .asList(ObjectCheck.class, StringCheck.class,
                     ObjectArrayCheck.class, PrimitiveArrayCheck.class,
-                    CollectionCheck.class, NumberCheck.class, UrlCheck.class);
+                    CollectionCheck.class, NumberCheck.class, UrlCheck.class,
+                    IntCheck.class);
     
-    private static final Map<Class<?>, ThreadLocal<? extends ObjectBaseCheck<?, ?>>> objectChecks;
+    private static final Map<Class<?>, ThreadLocal<? extends BaseCheck<?>>> objectChecks;
     
     static {
-        final Map<Class<?>, ThreadLocal<? extends ObjectBaseCheck<?, ?>>> map = new HashMap<Class<?>, ThreadLocal<? extends ObjectBaseCheck<?, ?>>>();
-        for(final Class<? extends ObjectBaseCheck<? extends Object, ?>> checkClass : CHECK_CLASSES)
-            map.put(checkClass,
-                    new NoArgConstructorThreadLocal<ObjectBaseCheck<?, ?>>(checkClass));
+        final Map<Class<?>, ThreadLocal<? extends BaseCheck<?>>> map = new HashMap<Class<?>, ThreadLocal<? extends BaseCheck<?>>>();
+        for(final Class<? extends BaseCheck<?>> checkClass : CHECK_CLASSES)
+            map.put(checkClass, new NoArgConstructorThreadLocal<BaseCheck<?>>(
+                    checkClass));
         objectChecks = Collections.unmodifiableMap(map);
     }
     
@@ -40,12 +41,17 @@ public class FluentChecks {
         return check;
     }
     
-    @SuppressWarnings("unchecked")
-    private static <T, C extends ObjectBaseCheck<T, C>> C getCheck(
-            final Class<C> checkClass) {
-        final ThreadLocal<? extends ObjectBaseCheck<?, ?>> threadLocal = objectChecks
+    public static IntCheck getIntCheck(final int argument) {
+        final IntCheck check = getCheck(IntCheck.class);
+        check.reset(argument);
+        return check;
+    }
+    
+    private static <C extends BaseCheck<C>> C getCheck(final Class<C> checkClass) {
+        @SuppressWarnings("unchecked")
+        final ThreadLocal<C> threadLocal = (ThreadLocal<C>) objectChecks
                 .get(checkClass);
         assert threadLocal != null;
-        return (C) threadLocal.get();
+        return threadLocal.get();
     }
 }

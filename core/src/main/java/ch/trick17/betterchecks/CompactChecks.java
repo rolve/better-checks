@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.Collection;
 
 import ch.trick17.betterchecks.fluent.CollectionCheck;
+import ch.trick17.betterchecks.fluent.IntCheck;
 import ch.trick17.betterchecks.fluent.NumberCheck;
 import ch.trick17.betterchecks.fluent.ObjectArrayCheck;
 import ch.trick17.betterchecks.fluent.ObjectCheck;
@@ -86,6 +87,10 @@ public abstract class CompactChecks {
     }
     
     public static UrlCheck check(final URL argument) {
+        return Check.that(argument);
+    }
+    
+    public static IntCheck check(final int argument) {
         return Check.that(argument);
     }
 }
