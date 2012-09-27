@@ -1,45 +1,32 @@
 package ch.trick17.betterchecks.fluent;
 
-import static ch.trick17.betterchecks.Exceptions.defaultArgName;
 import static ch.trick17.betterchecks.Exceptions.illegalArgumentException;
 import static ch.trick17.betterchecks.MessageType.*;
 import ch.trick17.betterchecks.MessageType;
 
-public class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>> {
+public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
+        extends BaseCheck<C> {
     
     protected T arg;
     protected Class<?> argClass;
-    protected String argName;
     protected boolean nullAllowed;
-    private boolean inverted;
     
     protected final void reset(final T argument) {
+        reset();
         this.arg = argument;
         if(argument == null)
             argClass = null;
         else
             argClass = argument.getClass();
-        this.argName = defaultArgName();
         this.nullAllowed = false;
-        this.inverted = false;
     }
     
     /*
      * Modifier methods
      */
     
-    public final C named(final String argumentName) {
-        this.argName = argumentName;
-        return me();
-    }
-    
     public final C isNullOr() {
         nullAllowed = true;
-        return me();
-    }
-    
-    public final C not() {
-        inverted = !inverted;
         return me();
     }
     
@@ -103,10 +90,5 @@ public class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>> {
         if(nullAllowed)
             check.isNullOr();
         return check.named("the " + propertyName + " of " + argName);
-    }
-    
-    @SuppressWarnings("unchecked")
-    private C me() {
-        return (C) this; // Why is a cast needed here?
     }
 }
