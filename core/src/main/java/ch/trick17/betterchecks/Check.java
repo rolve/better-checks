@@ -8,6 +8,7 @@ import java.util.Collection;
 import ch.trick17.betterchecks.fluent.CollectionCheck;
 import ch.trick17.betterchecks.fluent.FluentChecks;
 import ch.trick17.betterchecks.fluent.IntCheck;
+import ch.trick17.betterchecks.fluent.LongCheck;
 import ch.trick17.betterchecks.fluent.NumberCheck;
 import ch.trick17.betterchecks.fluent.ObjectArrayCheck;
 import ch.trick17.betterchecks.fluent.ObjectCheck;
@@ -175,5 +176,9 @@ public abstract class Check {
     
     public static IntCheck that(final int argument) {
         return FluentChecks.getIntCheck(argument);
+    }
+    
+    public static LongCheck that(final long argument) {
+        return FluentChecks.getLongCheck(argument);
     }
 }

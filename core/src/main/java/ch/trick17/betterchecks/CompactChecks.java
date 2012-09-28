@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import ch.trick17.betterchecks.fluent.CollectionCheck;
 import ch.trick17.betterchecks.fluent.IntCheck;
+import ch.trick17.betterchecks.fluent.LongCheck;
 import ch.trick17.betterchecks.fluent.NumberCheck;
 import ch.trick17.betterchecks.fluent.ObjectArrayCheck;
 import ch.trick17.betterchecks.fluent.ObjectCheck;
@@ -91,6 +92,10 @@ public abstract class CompactChecks {
     }
     
     public static IntCheck check(final int argument) {
+        return Check.that(argument);
+    }
+    
+    public static LongCheck check(final long argument) {
         return Check.that(argument);
     }
 }

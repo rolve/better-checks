@@ -13,13 +13,4 @@ public class PrimitiveBaseCheck<C extends PrimitiveBaseCheck<C>> extends
         inverted = false;
         return me();
     }
-    
-    protected final C checkWithCause(final boolean condition,
-            final MessageType formatId, final Throwable cause,
-            final Object... msgArgs) {
-        if(inverted ? condition : !condition)
-            throw illegalArgumentException(formatId, inverted, msgArgs, cause);
-        inverted = false;
-        return me();
-    }
 }

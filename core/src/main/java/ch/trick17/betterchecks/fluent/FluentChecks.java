@@ -15,7 +15,7 @@ public class FluentChecks {
             .asList(ObjectCheck.class, StringCheck.class,
                     ObjectArrayCheck.class, PrimitiveArrayCheck.class,
                     CollectionCheck.class, NumberCheck.class, UrlCheck.class,
-                    IntCheck.class);
+                    IntCheck.class, LongCheck.class);
     
     private static final Map<Class<?>, ThreadLocal<? extends BaseCheck<?>>> objectChecks;
     
@@ -43,6 +43,12 @@ public class FluentChecks {
     
     public static IntCheck getIntCheck(final int argument) {
         final IntCheck check = getCheck(IntCheck.class);
+        check.reset(argument);
+        return check;
+    }
+    
+    public static LongCheck getLongCheck(final long argument) {
+        final LongCheck check = getCheck(LongCheck.class);
         check.reset(argument);
         return check;
     }
