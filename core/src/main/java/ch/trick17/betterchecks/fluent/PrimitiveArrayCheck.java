@@ -9,7 +9,7 @@ public final class PrimitiveArrayCheck extends
     
     private int argLength;
     
-    protected final void reset(final Object argument, final int argumentLength) {
+    protected void reset(final Object argument, final int argumentLength) {
         reset(argument);
         argLength = argumentLength;
     }
