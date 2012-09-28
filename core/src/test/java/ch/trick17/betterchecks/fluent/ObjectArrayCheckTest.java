@@ -121,8 +121,6 @@ public class ObjectArrayCheckTest {
     @SuppressWarnings("null")
     public void testHasLengthWhich() {
         Check.that(new Object[] {0, 1, 2, 3, 4}).hasLengthWhich().isEqualTo(5);
-        assertEquals(5, Check.that(new Integer[] {0, 1, 2, 3, 4})
-                .hasLengthWhich().arg);
         assertEquals("the length of "
                 + Config.getConfig().getDefaultArgumentName(), Check.that(
                 new Object[] {0, 1, 2, 3, 4}).hasLengthWhich().argName);

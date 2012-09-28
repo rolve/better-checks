@@ -22,7 +22,7 @@ public final class CollectionCheck extends
     }
     
     public NumberCheck hasSizeWhich() {
-        return propertyCheck(NumberCheck.class,
+        return objectPropertyCheck(NumberCheck.class,
                 arg == null ? null : (Number) arg.size(), "size");
     }
 }

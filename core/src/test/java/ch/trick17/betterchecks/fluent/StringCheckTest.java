@@ -159,7 +159,6 @@ public class StringCheckTest {
     @SuppressWarnings("null")
     public void testHasLengthWhich() {
         Check.that("hello").hasLengthWhich().isEqualTo(5);
-        assertEquals(5, Check.that("hello").hasLengthWhich().arg);
         assertEquals("the length of "
                 + Config.getConfig().getDefaultArgumentName(), Check.that(
                 "hello").hasLengthWhich().argName);

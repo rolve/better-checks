@@ -28,9 +28,8 @@ public final class PrimitiveArrayCheck extends
                 ARG_LENGTH_BETWEEN, argName, min, max, arrayToString(arg));
     }
     
-    public NumberCheck hasLengthWhich() {
-        return propertyCheck(NumberCheck.class,
-                arg == null ? null : (Number) argLength, "length");
+    public IntCheck hasLengthWhich() {
+        return intPropertyCheck(arg == null ? -1 : argLength, "length");
     }
     
     /*

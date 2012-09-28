@@ -8,7 +8,7 @@ public abstract class BaseCheck<C extends BaseCheck<C>> {
     protected String argName;
     protected boolean inverted;
     
-    protected final void reset() {
+    protected final void baseReset() {
         this.argName = defaultArgName();
         this.inverted = false;
     }
@@ -31,13 +31,13 @@ public abstract class BaseCheck<C extends BaseCheck<C>> {
      * Implementation methods
      */
     
-    @SuppressWarnings("unchecked")
-    protected final C me() {
-        return (C) this; // Why is a cast needed here?
-    }
-    
     protected static void checkValid(final boolean valid, final String message) {
         if(!valid)
             throw new InvalidCheckException(message);
+    }
+    
+    @SuppressWarnings("unchecked")
+    protected final C me() {
+        return (C) this; // Why is a cast needed here?
     }
 }

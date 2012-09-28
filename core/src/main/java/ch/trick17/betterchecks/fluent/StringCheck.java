@@ -30,9 +30,8 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
                 ARG_LENGTH_BETWEEN, argName, min, max, arg);
     }
     
-    public NumberCheck hasLengthWhich() {
-        return propertyCheck(NumberCheck.class,
-                arg == null ? null : (Number) arg.length(), "length");
+    public IntCheck hasLengthWhich() {
+        return intPropertyCheck(arg == null ? -1 : arg.length(), "length");
     }
     
     public StringCheck startsWith(final String prefix) {

@@ -12,47 +12,46 @@ public class UrlCheck extends ObjectBaseCheck<URL, UrlCheck> {
     }
     
     public StringCheck hasProtocolWhich() {
-        return propertyCheck(StringCheck.class, arg == null ? null : arg
+        return objectPropertyCheck(StringCheck.class, arg == null ? null : arg
                 .getProtocol(), "protocol");
     }
     
     public StringCheck hasHostWhich() {
-        return propertyCheck(StringCheck.class, arg == null ? null : arg
+        return objectPropertyCheck(StringCheck.class, arg == null ? null : arg
                 .getHost(), "host");
     }
     
-    public NumberCheck hasPortWhich() {
-        return propertyCheck(NumberCheck.class,
-                arg == null ? null : (Number) arg.getPort(), "port");
+    public IntCheck hasPortWhich() {
+        return intPropertyCheck(arg == null ? -1 : arg.getPort(), "port");
     }
     
     public StringCheck hasFileWhich() {
-        return propertyCheck(StringCheck.class, arg == null ? null : arg
+        return objectPropertyCheck(StringCheck.class, arg == null ? null : arg
                 .getFile(), "file");
     }
     
     public StringCheck hasQueryWhich() {
-        return propertyCheck(StringCheck.class, arg == null ? null : arg
+        return objectPropertyCheck(StringCheck.class, arg == null ? null : arg
                 .getQuery(), "query");
     }
     
     public StringCheck hasAuthorityWhich() {
-        return propertyCheck(StringCheck.class, arg == null ? null : arg
+        return objectPropertyCheck(StringCheck.class, arg == null ? null : arg
                 .getAuthority(), "authority");
     }
     
     public StringCheck hasPathWhich() {
-        return propertyCheck(StringCheck.class, arg == null ? null : arg
+        return objectPropertyCheck(StringCheck.class, arg == null ? null : arg
                 .getPath(), "path");
     }
     
     public StringCheck hasUserInfoWhich() {
-        return propertyCheck(StringCheck.class, arg == null ? null : arg
+        return objectPropertyCheck(StringCheck.class, arg == null ? null : arg
                 .getUserInfo(), "user info");
     }
     
     public StringCheck hasRefWhich() {
-        return propertyCheck(StringCheck.class, arg == null ? null : arg
+        return objectPropertyCheck(StringCheck.class, arg == null ? null : arg
                 .getRef(), "reference (anchor)");
     }
 }

@@ -12,7 +12,7 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
     protected boolean nullAllowed;
     
     protected final void reset(final T argument) {
-        reset();
+        baseReset();
         this.arg = argument;
         if(argument == null)
             argClass = null;
@@ -56,21 +56,21 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
      * Implementation methods
      */
     
-    protected final C check(final boolean condition,
-            final MessageType formatId, final Object... msgArgs) {
+    protected final C check(final boolean condition, final MessageType msgType,
+            final Object... msgArgs) {
         checkNull();
         if(!(nullAllowed && arg == null) && (inverted ? condition : !condition))
-            throw illegalArgumentException(formatId, inverted, msgArgs);
+            throw illegalArgumentException(msgType, inverted, msgArgs);
         inverted = false;
         return me();
     }
     
     protected final C checkWithCause(final boolean condition,
-            final MessageType formatId, final Throwable cause,
+            final MessageType msgType, final Throwable cause,
             final Object... msgArgs) {
         checkNull();
         if(!(nullAllowed && arg == null) && (inverted ? condition : !condition))
-            throw illegalArgumentException(formatId, inverted, msgArgs, cause);
+            throw illegalArgumentException(msgType, inverted, msgArgs, cause);
         inverted = false;
         return me();
     }
@@ -82,13 +82,22 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
         assert arg == null ? nullAllowed : true;
     }
     
-    protected final <T1, C1 extends ObjectBaseCheck<T1, C1>> C1 propertyCheck(
+    protected final <T1, C1 extends ObjectBaseCheck<T1, C1>> C1 objectPropertyCheck(
             final Class<C1> checkClass, final T1 property,
             final String propertyName) {
         checkNull();
         final C1 check = FluentChecks.getObjectCheck(checkClass, property);
         if(nullAllowed)
             check.isNullOr();
+        return check.named("the " + propertyName + " of " + argName);
+    }
+    
+    protected final IntCheck intPropertyCheck(final int property,
+            final String propertyName) {
+        checkNull();
+        final IntCheck check = FluentChecks.getIntCheck(property);
+        if(nullAllowed && arg == null)
+            check.disable();
         return check.named("the " + propertyName + " of " + argName);
     }
 }
