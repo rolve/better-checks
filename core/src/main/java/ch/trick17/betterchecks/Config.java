@@ -12,13 +12,15 @@ public final class Config {
      * Constants
      */
     public static final String CONFIG_BASE_NAME = "better-checks-config";
-    private static final String DEFAULT_ARG_NAME_KEY = "defaultArgumentName";
     private static final String MSG_FORMAT_SUFFIX = ".format";
+    private static final String CLEAN_STACK_TRACES_ENABLED_KEY = "cleanStackTraces";
+    private static final String DEFAULT_ARG_NAME_KEY = "defaultArgumentName";
     
     /*
      * Default values
      */
     private static final String DEFAULT_DEFAULT_ARG_NAME = "the argument";
+    private static final boolean DEFAULT_CLEAN_STRACK_TRACES_ENABLED = true;
     
     /*
      * Static initialization and global config access
@@ -37,6 +39,9 @@ public final class Config {
         
         theConfig.defaultArgumentName = getFromBundle(bundle,
                 DEFAULT_ARG_NAME_KEY, DEFAULT_DEFAULT_ARG_NAME);
+        theConfig.cleanStackTracesEnabled = getFromBundle(bundle,
+                CLEAN_STACK_TRACES_ENABLED_KEY,
+                DEFAULT_CLEAN_STRACK_TRACES_ENABLED);
         
         theConfig.messageFormats = new HashMap<MessageType, Config.FormatPair>();
         for(final MessageType msgType : MessageType.values()) {
@@ -61,6 +66,18 @@ public final class Config {
             }
     }
     
+    private static boolean getFromBundle(final ResourceBundle bundle,
+            final String key, final boolean defaultValue) {
+        if(bundle == null)
+            return defaultValue;
+        else
+            try {
+                return Boolean.parseBoolean(bundle.getString(key));
+            } catch(final MissingResourceException e) {
+                return defaultValue;
+            }
+    }
+    
     public static Config getConfig() {
         return config;
     }
@@ -73,10 +90,15 @@ public final class Config {
      * Note that a Config object is *effectively* immutable. The static config
      * is therefore thread-safe after publication in the static initializer.
      */
+    private boolean cleanStackTracesEnabled;
     private String defaultArgumentName;
     private Map<MessageType, FormatPair> messageFormats;
     
     private Config() {}
+    
+    public boolean isCleanStackTracesEnabled() {
+        return cleanStackTracesEnabled;
+    }
     
     public String getDefaultArgumentName() {
         return defaultArgumentName;

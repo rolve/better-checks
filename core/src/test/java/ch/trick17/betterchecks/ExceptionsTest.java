@@ -6,16 +6,16 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-public class ExceptionsTest {
+public class ExceptionsTest extends CustomConfigTest {
     
     @Test
     public void testIllegalArgumentException() {
         IllegalArgumentException exception = Exceptions
                 .illegalArgumentException(MessageType.ARG_EMPTY, false,
-                        new Object[] {"the argument"});
+                        new Object[] {"arg"});
         
-        assertEquals(Exceptions.formatMsg(MessageType.ARG_EMPTY, false,
-                "the argument"), exception.getMessage());
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_EMPTY, false, "arg"),
+                exception.getMessage());
         
         /*
          * Test that the stack trace is cleaned up to not contain elements from
@@ -37,7 +37,23 @@ public class ExceptionsTest {
         assertEquals(ExceptionsTest.class.getSimpleName() + ".java", topElement
                 .getFileName());
         assertEquals("testIllegalArgumentException", topElement.getMethodName());
+        
+        /*
+         * Test disabling stack trace cleaning
+         */
+        useTestConfig();
+        
+        exception = Exceptions.illegalArgumentException(MessageType.ARG_EMPTY,
+                false, new Object[] {"arg"});
+        topElement = exception.getStackTrace()[0];
+        assertEquals(Exceptions.class.getName(), topElement.getClassName());
+        assertEquals(Exceptions.class.getSimpleName() + ".java", topElement
+                .getFileName());
+        assertEquals("illegalArgumentException", topElement.getMethodName());
     }
+    
+    @Test
+    public void testIllegalArgumentExceptionCleanStackTracesOff() {}
     
     private static class ExceptionsTestHelper {
         
@@ -50,9 +66,9 @@ public class ExceptionsTest {
     @Test
     public void testFormatMsg() {
         /* Not inverted */
-        assertEquals("the argument must not be null", Exceptions.formatMsg(
-                MessageType.ARG_NULL, false, "the argument"));
-        assertEquals("your argument must not be empty", Exceptions.formatMsg(
+        assertEquals("arg must not be null", Exceptions.formatMsg(
+                MessageType.ARG_NULL, false, "arg"));
+        assertEquals("the argument must not be empty", Exceptions.formatMsg(
                 MessageType.ARG_EMPTY, false, Exceptions.defaultArgName()));
         assertEquals(
                 "the list must have a size between 3 and 4 (value: [abc d, hello])",
@@ -61,9 +77,9 @@ public class ExceptionsTest {
                                 "abc d", "hello")));
         
         /* Inverted */
-        assertEquals("the argument must be null", Exceptions.formatMsg(
-                MessageType.ARG_NULL, true, "the argument"));
-        assertEquals("your argument must be empty", Exceptions.formatMsg(
+        assertEquals("arg must be null", Exceptions.formatMsg(
+                MessageType.ARG_NULL, true, "arg"));
+        assertEquals("the argument must be empty", Exceptions.formatMsg(
                 MessageType.ARG_EMPTY, true, Exceptions.defaultArgName()));
         assertEquals(
                 "the list must not have a size between 3 and 4 (value: [abc d, hello])",
