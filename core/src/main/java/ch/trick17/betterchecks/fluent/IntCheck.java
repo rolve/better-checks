@@ -2,6 +2,8 @@ package ch.trick17.betterchecks.fluent;
 
 import static ch.trick17.betterchecks.MessageType.*;
 
+import java.util.Collection;
+
 public class IntCheck extends PrimitiveBaseCheck<IntCheck> {
     
     private int arg;
@@ -32,7 +34,24 @@ public class IntCheck extends PrimitiveBaseCheck<IntCheck> {
     }
     
     public IntCheck isBetween(final int min, final int max) {
+        checkValid(min <= max, "min (" + min
+                + ") must be less than or equal to max (" + max + ")");
         return check(arg >= min && arg <= max, ARG_BETWEEN, argName, min, max,
                 arg);
+    }
+    
+    public IntCheck isValidIndex(final int listSize) {
+        checkValid(listSize > 0, "listSize must be greater than 0 (value: "
+                + listSize + ")");
+        return check(arg >= 0 && arg < listSize, ARG_INDEX, argName, listSize,
+                arg);
+    }
+    
+    public IntCheck isValidIndex(final Collection<?> collection) {
+        return isValidIndex(collection.size());
+    }
+    
+    public IntCheck isValidIndex(final Object[] array) {
+        return isValidIndex(array.length);
     }
 }

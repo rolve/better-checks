@@ -28,6 +28,8 @@ public enum MessageType {
     ARG_GREATER("%s must -(not )-be greater than %s (value: %s)"),
     ARG_LESS("%s must -(not )-be less than %s (value: %s)"),
     ARG_BETWEEN("%s must -(not )-be between %s and %s (value: %s)"),
+    ARG_INDEX(
+            "%s must -(not )-be a valid index for a list or array of size %s (value: %s)"),
     ARG_PROTOCOL("%s must -(not )-have the protocol %s (value: %s)");
     
     private final String defaultFormat;

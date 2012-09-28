@@ -3,10 +3,13 @@ package ch.trick17.betterchecks.fluent;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.Exceptions;
+import ch.trick17.betterchecks.InvalidCheckException;
 import ch.trick17.betterchecks.MessageType;
 
 public class IntCheckTest {
@@ -81,7 +84,7 @@ public class IntCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MessageType.ARG_NEGATIVE, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NEGATIVE, true,
                 Exceptions.defaultArgName(), -1), thrown.getMessage());
     }
     
@@ -209,5 +212,59 @@ public class IntCheckTest {
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MessageType.ARG_BETWEEN, false,
                 Exceptions.defaultArgName(), 1, 2, 0), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that(-1).isBetween(2, 1);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof InvalidCheckException);
+        assertEquals("min (2) must be less than or equal to max (1)", thrown
+                .getMessage());
+    }
+    
+    @Test
+    @SuppressWarnings("null")
+    public void testIsValidIndex() {
+        Check.that(1).isValidIndex(2);
+        Check.that(1).isValidIndex(new Object[] {1, 2});
+        Check.that(1).isValidIndex(Arrays.asList(1, 2));
+        Check.that(0).isValidIndex(1);
+        Check.that(Integer.MAX_VALUE - 1).isValidIndex(Integer.MAX_VALUE);
+        
+        Check.that(1).not().isValidIndex(1);
+        Check.that(-2).not().isValidIndex(1);
+        Check.that(-2).not().isValidIndex(Integer.MAX_VALUE);
+        
+        Exception thrown = null;
+        try {
+            Check.that(2).isValidIndex(2);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_INDEX, false,
+                Exceptions.defaultArgName(), 2, 2), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that(-1).isValidIndex(1);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_INDEX, false,
+                Exceptions.defaultArgName(), 1, -1), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that(-1).isValidIndex(0);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof InvalidCheckException);
+        assertEquals("listSize must be greater than 0 (value: 0)", thrown
+                .getMessage());
     }
 }
