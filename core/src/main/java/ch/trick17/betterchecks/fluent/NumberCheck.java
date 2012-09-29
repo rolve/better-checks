@@ -25,7 +25,7 @@ public final class NumberCheck extends ObjectBaseCheck<Number, NumberCheck> {
             return check(arg.doubleValue() < 0, ARG_NEGATIVE, argName, arg);
     }
     
-    public NumberCheck isEqualTo(final Number number) {
+    public NumberCheck is(final Number number) {
         return check(arg == null || compare(arg, number) == 0, ARG_EQUAL,
                 argName, number, arg);
     }

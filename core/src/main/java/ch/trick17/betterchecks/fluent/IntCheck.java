@@ -21,7 +21,7 @@ public class IntCheck extends PrimitiveBaseCheck<IntCheck> {
         return check(arg < 0, ARG_NEGATIVE, argName, arg);
     }
     
-    public IntCheck isEqualTo(final int number) {
+    public IntCheck is(final int number) {
         return check(arg == number, ARG_EQUAL, argName, number, arg);
     }
     

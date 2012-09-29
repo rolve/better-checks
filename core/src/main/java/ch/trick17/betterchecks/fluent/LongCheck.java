@@ -19,7 +19,7 @@ public class LongCheck extends PrimitiveBaseCheck<LongCheck> {
         return check(arg < 0, ARG_NEGATIVE, argName, arg);
     }
     
-    public LongCheck isEqualTo(final long number) {
+    public LongCheck is(final long number) {
         return check(arg == number, ARG_EQUAL, argName, number, arg);
     }
     

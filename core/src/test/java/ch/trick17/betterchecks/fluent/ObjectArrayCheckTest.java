@@ -120,7 +120,7 @@ public class ObjectArrayCheckTest {
     @Test
     @SuppressWarnings("null")
     public void testHasLengthWhich() {
-        Check.that(new Object[] {0, 1, 2, 3, 4}).hasLengthWhich().isEqualTo(5);
+        Check.that(new Object[] {0, 1, 2, 3, 4}).hasLengthWhich().is(5);
         assertEquals("the length of "
                 + Config.getConfig().getDefaultArgumentName(), Check.that(
                 new Object[] {0, 1, 2, 3, 4}).hasLengthWhich().argName);
@@ -128,7 +128,7 @@ public class ObjectArrayCheckTest {
                 new Object[] {0, 1, 2, 3, 4}).named("the array")
                 .hasLengthWhich().argName);
         
-        Check.that((Object[]) null).isNullOr().hasLengthWhich().isEqualTo(100);
+        Check.that((Object[]) null).isNullOr().hasLengthWhich().is(100);
         
         Exception thrown = null;
         try {

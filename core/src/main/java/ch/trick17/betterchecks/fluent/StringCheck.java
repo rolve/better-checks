@@ -71,7 +71,7 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
                 argName, regex, arg);
     }
     
-    public StringCheck isEqualTo(final String string) {
+    public StringCheck is(final String string) {
         return check(arg == null || arg.equals(string), ARG_EQUAL, argName,
                 string, arg);
     }

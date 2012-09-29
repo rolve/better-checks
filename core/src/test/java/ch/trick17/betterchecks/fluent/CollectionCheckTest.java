@@ -103,7 +103,7 @@ public class CollectionCheckTest {
     @Test
     @SuppressWarnings("null")
     public void testHasSizeWhich() {
-        Check.that(Arrays.asList(1, 2, 3, 4, 5)).hasSizeWhich().isEqualTo(5);
+        Check.that(Arrays.asList(1, 2, 3, 4, 5)).hasSizeWhich().is(5);
         assertEquals("the size of "
                 + Config.getConfig().getDefaultArgumentName(), Check.that(
                 Arrays.asList(1, 2, 3, 4, 5)).hasSizeWhich().argName);
@@ -111,7 +111,7 @@ public class CollectionCheckTest {
                 Check.that(Arrays.asList(1, 2, 3, 4, 5)).named("the list")
                         .hasSizeWhich().argName);
         
-        Check.that((Collection<?>) null).isNullOr().hasSizeWhich().isEqualTo(
+        Check.that((Collection<?>) null).isNullOr().hasSizeWhich().is(
                 100);
         
         Exception thrown = null;

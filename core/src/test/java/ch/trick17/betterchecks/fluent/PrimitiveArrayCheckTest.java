@@ -112,7 +112,7 @@ public class PrimitiveArrayCheckTest {
     @Test
     @SuppressWarnings("null")
     public void testHasLengthWhich() {
-        Check.that(new int[] {0, 1, 2, 3, 4}).hasLengthWhich().isEqualTo(5);
+        Check.that(new int[] {0, 1, 2, 3, 4}).hasLengthWhich().is(5);
         assertEquals("the length of "
                 + Config.getConfig().getDefaultArgumentName(), Check.that(
                 new int[] {0, 1, 2, 3, 4}).hasLengthWhich().argName);
@@ -120,7 +120,7 @@ public class PrimitiveArrayCheckTest {
                 Check.that(new int[] {0, 1, 2, 3, 4}).named("the array")
                         .hasLengthWhich().argName);
         
-        Check.that((int[]) null).isNullOr().hasLengthWhich().isEqualTo(100);
+        Check.that((int[]) null).isNullOr().hasLengthWhich().is(100);
         
         Exception thrown = null;
         try {

@@ -91,19 +91,19 @@ public class IntCheckTest {
     @Test
     @SuppressWarnings("null")
     public void testIsEqualTo() {
-        Check.that(1).isEqualTo(1);
-        Check.that(-2).isEqualTo(-2);
-        Check.that(0).isEqualTo(0);
-        Check.that(Integer.MIN_VALUE).isEqualTo(Integer.MIN_VALUE);
+        Check.that(1).is(1);
+        Check.that(-2).is(-2);
+        Check.that(0).is(0);
+        Check.that(Integer.MIN_VALUE).is(Integer.MIN_VALUE);
         
-        Check.that(1).not().isEqualTo(2);
-        Check.that(-2).not().isEqualTo(1);
-        Check.that(0).not().isEqualTo(1);
-        Check.that(Integer.MIN_VALUE).not().isEqualTo(Integer.MAX_VALUE);
+        Check.that(1).not().is(2);
+        Check.that(-2).not().is(1);
+        Check.that(0).not().is(1);
+        Check.that(Integer.MIN_VALUE).not().is(Integer.MAX_VALUE);
         
         Exception thrown = null;
         try {
-            Check.that(0).isEqualTo(1);
+            Check.that(0).is(1);
         } catch(final Exception e) {
             thrown = e;
         }

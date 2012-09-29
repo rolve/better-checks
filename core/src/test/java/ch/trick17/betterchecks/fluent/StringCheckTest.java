@@ -160,14 +160,14 @@ public class StringCheckTest {
     @Test
     @SuppressWarnings("null")
     public void testHasLengthWhich() {
-        Check.that("hello").hasLengthWhich().isEqualTo(5);
+        Check.that("hello").hasLengthWhich().is(5);
         assertEquals("the length of "
                 + Config.getConfig().getDefaultArgumentName(), Check.that(
                 "hello").hasLengthWhich().argName);
         assertEquals("the length of string", Check.that("hello")
                 .named("string").hasLengthWhich().argName);
         
-        Check.that((String) null).isNullOr().hasLengthWhich().isEqualTo(100);
+        Check.that((String) null).isNullOr().hasLengthWhich().is(100);
         
         Exception thrown = null;
         try {
@@ -395,12 +395,12 @@ public class StringCheckTest {
     @Test
     @SuppressWarnings("null")
     public void testIsEqualTo() {
-        Check.that("hello").isEqualTo("hello");
-        Check.that("").isEqualTo("");
+        Check.that("hello").is("hello");
+        Check.that("").is("");
         
         Exception thrown = null;
         try {
-            Check.that("hello").isEqualTo("hella");
+            Check.that("hello").is("hella");
         } catch(final Exception e) {
             thrown = e;
         }
@@ -411,7 +411,7 @@ public class StringCheckTest {
         
         thrown = null;
         try {
-            Check.that((String) null).isEqualTo("");
+            Check.that((String) null).is("");
         } catch(final Exception e) {
             thrown = e;
         }

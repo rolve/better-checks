@@ -158,13 +158,13 @@ public class NumberCheckTest {
     @Test
     @SuppressWarnings("null")
     public void testIsEqualTo() {
-        Check.that((Number) 1).isEqualTo(1);
-        Check.that((Number) 1).isEqualTo(1.0);
-        Check.that((Number) 0).isEqualTo(new BigDecimal("0"));
+        Check.that((Number) 1).is(1);
+        Check.that((Number) 1).is(1.0);
+        Check.that((Number) 0).is(new BigDecimal("0"));
         
         Exception thrown = null;
         try {
-            Check.that((Number) (-1)).isEqualTo(0);
+            Check.that((Number) (-1)).is(0);
         } catch(final Exception e) {
             thrown = e;
         }
@@ -174,7 +174,7 @@ public class NumberCheckTest {
         
         thrown = null;
         try {
-            Check.that((Number) null).isEqualTo(0);
+            Check.that((Number) null).is(0);
         } catch(final Exception e) {
             thrown = e;
         }

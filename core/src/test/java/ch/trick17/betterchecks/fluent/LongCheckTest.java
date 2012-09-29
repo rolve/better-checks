@@ -79,19 +79,19 @@ public class LongCheckTest {
     @Test
     @SuppressWarnings("null")
     public void testIsEqualTo() {
-        Check.that(1L).isEqualTo(1);
-        Check.that(-2L).isEqualTo(-2);
-        Check.that(0L).isEqualTo(0);
-        Check.that(Long.MIN_VALUE).isEqualTo(Long.MIN_VALUE);
+        Check.that(1L).is(1);
+        Check.that(-2L).is(-2);
+        Check.that(0L).is(0);
+        Check.that(Long.MIN_VALUE).is(Long.MIN_VALUE);
         
-        Check.that(1L).not().isEqualTo(2);
-        Check.that(-2L).not().isEqualTo(1);
-        Check.that(0L).not().isEqualTo(1);
-        Check.that(Long.MIN_VALUE).not().isEqualTo(Long.MAX_VALUE);
+        Check.that(1L).not().is(2);
+        Check.that(-2L).not().is(1);
+        Check.that(0L).not().is(1);
+        Check.that(Long.MIN_VALUE).not().is(Long.MAX_VALUE);
         
         Exception thrown = null;
         try {
-            Check.that(0L).isEqualTo(1);
+            Check.that(0L).is(1);
         } catch(final Exception e) {
             thrown = e;
         }

@@ -46,14 +46,14 @@ public class UrlCheckTest {
     public void testHasProtocolWhich() throws MalformedURLException {
         final URL url = new URL(
                 "http://rolve@example.com:8080/the-path/?the-query#the-anchor");
-        Check.that(url).hasProtocolWhich().isEqualTo("http");
-        Check.that(url).hasHostWhich().isEqualTo("example.com");
-        Check.that(url).hasPortWhich().isEqualTo(8080);
-        Check.that(url).hasFileWhich().isEqualTo("/the-path/?the-query");
-        Check.that(url).hasQueryWhich().isEqualTo("the-query");
-        Check.that(url).hasAuthorityWhich().isEqualTo("rolve@example.com:8080");
-        Check.that(url).hasPathWhich().isEqualTo("/the-path/");
-        Check.that(url).hasUserInfoWhich().isEqualTo("rolve");
-        Check.that(url).hasRefWhich().isEqualTo("the-anchor");
+        Check.that(url).hasProtocolWhich().is("http");
+        Check.that(url).hasHostWhich().is("example.com");
+        Check.that(url).hasPortWhich().is(8080);
+        Check.that(url).hasFileWhich().is("/the-path/?the-query");
+        Check.that(url).hasQueryWhich().is("the-query");
+        Check.that(url).hasAuthorityWhich().is("rolve@example.com:8080");
+        Check.that(url).hasPathWhich().is("/the-path/");
+        Check.that(url).hasUserInfoWhich().is("rolve");
+        Check.that(url).hasRefWhich().is("the-anchor");
     }
 }
