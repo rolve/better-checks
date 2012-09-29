@@ -32,6 +32,8 @@ public class LongCheck extends PrimitiveBaseCheck<LongCheck> {
     }
     
     public LongCheck isBetween(final long min, final long max) {
+        checkValid(min <= max, "min (" + min
+                + ") must be less than or equal to max (" + max + ")");
         return check(arg >= min && arg <= max, ARG_BETWEEN, argName, min, max,
                 arg);
     }

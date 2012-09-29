@@ -4,12 +4,14 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
 import java.net.MalformedURLException;
+import java.util.regex.Pattern;
 
 import org.junit.Test;
 
 import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.Config;
 import ch.trick17.betterchecks.Exceptions;
+import ch.trick17.betterchecks.InvalidCheckException;
 import ch.trick17.betterchecks.MessageType;
 
 public class StringCheckTest {
@@ -284,17 +286,6 @@ public class StringCheckTest {
         
         thrown = null;
         try {
-            Check.that("hello").containsAny();
-        } catch(final Exception e) {
-            thrown = e;
-        }
-        assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MessageType.ARG_CONTAINS_ANY, false,
-                Exceptions.defaultArgName(), "[]", "hello"), thrown
-                .getMessage());
-        
-        thrown = null;
-        try {
             Check.that((String) null).containsAny("");
         } catch(final Exception e) {
             thrown = e;
@@ -302,6 +293,15 @@ public class StringCheckTest {
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
                 Exceptions.defaultArgName()), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that("hello").containsAny();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof InvalidCheckException);
+        assertEquals("sequences must not be empty", thrown.getMessage());
     }
     
     @Test
@@ -356,6 +356,34 @@ public class StringCheckTest {
         thrown = null;
         try {
             Check.that((String) null).matches(".*");
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+    }
+    
+    @Test
+    @SuppressWarnings("null")
+    public void testMatchesPattern() {
+        Check.that("hello").matches(Pattern.compile("hello"));
+        Check.that("hello").matches(Pattern.compile("h.*"));
+        
+        Exception thrown = null;
+        try {
+            Check.that("hello").matches(Pattern.compile("hi"));
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_MATCHES, false,
+                Exceptions.defaultArgName(), Pattern.compile("hi"), "hello"),
+                thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((String) null).matches(Pattern.compile(".*"));
         } catch(final Exception e) {
             thrown = e;
         }

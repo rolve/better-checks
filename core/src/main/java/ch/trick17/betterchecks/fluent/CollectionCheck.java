@@ -21,8 +21,7 @@ public final class CollectionCheck extends
                 ARG_SIZE_BETWEEN, argName, min, max, arg);
     }
     
-    public NumberCheck hasSizeWhich() {
-        return objectPropertyCheck(NumberCheck.class,
-                arg == null ? null : (Number) arg.size(), "size");
+    public IntCheck hasSizeWhich() {
+        return intPropertyCheck(arg == null ? -1 : arg.size(), "size");
     }
 }

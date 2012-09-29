@@ -5,6 +5,7 @@ import static ch.trick17.betterchecks.MessageType.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 import ch.trick17.betterchecks.Check;
 
@@ -50,6 +51,7 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
     }
     
     public StringCheck containsAny(final CharSequence... sequences) {
+        checkValid(sequences.length > 0, "sequences must not be empty");
         return check(arg == null || testContainsAny(sequences),
                 ARG_CONTAINS_ANY, argName, Arrays.toString(sequences), arg);
     }
@@ -60,9 +62,13 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
     }
     
     public StringCheck matches(final String regex) {
-        // IMPROVE: Cache compiled patterns?
         return check(arg == null || arg.matches(regex), ARG_MATCHES, argName,
                 regex, arg);
+    }
+    
+    public StringCheck matches(final Pattern regex) {
+        return check(arg == null || regex.matcher(arg).matches(), ARG_MATCHES,
+                argName, regex, arg);
     }
     
     public StringCheck isEqualTo(final String string) {

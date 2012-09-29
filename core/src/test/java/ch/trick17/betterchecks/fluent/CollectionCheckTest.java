@@ -104,8 +104,6 @@ public class CollectionCheckTest {
     @SuppressWarnings("null")
     public void testHasSizeWhich() {
         Check.that(Arrays.asList(1, 2, 3, 4, 5)).hasSizeWhich().isEqualTo(5);
-        assertEquals(5,
-                Check.that(Arrays.asList(1, 2, 3, 4, 5)).hasSizeWhich().arg);
         assertEquals("the size of "
                 + Config.getConfig().getDefaultArgumentName(), Check.that(
                 Arrays.asList(1, 2, 3, 4, 5)).hasSizeWhich().argName);
