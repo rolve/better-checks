@@ -1,6 +1,7 @@
 package ch.trick17.betterchecks.util;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * A {@link ThreadLocal} that uses the no-arg constructor of the class passed to
@@ -17,7 +18,7 @@ public class NoArgConstructorThreadLocal<T> extends ThreadLocal<T> {
     public NoArgConstructorThreadLocal(final Class<? extends T> clazz) {
         try {
             constructor = clazz.getConstructor();
-        } catch(final ReflectiveOperationException e) {
+        } catch(final NoSuchMethodException e) {
             final String msg = "Could not access the no-arg constructor of class "
                     + clazz.getName();
             throw new RuntimeException(msg, e);
@@ -28,7 +29,15 @@ public class NoArgConstructorThreadLocal<T> extends ThreadLocal<T> {
     protected T initialValue() {
         try {
             return constructor.newInstance();
-        } catch(final ReflectiveOperationException e) {
+        } catch(final IllegalAccessException e) {
+            final String msg = "Could not create initial value for ThreadLocal with class: "
+                    + constructor.getDeclaringClass().getName();
+            throw new RuntimeException(msg, e);
+        } catch(final InvocationTargetException e) {
+            final String msg = "Could not create initial value for ThreadLocal with class: "
+                    + constructor.getDeclaringClass().getName();
+            throw new RuntimeException(msg, e);
+        } catch(final InstantiationException e) {
             final String msg = "Could not create initial value for ThreadLocal with class: "
                     + constructor.getDeclaringClass().getName();
             throw new RuntimeException(msg, e);

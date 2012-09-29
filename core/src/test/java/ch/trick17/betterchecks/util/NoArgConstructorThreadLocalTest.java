@@ -2,6 +2,8 @@ package ch.trick17.betterchecks.util;
 
 import static junit.framework.Assert.*;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.junit.Test;
 
 import ch.trick17.betterchecks.fluent.ObjectCheck;
@@ -26,7 +28,7 @@ public class NoArgConstructorThreadLocalTest {
         assertNotNull(thrown);
         assertEquals(thrown.getMessage(),
                 "Could not access the no-arg constructor of class java.lang.Integer");
-        assertTrue(thrown.getCause() instanceof ReflectiveOperationException);
+        assertTrue(thrown.getCause() instanceof NoSuchMethodException);
         
         thrown = null;
         final ThreadLocal<ThrowingHelper> threadLocal = new NoArgConstructorThreadLocal<ThrowingHelper>(
@@ -40,7 +42,7 @@ public class NoArgConstructorThreadLocalTest {
         assertEquals(
                 thrown.getMessage(),
                 "Could not create initial value for ThreadLocal with class: ch.trick17.betterchecks.util.NoArgConstructorThreadLocalTest$ThrowingHelper");
-        assertTrue(thrown.getCause() instanceof ReflectiveOperationException);
+        assertTrue(thrown.getCause() instanceof InvocationTargetException);
     }
     
     private static class ThrowingHelper {
