@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.Collection;
 
 import ch.trick17.betterchecks.fluent.CollectionCheck;
+import ch.trick17.betterchecks.fluent.DoubleCheck;
 import ch.trick17.betterchecks.fluent.FluentChecks;
 import ch.trick17.betterchecks.fluent.IntCheck;
 import ch.trick17.betterchecks.fluent.LongCheck;
@@ -180,5 +181,9 @@ public abstract class Check {
     
     public static LongCheck that(final long argument) {
         return FluentChecks.getLongCheck(argument);
+    }
+    
+    public static DoubleCheck that(final double argument) {
+        return FluentChecks.getDoubleCheck(argument);
     }
 }
