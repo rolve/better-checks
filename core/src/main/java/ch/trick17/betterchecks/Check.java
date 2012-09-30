@@ -20,8 +20,8 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
 /**
  * This is the primary entry point to the Better Checks library. Its intention
  * is to provide a lightweight and compact, but powerful way for precodition
- * checking, in particular regarding method arguments. Argument checks are
- * written in a fluent way like this:
+ * checking, in particular for method arguments. Argument checks are written in
+ * a fluent way like this:
  * <p>
  * <code>Check.that(<em>argument</em>).<em>check1</em>().<em>check2</em>()<em>...</em>;</code>
  * <p>
@@ -60,6 +60,16 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * easier. To name an argument, prepend all checks with
  * <code>named("<em>argument name</em>")</code>, just like in the third example
  * at the top.
+ * <p>
+ * Finally, each check can be inverted by prepending <code>.not()</code>. Here
+ * is an example:
+ * <p>
+ * <code>Check.that(message).not().containsAny(badWords);</code>
+ * <p>
+ * Note that the <code>not()</code> only inverts the actual check and not the
+ * null check. In the above example this would mean that message must still be
+ * non-null. So null check inversion with <code>isNullOr()</code> is completely
+ * independent of check inversion with <code>not()</code>.
  * <h3>Intended Use and Thread Safety</h3>
  * <p>
  * To provide optimal performance, the <code>that(...)</code> methods do not
@@ -86,11 +96,12 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * possibly breaking their specification.
  * <p>
  * In general, the configuration possibilities of this library are rather
- * limited. The only thing possible to configure are the exception messages. And
- * the only way to configure those is via a properties file on the classpath.
- * This is also a design decision that makes it possible to safely use Better
- * Checks in libraries and, more generally, in all code that potentially runs
- * before the application's initialization, such as static initializers.
+ * limited. You can customize the exception messages and disable stack trace
+ * cleaning. The only way to configure those settings is via a properties file
+ * on the classpath. This is also a design decision that makes it possible to
+ * safely use Better Checks in libraries and, more generally, in all code that
+ * potentially runs before the application's initialization, such as static
+ * initializers.
  * 
  * @author Michael Faes
  * @see CompactChecks
