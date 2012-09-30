@@ -8,7 +8,8 @@ public final class ObjectArrayCheck extends
         ObjectBaseCheck<Object[], ObjectArrayCheck> {
     
     public ObjectArrayCheck isNotEmpty() {
-        return check(arg == null || arg.length != 0, ARG_EMPTY, argName, Arrays.toString(arg));
+        return check(arg == null || arg.length != 0, ARG_EMPTY, argName, Arrays
+                .toString(arg));
     }
     
     public ObjectArrayCheck hasLength(final int length) {
@@ -23,5 +24,24 @@ public final class ObjectArrayCheck extends
     
     public IntCheck hasLengthWhich() {
         return intPropertyCheck(arg == null ? -1 : arg.length, "length");
+    }
+    
+    public ObjectArrayCheck containsNoNull() {
+        return check(arg == null || testContainsNoNull(), ARG_CONTAINS_NULL,
+                argName, Arrays.toString(arg));
+    }
+    
+    // IMPROVE: allElementsOfType
+    
+    /*
+     * Implementation methods
+     */
+    
+    private boolean testContainsNoNull() {
+        for(final Object element : arg) {
+            if(element == null)
+                return false;
+        }
+        return true;
     }
 }

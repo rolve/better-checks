@@ -133,4 +133,35 @@ public class CollectionCheckTest {
         assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
                 Exceptions.defaultArgName()), thrown.getMessage());
     }
+    
+    @Test
+    @SuppressWarnings("null")
+    public void testContainsNoNull() {
+        Check.that(Arrays.asList("hello", "world")).containsNoNull();
+        Check.that(Arrays.asList("hello")).containsNoNull();
+        Check.that(Arrays.asList()).containsNoNull();
+        
+        Check.that((Collection<?>) null).isNullOr().containsNoNull();
+        
+        Exception thrown = null;
+        try {
+            Check.that(Arrays.asList("a", "b", null)).containsNoNull();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_CONTAINS_NULL, false,
+                Exceptions.defaultArgName(), "[a, b, null]"), thrown
+                .getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((Collection<?>) null).containsNoNull();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+    }
 }

@@ -106,6 +106,8 @@ public abstract class Check {
             throw illegalArgumentException(message);
     }
     
+    // TODO: Add support for state checks
+    
     /*
      * Fluent argument checks
      */
@@ -166,6 +168,8 @@ public abstract class Check {
         return FluentChecks.<Collection<?>, CollectionCheck> getObjectCheck(
                 CollectionCheck.class, argument);
     }
+    
+    // IMPROVE: Create MapCheck
     
     public static NumberCheck that(final Number argument) {
         return FluentChecks.getObjectCheck(NumberCheck.class, argument);

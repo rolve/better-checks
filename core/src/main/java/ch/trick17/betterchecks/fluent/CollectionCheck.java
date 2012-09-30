@@ -24,4 +24,23 @@ public final class CollectionCheck extends
     public IntCheck hasSizeWhich() {
         return intPropertyCheck(arg == null ? -1 : arg.size(), "size");
     }
+    
+    public CollectionCheck containsNoNull() {
+        return check(arg == null || testContainsNoNull(), ARG_CONTAINS_NULL,
+                argName, arg);
+    }
+    
+    // IMPROVE: allElementsOfType
+    
+    /*
+     * Implementation methods
+     */
+    
+    private boolean testContainsNoNull() {
+        for(final Object element : arg) {
+            if(element == null)
+                return false;
+        }
+        return true;
+    }
 }

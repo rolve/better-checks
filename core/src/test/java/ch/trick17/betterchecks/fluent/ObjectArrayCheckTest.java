@@ -150,4 +150,35 @@ public class ObjectArrayCheckTest {
         assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
                 Exceptions.defaultArgName()), thrown.getMessage());
     }
+    
+    @Test
+    @SuppressWarnings("null")
+    public void testContainsNoNull() {
+        Check.that(new Object[] {"hello", "world"}).containsNoNull();
+        Check.that(new Object[] {"hello"}).containsNoNull();
+        Check.that(new Object[] {}).containsNoNull();
+        
+        Check.that((Object[]) null).isNullOr().containsNoNull();
+        
+        Exception thrown = null;
+        try {
+            Check.that(new String[] {"a", "b", null}).containsNoNull();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_CONTAINS_NULL, false,
+                Exceptions.defaultArgName(), "[a, b, null]"), thrown
+                .getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((Object[]) null).containsNoNull();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+    }
 }
