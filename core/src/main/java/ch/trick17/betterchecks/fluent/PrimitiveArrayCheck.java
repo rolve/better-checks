@@ -14,8 +14,13 @@ public final class PrimitiveArrayCheck extends
         argLength = argumentLength;
     }
     
+    /*
+     * Checks
+     */
+    
     public PrimitiveArrayCheck isNotEmpty() {
-        return check(arg == null || argLength != 0, ARG_EMPTY, argName);
+        return check(arg == null || argLength != 0, ARG_EMPTY, argName,
+                arrayToString(arg));
     }
     
     public PrimitiveArrayCheck hasLength(final int length) {
@@ -37,6 +42,8 @@ public final class PrimitiveArrayCheck extends
      */
     
     private static String arrayToString(final Object arg) {
+        if(arg == null)
+            return String.valueOf((Object) null);
         if(arg instanceof boolean[])
             return Arrays.toString((boolean[]) arg);
         if(arg instanceof byte[])

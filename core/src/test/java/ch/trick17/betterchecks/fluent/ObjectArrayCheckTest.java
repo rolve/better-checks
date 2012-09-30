@@ -32,6 +32,16 @@ public class ObjectArrayCheckTest {
         
         thrown = null;
         try {
+            Check.that(new Object[] {"a"}).not().isNotEmpty();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_EMPTY, true,
+                Exceptions.defaultArgName(), "[a]"), thrown.getMessage());
+        
+        thrown = null;
+        try {
             Check.that((String[]) null).isNotEmpty();
         } catch(final Exception e) {
             thrown = e;

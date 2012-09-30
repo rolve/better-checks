@@ -44,6 +44,16 @@ public class PrimitiveArrayCheckTest {
         
         thrown = null;
         try {
+            Check.that(new int[] {1}).not().isNotEmpty();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_EMPTY, true,
+                Exceptions.defaultArgName(), "[1]"), thrown.getMessage());
+        
+        thrown = null;
+        try {
             Check.that((int[]) null).isNotEmpty();
         } catch(final Exception e) {
             thrown = e;

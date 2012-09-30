@@ -8,7 +8,7 @@ public final class ObjectArrayCheck extends
         ObjectBaseCheck<Object[], ObjectArrayCheck> {
     
     public ObjectArrayCheck isNotEmpty() {
-        return check(arg == null || arg.length != 0, ARG_EMPTY, argName);
+        return check(arg == null || arg.length != 0, ARG_EMPTY, argName, Arrays.toString(arg));
     }
     
     public ObjectArrayCheck hasLength(final int length) {

@@ -8,7 +8,7 @@ public final class CollectionCheck extends
         ObjectBaseCheck<Collection<?>, CollectionCheck> {
     
     public CollectionCheck isNotEmpty() {
-        return check(arg == null || !arg.isEmpty(), ARG_EMPTY, argName);
+        return check(arg == null || !arg.isEmpty(), ARG_EMPTY, argName, arg);
     }
     
     public CollectionCheck hasSize(final int size) {

@@ -35,6 +35,16 @@ public class CollectionCheckTest {
         
         thrown = null;
         try {
+            Check.that(Arrays.asList("a")).not().isNotEmpty();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_EMPTY, true,
+                Exceptions.defaultArgName(), "[a]"), thrown.getMessage());
+        
+        thrown = null;
+        try {
             Check.that((Collection<?>) null).isNotEmpty();
         } catch(final Exception e) {
             thrown = e;
@@ -111,8 +121,7 @@ public class CollectionCheckTest {
                 Check.that(Arrays.asList(1, 2, 3, 4, 5)).named("the list")
                         .hasSizeWhich().argName);
         
-        Check.that((Collection<?>) null).isNullOr().hasSizeWhich().is(
-                100);
+        Check.that((Collection<?>) null).isNullOr().hasSizeWhich().is(100);
         
         Exception thrown = null;
         try {

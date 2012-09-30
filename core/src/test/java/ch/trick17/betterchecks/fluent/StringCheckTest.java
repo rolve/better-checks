@@ -36,6 +36,16 @@ public class StringCheckTest {
         
         thrown = null;
         try {
+            Check.that("abc").not().isNotEmpty();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_EMPTY, true,
+                Exceptions.defaultArgName(), "abc"), thrown.getMessage());
+        
+        thrown = null;
+        try {
             Check.that((String) null).isNotEmpty();
         } catch(final Exception e) {
             thrown = e;
@@ -405,9 +415,8 @@ public class StringCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MessageType.ARG_IS, false,
-                Exceptions.defaultArgName(), "hella", "hello"), thrown
-                .getMessage());
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_IS, false, Exceptions
+                .defaultArgName(), "hella", "hello"), thrown.getMessage());
         
         thrown = null;
         try {

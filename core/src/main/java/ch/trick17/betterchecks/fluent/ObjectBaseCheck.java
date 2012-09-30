@@ -36,8 +36,8 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
     
     public final C isNotNull() {
         if(!nullAllowed && (inverted ? arg != null : arg == null))
-            throw illegalArgumentException(ARG_NULL, inverted,
-                    new Object[] {argName});
+            throw illegalArgumentException(ARG_NULL, inverted, new Object[] {
+                    argName, arg});
         inverted = false;
         return me();
     }
@@ -77,7 +77,7 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
     
     protected final void checkNull() {
         if(!nullAllowed && arg == null)
-            throw illegalArgumentException(ARG_NULL, inverted,
+            throw illegalArgumentException(ARG_NULL, nullAllowed,
                     new Object[] {argName});
         assert arg == null ? nullAllowed : true;
     }

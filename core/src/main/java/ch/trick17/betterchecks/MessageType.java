@@ -2,10 +2,10 @@ package ch.trick17.betterchecks;
 
 public enum MessageType {
     
-    ARG_NULL("%s must +(not )+be null"),
+    ARG_NULL("%s must +(not )+be null-( (value: %s))-"),
     ARG_INSTANCE("%s must -(not )-be an instance of class %s (class: %s)"),
     ARG_CLASS("%s must -(not )-have the class %s (class: %s)"),
-    ARG_EMPTY("%s must +(not )+be empty"),
+    ARG_EMPTY("%s must +(not )+be empty-( (value: %s))-"),
     ARG_WHITESPACE("%s must +(not )+consist of whitespace only"),
     ARG_LENGTH("%s must -(not )-have a length of %d (value: %s)"),
     ARG_SIZE("%s must -(not )-have a size of %d (value: %s)"),

@@ -77,10 +77,11 @@ public class ExceptionsTest extends CustomConfigTest {
                                 "abc d", "hello")));
         
         /* Inverted */
-        assertEquals("arg must be null", Exceptions.formatMsg(
-                MessageType.ARG_NULL, true, "arg"));
-        assertEquals("the argument must be empty", Exceptions.formatMsg(
-                MessageType.ARG_EMPTY, true, Exceptions.defaultArgName()));
+        assertEquals("arg must be null (value: hello)", Exceptions.formatMsg(
+                MessageType.ARG_NULL, true, "arg", "hello"));
+        assertEquals("the argument must be empty (value: [1, 2, 3])",
+                Exceptions.formatMsg(MessageType.ARG_EMPTY, true, Exceptions
+                        .defaultArgName(), Arrays.asList(1, 2, 3)));
         assertEquals(
                 "the list must not have a size between 3 and 4 (value: [abc d, hello])",
                 Exceptions.formatMsg(MessageType.ARG_SIZE_BETWEEN, true,

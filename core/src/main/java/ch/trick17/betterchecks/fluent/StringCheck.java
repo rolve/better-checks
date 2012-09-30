@@ -12,7 +12,7 @@ import ch.trick17.betterchecks.Check;
 public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
     
     public StringCheck isNotEmpty() {
-        return check(arg == null || !arg.isEmpty(), ARG_EMPTY, argName);
+        return check(arg == null || !arg.isEmpty(), ARG_EMPTY, argName, arg);
     }
     
     public StringCheck isNotWhitespace() {
