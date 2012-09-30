@@ -90,7 +90,7 @@ public class IntCheckTest {
     
     @Test
     @SuppressWarnings("null")
-    public void testIsEqualTo() {
+    public void testIs() {
         Check.that(1).is(1);
         Check.that(-2).is(-2);
         Check.that(0).is(0);
@@ -108,7 +108,7 @@ public class IntCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MessageType.ARG_EQUAL, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_IS, false,
                 Exceptions.defaultArgName(), 1, 0), thrown.getMessage());
     }
     

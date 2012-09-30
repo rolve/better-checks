@@ -394,7 +394,7 @@ public class StringCheckTest {
     
     @Test
     @SuppressWarnings("null")
-    public void testIsEqualTo() {
+    public void testIs() {
         Check.that("hello").is("hello");
         Check.that("").is("");
         
@@ -405,7 +405,7 @@ public class StringCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MessageType.ARG_EQUAL, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_IS, false,
                 Exceptions.defaultArgName(), "hella", "hello"), thrown
                 .getMessage());
         

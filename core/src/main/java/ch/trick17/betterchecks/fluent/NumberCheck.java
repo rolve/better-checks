@@ -26,7 +26,7 @@ public final class NumberCheck extends ObjectBaseCheck<Number, NumberCheck> {
     }
     
     public NumberCheck is(final Number number) {
-        return check(arg == null || compare(arg, number) == 0, ARG_EQUAL,
+        return check(arg == null || compare(arg, number) == 0, ARG_IS,
                 argName, number, arg);
     }
     

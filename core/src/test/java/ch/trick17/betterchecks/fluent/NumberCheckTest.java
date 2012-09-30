@@ -157,7 +157,7 @@ public class NumberCheckTest {
     
     @Test
     @SuppressWarnings("null")
-    public void testIsEqualTo() {
+    public void testIs() {
         Check.that((Number) 1).is(1);
         Check.that((Number) 1).is(1.0);
         Check.that((Number) 0).is(new BigDecimal("0"));
@@ -169,7 +169,7 @@ public class NumberCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MessageType.ARG_EQUAL, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_IS, false,
                 Exceptions.defaultArgName(), 0, -1), thrown.getMessage());
         
         thrown = null;

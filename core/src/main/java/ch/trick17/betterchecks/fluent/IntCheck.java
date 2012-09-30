@@ -22,7 +22,7 @@ public class IntCheck extends PrimitiveBaseCheck<IntCheck> {
     }
     
     public IntCheck is(final int number) {
-        return check(arg == number, ARG_EQUAL, argName, number, arg);
+        return check(arg == number, ARG_IS, argName, number, arg);
     }
     
     public IntCheck isGreaterThan(final int number) {

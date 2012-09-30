@@ -72,7 +72,7 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
     }
     
     public StringCheck is(final String string) {
-        return check(arg == null || arg.equals(string), ARG_EQUAL, argName,
+        return check(arg == null || arg.equals(string), ARG_IS, argName,
                 string, arg);
     }
     

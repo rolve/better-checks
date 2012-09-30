@@ -78,7 +78,7 @@ public class LongCheckTest {
     
     @Test
     @SuppressWarnings("null")
-    public void testIsEqualTo() {
+    public void testIs() {
         Check.that(1L).is(1);
         Check.that(-2L).is(-2);
         Check.that(0L).is(0);
@@ -96,7 +96,7 @@ public class LongCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MessageType.ARG_EQUAL, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_IS, false,
                 Exceptions.defaultArgName(), 1, 0), thrown.getMessage());
     }
     
