@@ -41,6 +41,14 @@ public abstract class Exceptions {
         return exception;
     }
     
+    public static IllegalStateException illegalStateException(
+            final String message) {
+        final IllegalStateException exception = new IllegalStateException(
+                message);
+        cleanUpStackTrace(exception);
+        return exception;
+    }
+    
     public static String formatMsg(final MessageType msgType,
             final boolean inverted, final Object... msgArgs) {
         final String format = Config.getConfig().getMessageFormat(msgType,

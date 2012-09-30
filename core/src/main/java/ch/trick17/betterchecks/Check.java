@@ -1,6 +1,7 @@
 package ch.trick17.betterchecks;
 
 import static ch.trick17.betterchecks.Exceptions.illegalArgumentException;
+import static ch.trick17.betterchecks.Exceptions.illegalStateException;
 
 import java.net.URL;
 import java.util.Collection;
@@ -112,12 +113,15 @@ public abstract class Check {
      * Simple checks
      */
     
-    public static void that(final boolean condition, final String message) {
+    public static void arguments(final boolean condition, final String message) {
         if(!condition)
             throw illegalArgumentException(message);
     }
     
-    // TODO: Add support for state checks
+    public static void state(final boolean condition, final String message) {
+        if(!condition)
+            throw illegalStateException(message);
+    }
     
     /*
      * Fluent argument checks
