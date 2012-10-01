@@ -1,6 +1,6 @@
 ## Better Checks
 
-The **Better Checks** library aims to provide a lightweight and compact, but powerful way for precodition checking in Java, in particular for method arguments. Checks are written in a fluent way.
+The **Better Checks** library aims to provide a lightweight and concise, but powerful way for precodition checking in Java, in particular for method arguments. Checks are written in a fluent way.
 
 Examples:
 

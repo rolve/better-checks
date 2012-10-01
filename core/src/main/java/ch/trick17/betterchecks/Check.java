@@ -20,7 +20,7 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
 
 /**
  * This is the primary entry point to the Better Checks library. Its intention
- * is to provide a lightweight and compact, but powerful way for precodition
+ * is to provide a lightweight and concise, but powerful way for precodition
  * checking, in particular for method arguments. Argument checks are written in
  * a fluent way like this:
  * <p>
