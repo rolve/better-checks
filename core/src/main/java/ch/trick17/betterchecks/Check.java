@@ -74,7 +74,7 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * <h3>Intended Use and Thread Safety</h3>
  * <p>
  * To provide optimal performance, the <code>that(...)</code> methods do not
- * create a new *Check object for every call. Instead, each overloaded method
+ * create a new *Check objects for every call. Instead, each overloaded method
  * always returns the same (but modified) object (in a given thread). Therefore,
  * you should always use those objects right after getting them by using the
  * fluent API. Never should you store them and using them later, not even in

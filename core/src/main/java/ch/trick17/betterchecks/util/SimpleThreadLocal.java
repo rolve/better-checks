@@ -11,11 +11,11 @@ import java.lang.reflect.InvocationTargetException;
  * @param <T>
  *            The type of object this ThreadLocal holds
  */
-public class NoArgConstructorThreadLocal<T> extends ThreadLocal<T> {
+public final class SimpleThreadLocal<T> extends ThreadLocal<T> {
     
     private Constructor<? extends T> constructor;
     
-    public NoArgConstructorThreadLocal(final Class<? extends T> clazz) {
+    public SimpleThreadLocal(final Class<? extends T> clazz) {
         try {
             constructor = clazz.getConstructor();
         } catch(final NoSuchMethodException e) {

@@ -6,9 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ch.trick17.betterchecks.util.NoArgConstructorThreadLocal;
+import ch.trick17.betterchecks.util.SimpleThreadLocal;
 
 public class FluentChecks {
+    
+    // IMPROVE: Replace map with individual fields for better performance
     
     @SuppressWarnings("unchecked")
     private static final List<Class<? extends BaseCheck<?>>> CHECK_CLASSES = Arrays
@@ -17,13 +19,12 @@ public class FluentChecks {
                     CollectionCheck.class, NumberCheck.class, UrlCheck.class,
                     IntCheck.class, LongCheck.class, DoubleCheck.class);
     
-    private static final Map<Class<?>, ThreadLocal<? extends BaseCheck<?>>> objectChecks;
+    private static final Map<Class<?>, SimpleThreadLocal<? extends BaseCheck<?>>> objectChecks;
     
     static {
-        final Map<Class<?>, ThreadLocal<? extends BaseCheck<?>>> map = new HashMap<Class<?>, ThreadLocal<? extends BaseCheck<?>>>();
+        final Map<Class<?>, SimpleThreadLocal<? extends BaseCheck<?>>> map = new HashMap<Class<?>, SimpleThreadLocal<? extends BaseCheck<?>>>();
         for(final Class<? extends BaseCheck<?>> checkClass : CHECK_CLASSES)
-            map.put(checkClass, new NoArgConstructorThreadLocal<BaseCheck<?>>(
-                    checkClass));
+            map.put(checkClass, new SimpleThreadLocal<BaseCheck<?>>(checkClass));
         objectChecks = Collections.unmodifiableMap(map);
     }
     

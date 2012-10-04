@@ -8,18 +8,18 @@ import org.junit.Test;
 
 import ch.trick17.betterchecks.fluent.ObjectCheck;
 
-public class NoArgConstructorThreadLocalTest {
+public class SimpleThreadLocalTest {
     
     @Test
     @SuppressWarnings("null")
     public void testNoArgConstructorThreadLocal() {
-        new NoArgConstructorThreadLocal<Object>(Object.class).get();
-        new NoArgConstructorThreadLocal<Object>(String.class).get();
-        new NoArgConstructorThreadLocal<Object>(ObjectCheck.class).get();
+        new SimpleThreadLocal<Object>(Object.class).get();
+        new SimpleThreadLocal<Object>(String.class).get();
+        new SimpleThreadLocal<Object>(ObjectCheck.class).get();
         
         RuntimeException thrown = null;
         try {
-            final Object threadLocal = new NoArgConstructorThreadLocal<Integer>(
+            final Object threadLocal = new SimpleThreadLocal<Integer>(
                     Integer.class);
             threadLocal.toString();
         } catch(final RuntimeException e) {
@@ -31,7 +31,7 @@ public class NoArgConstructorThreadLocalTest {
         assertTrue(thrown.getCause() instanceof NoSuchMethodException);
         
         thrown = null;
-        final ThreadLocal<ThrowingHelper> threadLocal = new NoArgConstructorThreadLocal<ThrowingHelper>(
+        final ThreadLocal<ThrowingHelper> threadLocal = new SimpleThreadLocal<ThrowingHelper>(
                 ThrowingHelper.class);
         try {
             threadLocal.get();
@@ -41,7 +41,7 @@ public class NoArgConstructorThreadLocalTest {
         assertNotNull(thrown);
         assertEquals(
                 thrown.getMessage(),
-                "Could not create initial value for ThreadLocal with class: ch.trick17.betterchecks.util.NoArgConstructorThreadLocalTest$ThrowingHelper");
+                "Could not create initial value for ThreadLocal with class: ch.trick17.betterchecks.util.SimpleThreadLocalTest$ThrowingHelper");
         assertTrue(thrown.getCause() instanceof InvocationTargetException);
     }
     
