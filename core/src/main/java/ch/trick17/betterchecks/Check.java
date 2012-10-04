@@ -5,6 +5,7 @@ import static ch.trick17.betterchecks.Exceptions.illegalStateException;
 
 import java.net.URL;
 import java.util.Collection;
+import java.util.ResourceBundle;
 
 import ch.trick17.betterchecks.fluent.CollectionCheck;
 import ch.trick17.betterchecks.fluent.DoubleCheck;
@@ -92,6 +93,22 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * Thread safety is guaranteed by means of thread confinement. As each thread
  * receives its own check objects, and as long as they are not shared, the use
  * of those objects is thread safe.
+ * <h3>Stack Trace Cleaning</h3>
+ * <p>
+ * To make the Better Checks library as unintrusive as possible, the stack
+ * traces of the exceptions thrown by the checks are modified to not contain any
+ * stack frames from this library. Thus, the exceptions look exactly like they
+ * are being thrown by the method using the checks itself.
+ * <p>
+ * The idea behind this is to make it clear that the arguments (or the state
+ * respectively) are illegal with respect to the client method and not in
+ * respect to the methods of the Better Checks library. In addition, the Better
+ * Checks library itself never throws any {@link IllegalArgumentException}s or
+ * {@link IllegalStateException}s. Instead, it throws the specific
+ * {@link InvalidCheckException} to signal an invalid use of the library.
+ * <p>
+ * If stack trace cleaning is undesired, it can be turned off in the config
+ * file. See below for more information.
  * <h3>Compact Syntax</h3>
  * <p>
  * Instead of the <code>Check.that(...)</code> syntax, you can use a even more
@@ -111,6 +128,14 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * safely use Better Checks in libraries and, more generally, in all code that
  * potentially runs before the application's initialization, such as static
  * initializers.
+ * <p>
+ * The config file must be named <code>better-checks-config.properties</code>
+ * and must be located in the classpath root. The config file is loaded via
+ * {@link ResourceBundle}s, so localization is supported. However, it is
+ * questionable to display exception messages directly to the user, so this
+ * might not be commonly used.
+ * <p>
+ * TODO: Config file options
  * 
  * @author Michael Faes
  * @see CompactChecks
