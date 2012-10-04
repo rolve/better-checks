@@ -32,24 +32,32 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * <code>Check.that(list).isNullOr().hasSize(0);</code><br>
  * <code>Check.that(args).named("arguments").isNotEmpty();</code>
  * <p>
- * The actual checking methods (such as <code>matches(...)</code> or
- * <code>hasSize(...)</code>) all throw an exception if the check fails. The
- * exact type of exception depends on the kind of check that is called but in
- * most cases it is {@link IllegalArgumentException}.
+ * The check methods (such as <code>matches(...)</code> or
+ * <code>hasSize(...)</code>) throw an exception if the check fails. The exact
+ * type of exception depends on the kind of check that is called but in most
+ * cases it is {@link IllegalArgumentException}.
  * <h3>Check Objects</h3>
  * <p>
- * There are various overloaded variants of the <code>that(...)</code> method,
- * each one returning a *Check object that suits the argument's type. For
- * instance, if you pass a {@link String}, you will get a {@link StringCheck}
- * object, with methods like {@link StringCheck#isNotEmpty()},
- * {@link StringCheck#hasLength(int)} or {@link StringCheck#matches(String)}.
+ * You check the properties of your <code><em>argument</em></code> by calling
+ * <code>Check.that(<em>argument</em>)</code> and then appending the required
+ * checks. The <code>that(...)</code> method returns a check object that matches
+ * the (static) type of <code><em>argument</em></code>. This is done with method
+ * overloading. The returned check object has the <code><em>argument</em></code>
+ * "imprinted" to perform the checks that are called subsequently.
  * <p>
- * If there is no specific *Check class suiting the passed argument, a standard
- * {@link ObjectCheck} is returned, supporting only
- * {@link ObjectCheck#isNotNull()} and the state-modifying methods.
+ * For instance, if you pass a {@link String}, you will get a
+ * {@link StringCheck} object, with methods like
+ * {@link StringCheck#isNotEmpty()}, {@link StringCheck#hasLength(int)} or
+ * {@link StringCheck#matches(String)}.
+ * <p>
+ * If there is no specific check class that matches the passed argument, a
+ * generic {@link ObjectCheck} is returned, supporting only some basic checks
+ * like {@link ObjectCheck#isNotNull()} or
+ * {@link ObjectCheck#isInstanceOf(Class)} and the state-modifying methods (see
+ * below).
  * <h3>Check Modification</h3>
  * <p>
- * In addition to the checking methods, the *Check objects provide some modifier
+ * In addition to the checking methods, the check objects provide some modifier
  * methods that affect the subsequent checks. For example all checks by default
  * also check that the argument is not <code>null</code>, throwing an exception
  * if it is. To allow <code>null</code> as an accepted value, you can prepend
@@ -74,7 +82,7 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * <h3>Intended Use and Thread Safety</h3>
  * <p>
  * To provide optimal performance, the <code>that(...)</code> methods do not
- * create a new *Check objects for every call. Instead, each overloaded method
+ * create a new check objects for every call. Instead, each overloaded method
  * always returns the same (but modified) object (in a given thread). Therefore,
  * you should always use those objects right after getting them by using the
  * fluent API. Never should you store them and using them later, not even in
@@ -82,7 +90,7 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * therefore modify them.
  * <p>
  * Thread safety is guaranteed by means of thread confinement. As each thread
- * receives its own *Check objects, and as long as they are not shared, the use
+ * receives its own check objects, and as long as they are not shared, the use
  * of those objects is thread safe.
  * <h3>Compact Syntax</h3>
  * <p>
@@ -113,11 +121,40 @@ public abstract class Check {
      * Simple checks
      */
     
+    /**
+     * A simple argument check that throws an {@link IllegalArgumentException}
+     * with the given message if the given condition is <code>false</code>.
+     * <p>
+     * Use this as a fallback option if you have to check something that the
+     * fluent checks don't provide or if you have to check two arguments
+     * together. Otherwise the fluent checks will probably be more readable and
+     * concise as you don't have to provide the exception message.
+     * 
+     * @param condition
+     *            The condition that must hold for the method arguments
+     * @param message
+     *            The exception message
+     * @see Check#state(boolean, String)
+     */
     public static void arguments(final boolean condition, final String message) {
         if(!condition)
             throw illegalArgumentException(message);
     }
     
+    /**
+     * A simple check that throws an {@link IllegalStateException} with the
+     * given message if the given condition is <code>false</code>.
+     * <p>
+     * In contrast to most other checks, this check is for checking the state of
+     * your object (instead of the method arguments) at the beginning of a
+     * method invocation.
+     * 
+     * @param condition
+     *            The state condition that must hold at the beginning of the
+     *            method invocation
+     * @param message
+     *            The exception message
+     */
     public static void state(final boolean condition, final String message) {
         if(!condition)
             throw illegalStateException(message);
@@ -127,58 +164,193 @@ public abstract class Check {
      * Fluent argument checks
      */
     
+    /**
+     * Returns a generic {@link ObjectCheck} which can be use to check basic
+     * properties of all objects, e.g. {@link ObjectCheck#isNotNull()} or
+     * {@link ObjectCheck#isInstanceOf(Class)}.
+     * 
+     * @param argument
+     *            The argument to check
+     * @return A check object with the argument "imprinted"
+     * @see ObjectCheck
+     */
     public static ObjectCheck that(final Object argument) {
         return FluentChecks.getObjectCheck(ObjectCheck.class, argument);
     }
     
+    /**
+     * Returns a {@link StringCheck} which can be use to check various
+     * properties of a {@link String}, e.g. {@link StringCheck#hasLength(int)}
+     * or {@link StringCheck#contains(CharSequence)}.
+     * 
+     * @param argument
+     *            The String argument to check
+     * @return A check object with the argument "imprinted"
+     * @see StringCheck
+     */
     public static StringCheck that(final String argument) {
         return FluentChecks.getObjectCheck(StringCheck.class, argument);
     }
     
+    /**
+     * Returns a {@link ObjectArrayCheck} which can be use to check various
+     * properties of an object array (<code>Object[]</code>), e.g.
+     * {@link ObjectArrayCheck#hasLength(int)} or
+     * {@link ObjectArrayCheck#containsNoNull()}.
+     * <p>
+     * Note that since arrays are covariant in Java, any type of array (e.g.
+     * <code>String[]</code> or <code>Date[]</code>) is accepted by this method.
+     * The only exception are arrays of primitive types (e.g. <code>int[]</code>
+     * ), which have their own <code>that(...)</code> methods.
+     * 
+     * @param argument
+     *            The object array argument to check
+     * @return A check object with the argument "imprinted"
+     * @see ObjectArrayCheck
+     */
     public static ObjectArrayCheck that(final Object[] argument) {
         return FluentChecks.getObjectCheck(ObjectArrayCheck.class, argument);
     }
     
+    /**
+     * Returns a {@link PrimitiveArrayCheck} which can be use to check various
+     * properties of a primitive array (e.g. <code>int[]</code>), e.g.
+     * {@link PrimitiveArrayCheck#hasLength(int)} or
+     * {@link PrimitiveArrayCheck#isNotEmpty()}.
+     * 
+     * @param argument
+     *            The <code>boolean[]</code> array argument to check
+     * @return A check object with the argument "imprinted"
+     * @see PrimitiveArrayCheck
+     */
     public static PrimitiveArrayCheck that(final boolean[] argument) {
         return FluentChecks.getPrimitiveArrayCheck(argument,
                 argument != null ? argument.length : -1);
     }
     
+    /**
+     * Returns a {@link PrimitiveArrayCheck} which can be use to check various
+     * properties of a primitive array (e.g. <code>int[]</code>), e.g.
+     * {@link PrimitiveArrayCheck#hasLength(int)} or
+     * {@link PrimitiveArrayCheck#isNotEmpty()}.
+     * 
+     * @param argument
+     *            The <code>byte[]</code> array argument to check
+     * @return A check object with the argument "imprinted"
+     * @see PrimitiveArrayCheck
+     */
     public static PrimitiveArrayCheck that(final byte[] argument) {
         return FluentChecks.getPrimitiveArrayCheck(argument,
                 argument != null ? argument.length : -1);
     }
     
+    /**
+     * Returns a {@link PrimitiveArrayCheck} which can be use to check various
+     * properties of a primitive array (e.g. <code>int[]</code>), e.g.
+     * {@link PrimitiveArrayCheck#hasLength(int)} or
+     * {@link PrimitiveArrayCheck#isNotEmpty()}.
+     * 
+     * @param argument
+     *            The <code>char[]</code> array argument to check
+     * @return A check object with the argument "imprinted"
+     * @see PrimitiveArrayCheck
+     */
     public static PrimitiveArrayCheck that(final char[] argument) {
         return FluentChecks.getPrimitiveArrayCheck(argument,
                 argument != null ? argument.length : -1);
     }
     
+    /**
+     * Returns a {@link PrimitiveArrayCheck} which can be use to check various
+     * properties of a primitive array (e.g. <code>int[]</code>), e.g.
+     * {@link PrimitiveArrayCheck#hasLength(int)} or
+     * {@link PrimitiveArrayCheck#isNotEmpty()}.
+     * 
+     * @param argument
+     *            The <code>double[]</code> array argument to check
+     * @return A check object with the argument "imprinted"
+     * @see PrimitiveArrayCheck
+     */
     public static PrimitiveArrayCheck that(final double[] argument) {
         return FluentChecks.getPrimitiveArrayCheck(argument,
                 argument != null ? argument.length : -1);
     }
     
+    /**
+     * Returns a {@link PrimitiveArrayCheck} which can be use to check various
+     * properties of a primitive array (e.g. <code>int[]</code>), e.g.
+     * {@link PrimitiveArrayCheck#hasLength(int)} or
+     * {@link PrimitiveArrayCheck#isNotEmpty()}.
+     * 
+     * @param argument
+     *            The <code>float[]</code> array argument to check
+     * @return A check object with the argument "imprinted"
+     * @see PrimitiveArrayCheck
+     */
     public static PrimitiveArrayCheck that(final float[] argument) {
         return FluentChecks.getPrimitiveArrayCheck(argument,
                 argument != null ? argument.length : -1);
     }
     
+    /**
+     * Returns a {@link PrimitiveArrayCheck} which can be use to check various
+     * properties of a primitive array (e.g. <code>int[]</code>), e.g.
+     * {@link PrimitiveArrayCheck#hasLength(int)} or
+     * {@link PrimitiveArrayCheck#isNotEmpty()}.
+     * 
+     * @param argument
+     *            The <code>int[]</code> array argument to check
+     * @return A check object with the argument "imprinted"
+     * @see PrimitiveArrayCheck
+     */
     public static PrimitiveArrayCheck that(final int[] argument) {
         return FluentChecks.getPrimitiveArrayCheck(argument,
                 argument != null ? argument.length : -1);
     }
     
+    /**
+     * Returns a {@link PrimitiveArrayCheck} which can be use to check various
+     * properties of a primitive array (e.g. <code>int[]</code>), e.g.
+     * {@link PrimitiveArrayCheck#hasLength(int)} or
+     * {@link PrimitiveArrayCheck#isNotEmpty()}.
+     * 
+     * @param argument
+     *            The <code>long[]</code> array argument to check
+     * @return A check object with the argument "imprinted"
+     * @see PrimitiveArrayCheck
+     */
     public static PrimitiveArrayCheck that(final long[] argument) {
         return FluentChecks.getPrimitiveArrayCheck(argument,
                 argument != null ? argument.length : -1);
     }
     
+    /**
+     * Returns a {@link PrimitiveArrayCheck} which can be use to check various
+     * properties of a primitive array (e.g. <code>int[]</code>), e.g.
+     * {@link PrimitiveArrayCheck#hasLength(int)} or
+     * {@link PrimitiveArrayCheck#isNotEmpty()}.
+     * 
+     * @param argument
+     *            The <code>short[]</code> array argument to check
+     * @return A check object with the argument "imprinted"
+     * @see PrimitiveArrayCheck
+     */
     public static PrimitiveArrayCheck that(final short[] argument) {
         return FluentChecks.getPrimitiveArrayCheck(argument,
                 argument != null ? argument.length : -1);
     }
     
+    /**
+     * Returns a {@link CollectionCheck} which can be use to check various
+     * properties of a {@link Collection}, e.g.
+     * {@link CollectionCheck#hasSize(int)} or
+     * {@link CollectionCheck#containsNoNull()}.
+     * 
+     * @param argument
+     *            The Collection argument to check
+     * @return A check object with the argument "imprinted"
+     * @see CollectionCheck
+     */
     public static CollectionCheck that(final Collection<?> argument) {
         return FluentChecks.<Collection<?>, CollectionCheck> getObjectCheck(
                 CollectionCheck.class, argument);
@@ -186,22 +358,91 @@ public abstract class Check {
     
     // IMPROVE: Create MapCheck
     
+    /**
+     * Returns a {@link NumberCheck} which can be use to check various
+     * properties of a {@link Number}, e.g. {@link NumberCheck#isPositive()} or
+     * {@link NumberCheck#isBetween(Number, Number)}.
+     * <p>
+     * Note that this method is (should be) only used for numbers other than the
+     * ones corresponding to the primitive type numbers (
+     * <code>byte, short, int, long, float, double</code>). Those types have
+     * their own <code>that(...)</code> method and check classes with specific
+     * features. Also, they do not require any boxing or unboxing.
+     * 
+     * @param argument
+     *            The Number argument to check
+     * @return A check object with the argument "imprinted"
+     * @see NumberCheck
+     */
     public static NumberCheck that(final Number argument) {
         return FluentChecks.getObjectCheck(NumberCheck.class, argument);
     }
     
+    /**
+     * Returns an {@link UrlCheck} which can be use to check various properties
+     * of an {@link URL}, e.g. {@link UrlCheck#hasProtocol(String)}.
+     * <p>
+     * Note that the typical use case is to obtain a UrlCheck via the
+     * {@link StringCheck#isUrlWhich()} method which "converts" a
+     * {@link StringCheck} to an UrlCheck.
+     * 
+     * @param argument
+     *            The URL argument to check
+     * @return A check object with the argument "imprinted"
+     * @see UrlCheck
+     */
     public static UrlCheck that(final URL argument) {
         return FluentChecks.getObjectCheck(UrlCheck.class, argument);
     }
     
+    /**
+     * Returns an {@link IntCheck} which can be use to check various properties
+     * of an <code>int</code>, e.g. {@link IntCheck#isPositive()},
+     * {@link IntCheck#isBetween(int, int)} or
+     * {@link IntCheck#isValidIndex(Object[])}.
+     * <p>
+     * This method is (should be) also used for <code>short</code> and
+     * <code>byte</code> arguments as there is no (need for a) separate check
+     * class for them.
+     * 
+     * @param argument
+     *            The <code>int</code> argument to check
+     * @return A check object with the argument "imprinted"
+     * @see IntCheck
+     */
     public static IntCheck that(final int argument) {
         return FluentChecks.getIntCheck(argument);
     }
     
+    /**
+     * Returns a {@link LongCheck} which can be use to check various properties
+     * of a <code>long</code>, e.g. {@link LongCheck#isPositive()} or
+     * {@link LongCheck#isBetween(long, long)}.
+     * 
+     * @param argument
+     *            The <code>long</code> argument to check
+     * @return A check object with the argument "imprinted"
+     * @see LongCheck
+     */
     public static LongCheck that(final long argument) {
         return FluentChecks.getLongCheck(argument);
     }
     
+    /**
+     * Returns a {@link DoubleCheck} which can be use to check various
+     * properties of an <code>double</code>, e.g.
+     * {@link DoubleCheck#isPositive()},
+     * {@link DoubleCheck#isBetween(double, double)} or
+     * {@link DoubleCheck#isNotNaN()}.
+     * <p>
+     * This method is (should be) also used for <code>float</code> arguments as
+     * there is no (need for a) separate check class for them.
+     * 
+     * @param argument
+     *            The <code>double</code> argument to check
+     * @return A check object with the argument "imprinted"
+     * @see DoubleCheck
+     */
     public static DoubleCheck that(final double argument) {
         return FluentChecks.getDoubleCheck(argument);
     }
