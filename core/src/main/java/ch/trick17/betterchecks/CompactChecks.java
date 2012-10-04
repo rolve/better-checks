@@ -29,77 +29,145 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * <code>check(list).isNullOr().hasSize(0);</code><br>
  * <code>check(args).named("arguments").isNotEmpty();</code>
  * <p>
- * <strong>Note:</strong> For use case and thread safety issues, check the
+ * <strong>Note:</strong> For use case and thread safety issues, read the
  * documentation of the {@link Check} class.
  * 
  * @author Michael Faes
  */
 public abstract class CompactChecks {
     
+    /**
+     * See {@link Check#that(Object)}
+     */
+    @SuppressWarnings("javadoc")
     public static ObjectCheck check(final Object argument) {
         return Check.that(argument);
     }
     
+    /**
+     * See {@link Check#that(String)}
+     */
+    @SuppressWarnings("javadoc")
     public static StringCheck check(final String argument) {
         return Check.that(argument);
     }
     
+    /**
+     * See {@link Check#that(Object[])}
+     */
+    @SuppressWarnings("javadoc")
     public static ObjectArrayCheck check(final Object[] argument) {
         return Check.that(argument);
     }
     
+    /**
+     * See {@link Check#that(boolean[])}
+     */
+    @SuppressWarnings("javadoc")
     public static PrimitiveArrayCheck check(final boolean[] argument) {
         return Check.that(argument);
     }
     
+    /**
+     * See {@link Check#that(byte[])}
+     */
+    @SuppressWarnings("javadoc")
     public static PrimitiveArrayCheck check(final byte[] argument) {
         return Check.that(argument);
     }
     
+    /**
+     * See {@link Check#that(char[])}
+     */
+    @SuppressWarnings("javadoc")
     public static PrimitiveArrayCheck check(final char[] argument) {
         return Check.that(argument);
     }
     
+    /**
+     * See {@link Check#that(double[])}
+     */
+    @SuppressWarnings("javadoc")
     public static PrimitiveArrayCheck check(final double[] argument) {
         return Check.that(argument);
     }
     
+    /**
+     * See {@link Check#that(float[])}
+     */
+    @SuppressWarnings("javadoc")
     public static PrimitiveArrayCheck check(final float[] argument) {
         return Check.that(argument);
     }
     
+    /**
+     * See {@link Check#that(int[])}
+     */
+    @SuppressWarnings("javadoc")
     public static PrimitiveArrayCheck check(final int[] argument) {
         return Check.that(argument);
     }
     
+    /**
+     * See {@link Check#that(long[])}
+     */
+    @SuppressWarnings("javadoc")
     public static PrimitiveArrayCheck check(final long[] argument) {
         return Check.that(argument);
     }
     
+    /**
+     * See {@link Check#that(short[])}
+     */
+    @SuppressWarnings("javadoc")
     public static PrimitiveArrayCheck check(final short[] argument) {
         return Check.that(argument);
     }
     
+    /**
+     * See {@link Check#that(Collection)}
+     */
+    @SuppressWarnings("javadoc")
     public static CollectionCheck check(final Collection<?> argument) {
         return Check.that(argument);
     }
     
+    /**
+     * See {@link Check#that(Number)}
+     */
+    @SuppressWarnings("javadoc")
     public static NumberCheck check(final Number argument) {
         return Check.that(argument);
     }
     
+    /**
+     * See {@link Check#that(URL)}
+     */
+    @SuppressWarnings("javadoc")
     public static UrlCheck check(final URL argument) {
         return Check.that(argument);
     }
     
+    /**
+     * See {@link Check#that(int)}
+     */
+    @SuppressWarnings("javadoc")
     public static IntCheck check(final int argument) {
         return Check.that(argument);
     }
     
+    /**
+     * See {@link Check#that(long)}
+     */
+    @SuppressWarnings("javadoc")
     public static LongCheck check(final long argument) {
         return Check.that(argument);
     }
     
+    /**
+     * See {@link Check#that(double)}
+     */
+    @SuppressWarnings("javadoc")
     public static DoubleCheck check(final double argument) {
         return Check.that(argument);
     }
