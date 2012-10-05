@@ -159,6 +159,8 @@ public abstract class Check {
      *            The condition that must hold for the method arguments
      * @param message
      *            The exception message
+     * @throws IllegalArgumentException
+     *             if the condition is <code>false</code>
      * @see Check#state(boolean, String)
      */
     public static void arguments(final boolean condition, final String message) {
@@ -179,6 +181,9 @@ public abstract class Check {
      *            method invocation
      * @param message
      *            The exception message
+     * @throws IllegalStateException
+     *             if the condition is <code>false</code>
+     * @see #arguments(boolean, String)
      */
     public static void state(final boolean condition, final String message) {
         if(!condition)

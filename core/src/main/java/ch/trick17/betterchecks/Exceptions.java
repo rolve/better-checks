@@ -157,9 +157,10 @@ public abstract class Exceptions {
     }
     
     /**
-     * Returns the default argument name from the configuration.
+     * A convenience method that returns the default argument name from the
+     * configuration.
      * 
-     * @return see above ;-)
+     * @return {@link Config#getDefaultArgumentName()}
      */
     public static String defaultArgName() {
         return Config.getConfig().getDefaultArgumentName();
