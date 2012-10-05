@@ -1,5 +1,18 @@
 package ch.trick17.betterchecks;
 
+/**
+ * The MessageType enum define the types of exception messages that are used in
+ * the exceptions thrown by the various checks of the Better Checks library.
+ * <p>
+ * Each message type has a default message format associated with it. Use
+ * {@link #getDefaultFormat()} to get it. This default format can be overridden
+ * in the config file. See the documentation of {@link Config} or {@link Check}
+ * for more information about configuration of the Better Checks library and
+ * {@link Config#getMessageFormat(MessageType, boolean)} to learn more about the
+ * message formats.
+ * 
+ * @author Michael Faes
+ */
 public enum MessageType {
     
     ARG_NULL("%s must +(not )+be null-( (value: %s))-"),
@@ -41,6 +54,16 @@ public enum MessageType {
         this.defaultFormat = defaultFormat;
     }
     
+    /**
+     * Returns the default message format for this message type. It is a custom
+     * "meta" format that encompasses both the positive and the negative
+     * (inverted) version of the format. See
+     * {@link Config#getMessageFormat(MessageType, boolean)} for more
+     * information.
+     * 
+     * @return The default "meta" message format for this type of exception
+     *         message
+     */
     public String getDefaultFormat() {
         return defaultFormat;
     }
