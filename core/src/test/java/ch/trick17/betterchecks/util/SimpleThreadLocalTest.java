@@ -26,8 +26,9 @@ public class SimpleThreadLocalTest {
             thrown = e;
         }
         assertNotNull(thrown);
-        assertEquals(thrown.getMessage(),
-                "Could not access the no-arg constructor of class java.lang.Integer");
+        assertEquals(
+                "Class java.lang.Integer does not have a no-arg constructor",
+                thrown.getMessage());
         assertTrue(thrown.getCause() instanceof NoSuchMethodException);
         
         thrown = null;
@@ -40,8 +41,8 @@ public class SimpleThreadLocalTest {
         }
         assertNotNull(thrown);
         assertEquals(
-                thrown.getMessage(),
-                "Could not create initial value for ThreadLocal with class: ch.trick17.betterchecks.util.SimpleThreadLocalTest$ThrowingHelper");
+                "Could not create initial value for ThreadLocal with class: ch.trick17.betterchecks.util.SimpleThreadLocalTest$ThrowingHelper",
+                thrown.getMessage());
         assertTrue(thrown.getCause() instanceof InvocationTargetException);
     }
     
