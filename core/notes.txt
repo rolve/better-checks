@@ -18,20 +18,3 @@ Annotations:
 
 public void setSomething(@NotNull Object something)
 public void setHello(@Matches("hello .*!", not=true) String hello)
-
----
-
-Check object hierarchy
-
-ObjectCheck
-     ^
-     |
-StringCheck
-
-or:
-
-            Check<T>
-             ^     ^
-             |     |
-    StringCheck   ObjectCheck
-(Check<String>)   (Check<Object>)
