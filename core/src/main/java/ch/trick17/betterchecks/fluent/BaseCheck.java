@@ -7,8 +7,10 @@ import ch.trick17.betterchecks.Exceptions;
 import ch.trick17.betterchecks.InvalidCheckException;
 
 /**
- * The base class for all checks. It manages the state common to all checks: the
- * argument name and the inverted flag.
+ * The base class for <em>all</em> checks. It manages the state common to all
+ * checks: the argument name and the inverted flag. This class has two abstract
+ * subclasses which all concrete checks inherit from: {@link ObjectBaseCheck}
+ * and {@link PrimitiveBaseCheck}.
  * <p>
  * Because checks are reused, they must be reset using a <code>reset(...)</code>
  * method defined by the subclass before they are returned from one of the

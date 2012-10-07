@@ -8,8 +8,9 @@ import ch.trick17.betterchecks.MessageType;
 
 /**
  * The base class for all object checks (as opposed to primitive value checks).
- * It manages the state common to all these checks: the argument, the argument
- * class and the null-allowed flag.
+ * It manages the state and provides implementations common to all these checks.
+ * The state consists of the argument, the argument class and the null-allowed
+ * flag plus the state managed by {@link BaseCheck}.
  * 
  * @author Michael Faes
  * @param <T>
@@ -157,15 +158,20 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
     
     /**
      * A helper method that allows subclasses to perform simple checks
-     * conveniently with a one-liner.
-     * <p>
-     * It first performs the ({@link #isNullOr()}-aware) <code>null</code>
-     * -check and then checks if the given condition is <code>true</code> or
-     * <code>false</code> respectivly, depending on the
+     * conveniently with a one-liner. It checks the given condition in the
+     * context of this check object's current state. This means:
+     * <ul>
+     * <li>First, it performs the ({@link #isNullOr() isNullOr}-aware)
+     * <code>null</code>-check
+     * <li>Then, it checks if the given condition is <code>true</code> or
+     * <code>false</code> respectively, depending on the
      * {@link BaseCheck#inverted inverted} flag. If the check fails, an
      * {@link IllegalArgumentException} is thrown, with a message formatted
      * using the format belonging to the given message type and the given
-     * message arguments. Finally, it returns this check.
+     * message arguments.
+     * <li>Then, it resets the <code>inverted</code> flag.
+     * <li>Finally, it returns this check.
+     * </ul>
      * 
      * @param condition
      *            The check condition
