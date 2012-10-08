@@ -100,6 +100,10 @@ public abstract class BaseCheck<C extends BaseCheck<C>> {
      * example, the {@link IntCheck#isBetween(int, int) isBetween(int, int)}
      * check uses this method to assert that no invalid range is used, which
      * would make passing the check infeasible.
+     * <p>
+     * <strong>Note:</strong> Currently, the validity of checks is not checked,
+     * meaning this method is not used yet. This may change in later releases of
+     * the Better Checks library.
      * 
      * @param valid
      *            The validity condition

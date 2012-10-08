@@ -26,8 +26,8 @@ public final class NumberCheck extends ObjectBaseCheck<Number, NumberCheck> {
     }
     
     public NumberCheck is(final Number number) {
-        return check(arg == null || compare(arg, number) == 0, ARG_IS,
-                argName, number, arg);
+        return check(arg == null || compare(arg, number) == 0, ARG_IS, argName,
+                number, arg);
     }
     
     public NumberCheck isGreaterThan(final Number number) {
@@ -41,9 +41,6 @@ public final class NumberCheck extends ObjectBaseCheck<Number, NumberCheck> {
     }
     
     public NumberCheck isBetween(final Number min, final Number max) {
-        checkValid(min != null && max != null, "min and max must not be null");
-        checkValid(compare(min, max) <= 0,
-                "min must be less than or equal to max");
         return check(arg == null
                 || (compare(arg, min) >= 0 && compare(arg, max) <= 0),
                 ARG_BETWEEN, argName, min, max, arg);

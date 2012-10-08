@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.Exceptions;
-import ch.trick17.betterchecks.InvalidCheckException;
 import ch.trick17.betterchecks.MessageType;
 
 public class IntCheckTest {
@@ -108,8 +107,8 @@ public class IntCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MessageType.ARG_IS, false,
-                Exceptions.defaultArgName(), 1, 0), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_IS, false, Exceptions
+                .defaultArgName(), 1, 0), thrown.getMessage());
     }
     
     @Test
@@ -212,16 +211,6 @@ public class IntCheckTest {
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MessageType.ARG_BETWEEN, false,
                 Exceptions.defaultArgName(), 1, 2, 0), thrown.getMessage());
-        
-        thrown = null;
-        try {
-            Check.that(-1).isBetween(2, 1);
-        } catch(final Exception e) {
-            thrown = e;
-        }
-        assertTrue(thrown instanceof InvalidCheckException);
-        assertEquals("min (2) must be less than or equal to max (1)", thrown
-                .getMessage());
     }
     
     @Test
@@ -256,15 +245,5 @@ public class IntCheckTest {
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MessageType.ARG_INDEX, false,
                 Exceptions.defaultArgName(), 1, -1), thrown.getMessage());
-        
-        thrown = null;
-        try {
-            Check.that(-1).isValidIndex(0);
-        } catch(final Exception e) {
-            thrown = e;
-        }
-        assertTrue(thrown instanceof InvalidCheckException);
-        assertEquals("listSize must be greater than 0 (value: 0)", thrown
-                .getMessage());
     }
 }

@@ -32,8 +32,6 @@ public class DoubleCheck extends PrimitiveBaseCheck<DoubleCheck> {
     }
     
     public DoubleCheck isBetween(final double min, final double max) {
-        checkValid(min <= max, "min (" + min
-                + ") must be less than or equal to max (" + max + ")");
         return check(arg >= min && arg <= max, ARG_BETWEEN, argName, min, max,
                 arg);
     }

@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.Exceptions;
-import ch.trick17.betterchecks.InvalidCheckException;
 import ch.trick17.betterchecks.MessageType;
 
 public class DoubleCheckTest {
@@ -209,16 +208,6 @@ public class DoubleCheckTest {
         assertEquals(Exceptions.formatMsg(MessageType.ARG_BETWEEN, false,
                 Exceptions.defaultArgName(), 0.5, 1.0, 0.0), thrown
                 .getMessage());
-        
-        thrown = null;
-        try {
-            Check.that(-0.5).isBetween(2, 1);
-        } catch(final Exception e) {
-            thrown = e;
-        }
-        assertTrue(thrown instanceof InvalidCheckException);
-        assertEquals("min (2.0) must be less than or equal to max (1.0)",
-                thrown.getMessage());
     }
     
     @Test

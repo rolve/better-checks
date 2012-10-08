@@ -11,7 +11,6 @@ import org.junit.Test;
 import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.Config;
 import ch.trick17.betterchecks.Exceptions;
-import ch.trick17.betterchecks.InvalidCheckException;
 import ch.trick17.betterchecks.MessageType;
 
 public class StringCheckTest {
@@ -303,15 +302,6 @@ public class StringCheckTest {
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
                 Exceptions.defaultArgName()), thrown.getMessage());
-        
-        thrown = null;
-        try {
-            Check.that("hello").containsAny();
-        } catch(final Exception e) {
-            thrown = e;
-        }
-        assertTrue(thrown instanceof InvalidCheckException);
-        assertEquals("sequences must not be empty", thrown.getMessage());
     }
     
     @Test

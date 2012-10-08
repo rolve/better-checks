@@ -1,11 +1,15 @@
 package ch.trick17.betterchecks;
 
 /**
- * Indicates that the contract of a Check instance has been violated. This is
- * the fault of the "server" (the method that does the check) and not of the
- * client (the code that uses that method).
+ * Indicates that the contract of a check object has been violated. This is the
+ * fault of the "server" (the method that does the check) and not of the client
+ * (the code that uses that method).
  * <p>
- * For easier debugging, errors of this kind are reported by a separate type of
+ * <strong>Note:</strong> For performance reasons, the validity of checks is
+ * currently not checked, meaning that this exception is not yet used. However,
+ * this may change in later releases of the Better Checks library.
+ * <p>
+ * For easier debugging, invalid check errors are reported by a separate type of
  * exception and not {@link IllegalArgumentException} as well, which could
  * easily lead to confusion. This (and the fact that this exception does not
  * extend IllegalAgrumentException) also ensures that such errors are not

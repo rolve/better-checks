@@ -102,10 +102,7 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * <p>
  * The idea behind this is to make it clear that the arguments (or the state
  * respectively) are illegal with respect to the client method and not in
- * respect to the methods of the Better Checks library. In addition, the Better
- * Checks library itself never throws any {@link IllegalArgumentException}s or
- * {@link IllegalStateException}s. Instead, it throws the specific
- * {@link InvalidCheckException} to signal an invalid use of the library.
+ * respect to the methods of the Better Checks library.
  * <p>
  * If stack trace cleaning is undesired, it can be turned off in the config
  * file. See below for more information.

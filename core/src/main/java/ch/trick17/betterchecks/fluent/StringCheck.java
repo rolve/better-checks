@@ -51,7 +51,6 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
     }
     
     public StringCheck containsAny(final CharSequence... sequences) {
-        checkValid(sequences.length > 0, "sequences must not be empty");
         return check(arg == null || testContainsAny(sequences),
                 ARG_CONTAINS_ANY, argName, Arrays.toString(sequences), arg);
     }
