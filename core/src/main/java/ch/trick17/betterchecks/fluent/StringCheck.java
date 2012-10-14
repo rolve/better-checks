@@ -11,6 +11,11 @@ import ch.trick17.betterchecks.Check;
 
 public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
     
+    /**
+     * Default constructor, for internal usage only.
+     */
+    public StringCheck() {}
+    
     public StringCheck isNotEmpty() {
         return check(arg == null || !arg.isEmpty(), ARG_EMPTY, argName, arg);
     }

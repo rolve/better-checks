@@ -6,6 +6,11 @@ import java.net.URL;
 
 public class UrlCheck extends ObjectBaseCheck<URL, UrlCheck> {
     
+    /**
+     * Default constructor, for internal usage only.
+     */
+    public UrlCheck() {}
+    
     public UrlCheck hasProtocol(final String protocol) {
         return check(arg == null || arg.getProtocol().equals(protocol),
                 ARG_PROTOCOL, argName, protocol, arg);

@@ -7,6 +7,11 @@ import java.math.BigInteger;
 
 public final class NumberCheck extends ObjectBaseCheck<Number, NumberCheck> {
     
+    /**
+     * Default constructor, for internal usage only.
+     */
+    public NumberCheck() {}
+    
     public NumberCheck isPositive() {
         checkNull();
         if(arg instanceof BigDecimal)

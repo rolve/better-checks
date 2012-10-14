@@ -8,6 +8,11 @@ public class IntCheck extends PrimitiveBaseCheck<IntCheck> {
     
     private int arg;
     
+    /**
+     * Default constructor, for internal usage only.
+     */
+    public IntCheck() {}
+    
     protected final void reset(final int argument) {
         reset();
         this.arg = argument;

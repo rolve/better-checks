@@ -6,6 +6,11 @@ public class DoubleCheck extends PrimitiveBaseCheck<DoubleCheck> {
     
     private double arg;
     
+    /**
+     * Default constructor, for internal usage only.
+     */
+    public DoubleCheck() {}
+    
     protected final void reset(final double argument) {
         reset();
         this.arg = argument;

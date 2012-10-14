@@ -9,11 +9,20 @@ import ch.trick17.betterchecks.MessageType;
 /**
  * The check class for object arrays. It supports all non-primitive arrays, not
  * just <code>Object[]</code>.
+ * <p>
+ * Most check methods are related to the length of the array, like
+ * {@link #hasLength(int)} or {@link #hasLengthBetween(int, int)}, but there is
+ * also the {@link #containsNoNull()} method.
  * 
  * @author Michael Faes
  */
 public final class ObjectArrayCheck extends
         ObjectBaseCheck<Object[], ObjectArrayCheck> {
+    
+    /**
+     * Default constructor, for internal usage only.
+     */
+    public ObjectArrayCheck() {}
     
     /**
      * Checks that the array argument is not empty (meaning it has a length
@@ -71,8 +80,9 @@ public final class ObjectArrayCheck extends
      *            The maximum length
      * @return This check
      * @throws IllegalArgumentException
-     *             If the length of the array is strictly less than
-     *             <code>min</code> or strictly greater than <code>max</code>.
+     *             If the length of the array is <em>strictly</em> less than
+     *             <code>min</code> or <em>strictly</em> greater than
+     *             <code>max</code>.
      */
     public ObjectArrayCheck hasLengthBetween(final int min, final int max) {
         return check(arg == null || (arg.length >= min && arg.length <= max),

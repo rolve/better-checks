@@ -6,6 +6,11 @@ public class LongCheck extends PrimitiveBaseCheck<LongCheck> {
     
     private long arg;
     
+    /**
+     * Default constructor, for internal usage only.
+     */
+    public LongCheck() {}
+    
     protected final void reset(final long argument) {
         reset();
         this.arg = argument;
