@@ -466,7 +466,8 @@ public abstract class Check {
      * there is no (need for a) separate check class for them.
      * 
      * @param argument
-     *            The <code>double</code> argument to check
+     *            The <code>double</code> or <code>float</code> argument to
+     *            check
      * @return A check object with the argument "imprinted"
      * @see DoubleCheck
      */

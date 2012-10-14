@@ -232,6 +232,16 @@ public class DoubleCheckTest {
         
         thrown = null;
         try {
+            Check.that(Float.NaN).isNotNaN();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NAN, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+        
+        thrown = null;
+        try {
             Check.that(0.0).not().isNotNaN();
         } catch(final Exception e) {
             thrown = e;
@@ -255,6 +265,39 @@ public class DoubleCheckTest {
         Exception thrown = null;
         try {
             Check.that(Double.POSITIVE_INFINITY).isNotInfinite();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_INFINITE, false,
+                Exceptions.defaultArgName(), Double.POSITIVE_INFINITY), thrown
+                .getMessage());
+        
+        thrown = null;
+        try {
+            Check.that(Double.NEGATIVE_INFINITY).isNotInfinite();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_INFINITE, false,
+                Exceptions.defaultArgName(), Double.POSITIVE_INFINITY), thrown
+                .getMessage());
+        
+        thrown = null;
+        try {
+            Check.that(Float.POSITIVE_INFINITY).isNotInfinite();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_INFINITE, false,
+                Exceptions.defaultArgName(), Double.POSITIVE_INFINITY), thrown
+                .getMessage());
+        
+        thrown = null;
+        try {
+            Check.that(Float.NEGATIVE_INFINITY).isNotInfinite();
         } catch(final Exception e) {
             thrown = e;
         }

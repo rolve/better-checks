@@ -1,8 +1,6 @@
 package ch.trick17.betterchecks.fluent;
 
 import static ch.trick17.betterchecks.Exceptions.illegalArgumentException;
-import ch.trick17.betterchecks.Check;
-import ch.trick17.betterchecks.CompactChecks;
 import ch.trick17.betterchecks.MessageType;
 
 /**
@@ -30,9 +28,8 @@ public class PrimitiveBaseCheck<C extends PrimitiveBaseCheck<C>> extends
     private boolean disabled;
     
     /**
-     * Resets all state of this check. This method must be called every time
-     * before this check object is returned by one of the {@link Check} or
-     * {@link CompactChecks} methods.
+     * Resets the common state of this check class. This method must be called
+     * by the subclasses' more specific <code>reset(...)</code> methods.
      */
     protected final void reset() {
         baseReset();
