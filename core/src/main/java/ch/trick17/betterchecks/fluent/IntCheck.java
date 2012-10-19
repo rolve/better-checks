@@ -10,7 +10,7 @@ import ch.trick17.betterchecks.MessageType;
 
 /**
  * The check class for <code>int</code> arguments. It can also be (and
- * <em>is</em> - if you use the {@link Check} methods properly) used for
+ * <em>is</em> - if you use the {@link Check} methods correctly) used for
  * <code>short</code> and <code>byte</code> arguments.
  * <p>
  * It provides methods like {@link #isPositive()} or

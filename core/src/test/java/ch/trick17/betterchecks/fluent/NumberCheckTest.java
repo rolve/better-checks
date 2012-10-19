@@ -169,8 +169,8 @@ public class NumberCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MessageType.ARG_IS, false,
-                Exceptions.defaultArgName(), 0, -1), thrown.getMessage());
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_IS, false, Exceptions
+                .defaultArgName(), 0, -1), thrown.getMessage());
         
         thrown = null;
         try {
@@ -204,12 +204,15 @@ public class NumberCheckTest {
         Check.that(Double.POSITIVE_INFINITY).isGreaterThan(0);
         
         Check.that(new AtomicInteger(1)).isGreaterThan(0);
-        Check.that(
-                new BigInteger(
-                        "999999999999999999999999999999999999999999999999999999"))
-                .isGreaterThan(0);
         
-        // This is a tricky one: it is not handled correctly with .doubleValue()
+        // The next two are tricky ones: they are not handled correctly with
+        // .doubleValue()
+        final StringBuilder bigNumber = new StringBuilder();
+        for(int i = 0; i < Short.MAX_VALUE; i++)
+            bigNumber.append("9");
+        Check.that(new BigInteger(bigNumber.toString() + "9")).isGreaterThan(
+                new BigInteger(bigNumber.toString() + "8"));
+        
         final StringBuilder smallNumber = new StringBuilder("0.");
         for(int i = 0; i < Short.MAX_VALUE; i++)
             smallNumber.append('0');
@@ -254,7 +257,7 @@ public class NumberCheckTest {
         }
         assertTrue(thrown instanceof RuntimeException);
         assertEquals(
-                "The given number (unparsable of class ch.trick17.betterchecks.fluent.NumberCheckTest$WeirdNumber) does not have a parsable string representation",
+                "The given number (\"unparsable\" of class ch.trick17.betterchecks.fluent.NumberCheckTest$WeirdNumber) does not have a parsable string representation",
                 thrown.getMessage());
         assertTrue(thrown.getCause() instanceof NumberFormatException);
     }
