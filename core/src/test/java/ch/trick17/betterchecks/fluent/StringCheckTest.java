@@ -465,20 +465,32 @@ public class StringCheckTest {
     @Test
     @SuppressWarnings("null")
     public void testIsUrlWhich() {
-        final UrlCheck urlCheck = Check.that("https://example").named("string")
-                .isUrlWhich();
-        assertEquals("string", urlCheck.argName);
+        Check.that("https://example").isUrlWhich();
         
         Exception thrown = null;
         try {
-            Check.that("").isUrlWhich();
+            Check.that("invalid").isUrlWhich();
         } catch(final Exception e) {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MessageType.ARG_URL, false,
-                Exceptions.defaultArgName(), ""), thrown.getMessage());
+                Exceptions.defaultArgName(), "invalid"), thrown.getMessage());
         assertTrue(thrown.getCause() instanceof MalformedURLException);
+        
+        thrown = null;
+        try {
+            Check.that("invalid").named("string").isUrlWhich();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_URL, false, "string",
+                "invalid"), thrown.getMessage());
+        assertTrue(thrown.getCause() instanceof MalformedURLException);
+        
+        Check.that((String) null).isNullOr().isUrlWhich();
+        Check.that((String) null).isNullOr().isUrlWhich().hasProtocol("http");
         
         thrown = null;
         try {

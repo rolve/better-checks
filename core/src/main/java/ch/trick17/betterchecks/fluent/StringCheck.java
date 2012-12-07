@@ -12,7 +12,7 @@ import ch.trick17.betterchecks.Check;
 public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
     
     /**
-     * Default constructor, for internal usage only.
+     * Default constructor, for internal use only.
      */
     public StringCheck() {}
     
@@ -103,7 +103,40 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
             cause = e;
         }
         checkWithCause(arg == null || url != null, ARG_URL, cause, argName, arg);
-        return Check.that(url).named(argName);
+        final UrlCheck urlCheck = Check.that(url).named(argName);
+        if(nullAllowed)
+            urlCheck.isNullOr();
+        return urlCheck;
+    }
+    
+    public StringCheck isInt() {
+        checkNull();
+        Integer number = null;
+        Exception cause = null;
+        try {
+            number = new Integer(arg);
+        } catch(final NumberFormatException e) {
+            cause = e;
+        }
+        return checkWithCause(arg == null || number != null, ARG_URL, cause,
+                argName, arg);
+    }
+    
+    public IntCheck isIntWhich() {
+        checkNull();
+        Integer number = null;
+        Exception cause = null;
+        try {
+            number = new Integer(arg);
+        } catch(final NumberFormatException e) {
+            cause = e;
+        }
+        checkWithCause(arg == null || number != null, ARG_URL, cause, argName,
+                arg);
+        if(number == null)
+            return Check.that(-1).named(argName).disable();
+        else
+            return Check.that((int) number).named(argName);
     }
     
     /*
