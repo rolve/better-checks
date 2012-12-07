@@ -45,7 +45,7 @@ import ch.trick17.betterchecks.MessageType;
 public final class NumberCheck extends ObjectBaseCheck<Number, NumberCheck> {
     
     /**
-     * Default constructor, for internal usage only.
+     * Default constructor, for internal use only.
      */
     public NumberCheck() {}
     

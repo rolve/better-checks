@@ -24,7 +24,7 @@ public class IntCheck extends PrimitiveBaseCheck<IntCheck> {
     private int arg;
     
     /**
-     * Default constructor, for internal usage only.
+     * Default constructor, for internal use only.
      */
     public IntCheck() {}
     
@@ -79,10 +79,10 @@ public class IntCheck extends PrimitiveBaseCheck<IntCheck> {
     
     /**
      * Checks that the <code>int</code> argument is equal to the given number,
-     * throwing an exception otherwise. This check exists merely for the use in
-     * a property check. See {@link StringCheck#hasLengthWhich()} for example.
-     * However, in conjunction with inversion (see {@link #not()}), this method
-     * can also be used to exclude a single value.
+     * throwing an exception otherwise. This check method exists merely for
+     * using with a property check. See {@link StringCheck#hasLengthWhich()} for
+     * example. However, in conjunction with inversion (see {@link #not()}),
+     * this method can also be used to exclude a single value.
      * <p>
      * The message type used for exceptions thrown by this method is
      * {@link MessageType#ARG_IS}.

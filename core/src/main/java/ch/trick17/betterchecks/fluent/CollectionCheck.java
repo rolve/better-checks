@@ -20,7 +20,7 @@ public final class CollectionCheck extends
         ObjectBaseCheck<Collection<?>, CollectionCheck> {
     
     /**
-     * Default constructor, for internal usage only.
+     * Default constructor, for internal use only.
      */
     public CollectionCheck() {}
     
@@ -55,7 +55,7 @@ public final class CollectionCheck extends
      * @return This check
      * @throws IllegalArgumentException
      *             if the collection argument has a size different from the
-     *             given one.
+     *             given one
      * @see #hasSizeBetween(int, int)
      */
     public CollectionCheck hasSize(final int size) {
@@ -81,7 +81,7 @@ public final class CollectionCheck extends
      * @throws IllegalArgumentException
      *             If the size of the collection is <em>strictly</em> less than
      *             <code>min</code> or <em>strictly</em> greater than
-     *             <code>max</code>.
+     *             <code>max</code>
      */
     public CollectionCheck hasSizeBetween(final int min, final int max) {
         return check(arg == null || (arg.size() >= min && arg.size() <= max),

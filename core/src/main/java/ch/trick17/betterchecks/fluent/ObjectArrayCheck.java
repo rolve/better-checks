@@ -20,7 +20,7 @@ public final class ObjectArrayCheck extends
         ObjectBaseCheck<Object[], ObjectArrayCheck> {
     
     /**
-     * Default constructor, for internal usage only.
+     * Default constructor, for internal use only.
      */
     public ObjectArrayCheck() {}
     
@@ -56,7 +56,7 @@ public final class ObjectArrayCheck extends
      * @return This check
      * @throws IllegalArgumentException
      *             if the array argument has a length different from the given
-     *             one.
+     *             one
      * @see #hasLengthBetween(int, int)
      */
     public ObjectArrayCheck hasLength(final int length) {
@@ -82,7 +82,7 @@ public final class ObjectArrayCheck extends
      * @throws IllegalArgumentException
      *             If the length of the array is <em>strictly</em> less than
      *             <code>min</code> or <em>strictly</em> greater than
-     *             <code>max</code>.
+     *             <code>max</code>
      */
     public ObjectArrayCheck hasLengthBetween(final int min, final int max) {
         return check(arg == null || (arg.length >= min && arg.length <= max),
@@ -100,12 +100,12 @@ public final class ObjectArrayCheck extends
      * the argument, throwing an exception in case of a failure.
      * <p>
      * The returned check has the length of this check's array set as the
-     * argument and an argument name that indicates this fact. If the array is
-     * <code>null</code> and allowed to be so (like in the above example), the
-     * returned property check is completely disabled, meaning none of its check
-     * methods will throw an exception. An inversion called before this method
-     * is ignored and does <strong>not</strong> have any effect on the check
-     * methods called on the returned property check.
+     * argument and an argument name that indicates this fact. If the array
+     * reference is <code>null</code> and allowed to be so (like in the above
+     * example), the returned property check is completely disabled, meaning
+     * none of its check methods will throw an exception. An inversion called
+     * before this method is ignored and does <strong>not</strong> have any
+     * effect on the check methods called on the returned property check.
      * 
      * @return A property check for the length of the array argument
      */

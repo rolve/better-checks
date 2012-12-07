@@ -21,7 +21,7 @@ public class DoubleCheck extends PrimitiveBaseCheck<DoubleCheck> {
     private double arg;
     
     /**
-     * Default constructor, for internal usage only.
+     * Default constructor, for internal use only.
      */
     public DoubleCheck() {}
     

@@ -7,7 +7,7 @@ import java.net.URL;
 public class UrlCheck extends ObjectBaseCheck<URL, UrlCheck> {
     
     /**
-     * Default constructor, for internal usage only.
+     * Default constructor, for internal use only.
      */
     public UrlCheck() {}
     

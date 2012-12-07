@@ -18,7 +18,7 @@ public class LongCheck extends PrimitiveBaseCheck<LongCheck> {
     private long arg;
     
     /**
-     * Default constructor, for internal usage only.
+     * Default constructor, for internal use only.
      */
     public LongCheck() {}
     

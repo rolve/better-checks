@@ -22,7 +22,7 @@ public final class PrimitiveArrayCheck extends
     private int argLength;
     
     /**
-     * Default constructor, for internal usage only.
+     * Default constructor, for internal use only.
      */
     public PrimitiveArrayCheck() {}
     

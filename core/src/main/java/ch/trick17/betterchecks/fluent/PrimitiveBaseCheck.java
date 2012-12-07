@@ -40,10 +40,12 @@ public class PrimitiveBaseCheck<C extends PrimitiveBaseCheck<C>> extends
      * Disables all checks that are called on this check object. This is used
      * for property checks where the owner is null and allowed to be null.
      * 
+     * @return This check
      * @see ObjectBaseCheck#intPropertyCheck(int, String)
      */
-    protected final void disable() {
+    protected final C disable() {
         disabled = true;
+        return me();
     }
     
     /**

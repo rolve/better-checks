@@ -29,9 +29,10 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * <p>
  * Examples:
  * <p>
- * <code>Check.that(name).matches("hello .*!").hasLenghtBetween(0, 20);</code><br>
+ * <code>Check.that(greeting).matches("hello .*!").hasLenghtBetween(0, 20);</code>
+ * <br>
  * <code>Check.that(list).isNullOr().hasSize(0);</code><br>
- * <code>Check.that(args).named("arguments").isNotEmpty();</code>
+ * <code>Check.that(names).named("list of names").isNotEmpty();</code>
  * <p>
  * The check methods (such as <code>matches(...)</code> or
  * <code>hasSize(...)</code>) throw an exception if the check fails. The exact
@@ -83,12 +84,12 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * <h3>Intended Use and Thread Safety</h3>
  * <p>
  * To provide optimal performance, the <code>that(...)</code> methods do not
- * create a new check objects for every call. Instead, each overloaded method
+ * create a new check object for every call. Instead, each overloaded method
  * always returns the same (but modified) object (in a given thread). Therefore,
  * you should always use those objects right after getting them by using the
- * fluent API. Never should you store them and using them later, not even in
- * local variables, as <em>any</em> method called in between may also use and
- * therefore modify them.
+ * fluent API. Never should you store a check object and use it later, not even
+ * in local variables, as <em>any</em> method that is called in between may also
+ * use and therefore modify it.
  * <p>
  * Thread safety is guaranteed by means of thread confinement. As each thread
  * receives its own check objects, and as long as they are not shared, the use
