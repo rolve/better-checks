@@ -118,9 +118,10 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
         } catch(final NumberFormatException e) {
             cause = e;
         }
-        return checkWithCause(arg == null || number != null, ARG_URL, cause,
+        return checkWithCause(arg == null || number != null, ARG_INT, cause,
                 argName, arg);
     }
+    
     
     public IntCheck isIntWhich() {
         checkNull();
@@ -131,7 +132,7 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
         } catch(final NumberFormatException e) {
             cause = e;
         }
-        checkWithCause(arg == null || number != null, ARG_URL, cause, argName,
+        checkWithCause(arg == null || number != null, ARG_INT, cause, argName,
                 arg);
         if(number == null)
             return Check.that(-1).named(argName).disable();

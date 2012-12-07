@@ -465,7 +465,12 @@ public class StringCheckTest {
     @Test
     @SuppressWarnings("null")
     public void testIsUrlWhich() {
-        Check.that("https://example").isUrlWhich();
+        Check.that("https://example").isUrlWhich().hasProtocol("https")
+                .hasHostWhich().is("example");
+        assertEquals(Config.getConfig().getDefaultArgumentName(), Check.that(
+                "https://example").isUrlWhich().argName);
+        assertEquals("url", Check.that("https://example").named("url")
+                .isUrlWhich().argName);
         
         Exception thrown = null;
         try {
@@ -495,6 +500,108 @@ public class StringCheckTest {
         thrown = null;
         try {
             Check.that((String) null).isUrlWhich();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+    }
+    
+    @Test
+    @SuppressWarnings("null")
+    public void testIsInt() {
+        Check.that("42").isInt();
+        Check.that("0").isInt();
+        Check.that("1").isInt();
+        Check.that("-1").isInt();
+        Check.that(String.valueOf(Integer.MAX_VALUE)).isInt();
+        Check.that(String.valueOf(Integer.MIN_VALUE)).isInt();
+        
+        Exception thrown = null;
+        try {
+            Check.that("invalid").isInt();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_INT, false,
+                Exceptions.defaultArgName(), "invalid"), thrown.getMessage());
+        assertTrue(thrown.getCause() instanceof NumberFormatException);
+        
+        thrown = null;
+        try {
+            Check.that("").isInt();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_INT, false,
+                Exceptions.defaultArgName(), ""), thrown.getMessage());
+        assertTrue(thrown.getCause() instanceof NumberFormatException);
+        
+        thrown = null;
+        try {
+            Check.that(Integer.MAX_VALUE + "0").isInt();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_INT, false,
+                Exceptions.defaultArgName(), Integer.MAX_VALUE + "0"), thrown
+                .getMessage());
+        assertTrue(thrown.getCause() instanceof NumberFormatException);
+        
+        Check.that((String) null).isNullOr().isInt();
+        
+        thrown = null;
+        try {
+            Check.that((String) null).isInt();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+    }
+    
+    @Test
+    @SuppressWarnings("null")
+    public void testIsIntWhich() {
+        Check.that("42").isIntWhich().is(42);
+        assertEquals(Config.getConfig().getDefaultArgumentName(), Check.that(
+                "42").isIntWhich().argName);
+        assertEquals("number",
+                Check.that("42").named("number").isIntWhich().argName);
+        
+        Exception thrown = null;
+        try {
+            Check.that("invalid").isIntWhich();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_INT, false,
+                Exceptions.defaultArgName(), "invalid"), thrown.getMessage());
+        assertTrue(thrown.getCause() instanceof NumberFormatException);
+        
+        thrown = null;
+        try {
+            Check.that("invalid").named("string").isIntWhich();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_INT, false, "string",
+                "invalid"), thrown.getMessage());
+        assertTrue(thrown.getCause() instanceof NumberFormatException);
+        
+        Check.that((String) null).isNullOr().isIntWhich();
+        Check.that((String) null).isNullOr().isIntWhich().is(0);
+        
+        thrown = null;
+        try {
+            Check.that((String) null).isIntWhich();
         } catch(final Exception e) {
             thrown = e;
         }
