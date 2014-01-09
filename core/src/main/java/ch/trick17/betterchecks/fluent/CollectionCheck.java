@@ -132,9 +132,7 @@ public final class CollectionCheck extends
     
     // IMPROVE: allElementsOfType
     
-    /*
-     * Implementation methods
-     */
+    /* Implementation methods */
     
     private boolean testContainsNoNull() {
         for(final Object element : arg) {

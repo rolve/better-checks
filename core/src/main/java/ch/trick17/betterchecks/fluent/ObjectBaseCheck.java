@@ -69,9 +69,7 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
         this.nullAllowed = false;
     }
     
-    /*
-     * Modifier methods
-     */
+    /* Modifier methods */
     
     /**
      * Allow the argument to be <code>null</code>. This method modifies all
@@ -87,9 +85,7 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
         return me();
     }
     
-    /*
-     * Checks
-     */
+    /* Checks */
     
     /**
      * Checks that the argument is not <code>null</code>, throwing an exception
@@ -107,7 +103,7 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
      */
     public final C isNotNull() {
         if(!nullAllowed && (inverted ? arg != null : arg == null))
-            throw illegalArgumentException(ARG_NULL, inverted, new Object[] {
+            throw illegalArgumentException(ARG_NULL, inverted, new Object[]{
                     argName, arg});
         inverted = false;
         return me();
@@ -152,9 +148,7 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
                 argName, clazz, argClass);
     }
     
-    /*
-     * Implementation methods
-     */
+    /* Implementation methods */
     
     /**
      * A helper method that allows subclasses to perform simple checks
@@ -228,7 +222,7 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
     protected final void checkNull() {
         if(!nullAllowed && arg == null)
             throw illegalArgumentException(ARG_NULL, nullAllowed,
-                    new Object[] {argName});
+                    new Object[]{argName});
         assert arg == null ? nullAllowed : true;
     }
     

@@ -43,9 +43,7 @@ public final class PrimitiveArrayCheck extends
         argLength = argumentLength;
     }
     
-    /*
-     * Checks
-     */
+    /* Checks */
     
     /**
      * Checks that the array argument is not empty (meaning it has a length
@@ -134,9 +132,7 @@ public final class PrimitiveArrayCheck extends
         return intPropertyCheck(arg == null ? -1 : argLength, "length");
     }
     
-    /*
-     * Implementation methods
-     */
+    /* Implementation methods */
     
     private static String arrayToString(final Object arg) {
         if(arg == null)

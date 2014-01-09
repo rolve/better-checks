@@ -24,8 +24,7 @@ public class FluentChecks {
     
     // IMPROVE: Replace map with individual fields for better performance
     
-    @SuppressWarnings("unchecked")
-    private static final List<Class<? extends BaseCheck<?>>> CHECK_CLASSES = Arrays
+    @SuppressWarnings("unchecked") private static final List<Class<? extends BaseCheck<?>>> CHECK_CLASSES = Arrays
             .asList(ObjectCheck.class, StringCheck.class,
                     ObjectArrayCheck.class, PrimitiveArrayCheck.class,
                     CollectionCheck.class, NumberCheck.class, UrlCheck.class,
@@ -120,8 +119,7 @@ public class FluentChecks {
     }
     
     private static <C extends BaseCheck<C>> C getCheck(final Class<C> checkClass) {
-        @SuppressWarnings("unchecked")
-        final ThreadLocal<C> threadLocal = (ThreadLocal<C>) objectChecks
+        @SuppressWarnings("unchecked") final ThreadLocal<C> threadLocal = (ThreadLocal<C>) objectChecks
                 .get(checkClass);
         assert threadLocal != null;
         return threadLocal.get();

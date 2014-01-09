@@ -140,9 +140,7 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  */
 public abstract class Check {
     
-    /*
-     * Simple checks
-     */
+    /* Simple checks */
     
     /**
      * A simple argument check that throws an {@link IllegalArgumentException}
@@ -188,9 +186,7 @@ public abstract class Check {
             throw illegalStateException(message);
     }
     
-    /*
-     * Fluent argument checks
-     */
+    /* Fluent argument checks */
     
     /**
      * Returns a generic {@link ObjectCheck} which can be use to check basic

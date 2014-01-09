@@ -29,7 +29,7 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * <code>check(list).isNullOr().hasSize(0);</code><br>
  * <code>check(args).named("arguments").isNotEmpty();</code>
  * <p>
- * <strong>Note:</strong> For use case and thread safety issues, read the
+ * <strong>Note:</strong> For intended use and thread safety issues, read the
  * documentation of the {@link Check} class.
  * 
  * @author Michael Faes

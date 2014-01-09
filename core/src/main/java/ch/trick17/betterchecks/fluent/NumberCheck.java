@@ -215,9 +215,7 @@ public final class NumberCheck extends ObjectBaseCheck<Number, NumberCheck> {
                 ARG_BETWEEN, argName, min, max, arg);
     }
     
-    /*
-     * Implementation methods
-     */
+    /* Implementation methods */
     
     private static int compare(final Number x, final Number y) {
         return toBigDecimal(x).compareTo(toBigDecimal(y));

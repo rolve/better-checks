@@ -217,7 +217,7 @@ public class IntCheckTest {
     @SuppressWarnings("null")
     public void testIsValidIndex() {
         Check.that(1).isValidIndex(2);
-        Check.that(1).isValidIndex(new Object[] {1, 2});
+        Check.that(1).isValidIndex(new Object[]{1, 2});
         Check.that(1).isValidIndex(Arrays.asList(1, 2));
         Check.that(0).isValidIndex(1);
         Check.that(Integer.MAX_VALUE - 1).isValidIndex(Integer.MAX_VALUE);

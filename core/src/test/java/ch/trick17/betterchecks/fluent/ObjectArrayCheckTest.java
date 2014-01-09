@@ -15,14 +15,14 @@ public class ObjectArrayCheckTest {
     @Test
     @SuppressWarnings("null")
     public void testIsNotEmpty() {
-        Check.that(new String[] {"", ""}).isNotEmpty();
-        Check.that(new String[] {""}).isNotEmpty();
-        Check.that(new String[] {"", ""}).isNullOr().isNotEmpty();
+        Check.that(new String[]{"", ""}).isNotEmpty();
+        Check.that(new String[]{""}).isNotEmpty();
+        Check.that(new String[]{"", ""}).isNullOr().isNotEmpty();
         Check.that((String) null).isNullOr().isNotEmpty();
         
         Exception thrown = null;
         try {
-            Check.that(new String[] {}).isNotEmpty();
+            Check.that(new String[]{}).isNotEmpty();
         } catch(final Exception e) {
             thrown = e;
         }
@@ -32,7 +32,7 @@ public class ObjectArrayCheckTest {
         
         thrown = null;
         try {
-            Check.that(new Object[] {"a"}).not().isNotEmpty();
+            Check.that(new Object[]{"a"}).not().isNotEmpty();
         } catch(final Exception e) {
             thrown = e;
         }
@@ -54,13 +54,13 @@ public class ObjectArrayCheckTest {
     @Test
     @SuppressWarnings("null")
     public void testHasLength() {
-        Check.that(new String[] {"", "", "", "", ""}).hasLength(5);
-        Check.that(new String[] {"", ""}).hasLength(2);
-        Check.that(new String[] {}).hasLength(0);
+        Check.that(new String[]{"", "", "", "", ""}).hasLength(5);
+        Check.that(new String[]{"", ""}).hasLength(2);
+        Check.that(new String[]{}).hasLength(0);
         
         Exception thrown = null;
         try {
-            Check.that(new String[] {"A", "B", "C"}).hasLength(2);
+            Check.that(new String[]{"A", "B", "C"}).hasLength(2);
         } catch(final Exception e) {
             thrown = e;
         }
@@ -83,19 +83,19 @@ public class ObjectArrayCheckTest {
     @Test
     @SuppressWarnings("null")
     public void testHasLengthBetween() {
-        Check.that(new String[] {"", "", "", "", ""}).hasLengthBetween(5, 5);
-        Check.that(new String[] {"", "", "", "", ""}).hasLengthBetween(0, 10);
-        Check.that(new String[] {"", "", "", "", ""}).hasLengthBetween(
+        Check.that(new String[]{"", "", "", "", ""}).hasLengthBetween(5, 5);
+        Check.that(new String[]{"", "", "", "", ""}).hasLengthBetween(0, 10);
+        Check.that(new String[]{"", "", "", "", ""}).hasLengthBetween(
                 Integer.MIN_VALUE, Integer.MAX_VALUE);
         
-        Check.that(new String[] {}).hasLengthBetween(0, 0);
-        Check.that(new String[] {}).hasLengthBetween(-1, 1);
-        Check.that(new String[] {}).hasLengthBetween(Integer.MIN_VALUE,
+        Check.that(new String[]{}).hasLengthBetween(0, 0);
+        Check.that(new String[]{}).hasLengthBetween(-1, 1);
+        Check.that(new String[]{}).hasLengthBetween(Integer.MIN_VALUE,
                 Integer.MAX_VALUE);
         
         Exception thrown = null;
         try {
-            Check.that(new String[] {"a", "b", "c"}).hasLengthBetween(0, 2);
+            Check.that(new String[]{"a", "b", "c"}).hasLengthBetween(0, 2);
         } catch(final Exception e) {
             thrown = e;
         }
@@ -106,7 +106,7 @@ public class ObjectArrayCheckTest {
         
         thrown = null;
         try {
-            Check.that(new String[] {"1", "2", "3"}).hasLengthBetween(4,
+            Check.that(new String[]{"1", "2", "3"}).hasLengthBetween(4,
                     Integer.MAX_VALUE);
         } catch(final Exception e) {
             thrown = e;
@@ -130,12 +130,12 @@ public class ObjectArrayCheckTest {
     @Test
     @SuppressWarnings("null")
     public void testHasLengthWhich() {
-        Check.that(new Object[] {0, 1, 2, 3, 4}).hasLengthWhich().is(5);
+        Check.that(new Object[]{0, 1, 2, 3, 4}).hasLengthWhich().is(5);
         assertEquals("the length of "
                 + Config.getConfig().getDefaultArgumentName(), Check.that(
-                new Object[] {0, 1, 2, 3, 4}).hasLengthWhich().argName);
+                new Object[]{0, 1, 2, 3, 4}).hasLengthWhich().argName);
         assertEquals("the length of the array", Check.that(
-                new Object[] {0, 1, 2, 3, 4}).named("the array")
+                new Object[]{0, 1, 2, 3, 4}).named("the array")
                 .hasLengthWhich().argName);
         
         Check.that((Object[]) null).isNullOr().hasLengthWhich().is(100);
@@ -154,15 +154,15 @@ public class ObjectArrayCheckTest {
     @Test
     @SuppressWarnings("null")
     public void testContainsNoNull() {
-        Check.that(new Object[] {"hello", "world"}).containsNoNull();
-        Check.that(new Object[] {"hello"}).containsNoNull();
-        Check.that(new Object[] {}).containsNoNull();
+        Check.that(new Object[]{"hello", "world"}).containsNoNull();
+        Check.that(new Object[]{"hello"}).containsNoNull();
+        Check.that(new Object[]{}).containsNoNull();
         
         Check.that((Object[]) null).isNullOr().containsNoNull();
         
         Exception thrown = null;
         try {
-            Check.that(new String[] {"a", "b", null}).containsNoNull();
+            Check.that(new String[]{"a", "b", null}).containsNoNull();
         } catch(final Exception e) {
             thrown = e;
         }

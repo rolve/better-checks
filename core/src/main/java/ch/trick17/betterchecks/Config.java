@@ -18,16 +18,14 @@ import ch.trick17.betterchecks.fluent.ObjectCheck;
  * <p>
  * The config file is loaded when this class is initialized. To access the
  * config, use the static {@link #getConfig()} method that provides access to
- * the config singleton. To assert that the your config file has been load, you
- * may use the {@link #isLoadedFromConfigFile()} method.
+ * the config singleton. To assert that the your config file has been loaded,
+ * you may use the {@link #isLoadedFromConfigFile()} method.
  * 
  * @author Michael Faes
  */
 public final class Config {
     
-    /*
-     * Constants
-     */
+    /* Constants */
     /**
      * The base name of the config file for this library
      */
@@ -37,15 +35,11 @@ public final class Config {
     private static final String CLEAN_STACK_TRACES_ENABLED_KEY = "cleanStackTraces";
     private static final String DEFAULT_ARG_NAME_KEY = "defaultArgumentName";
     
-    /*
-     * Default values
-     */
+    /* Default values */
     private static final String DEFAULT_DEFAULT_ARG_NAME = "the argument";
     private static final boolean DEFAULT_CLEAN_STRACK_TRACES_ENABLED = true;
     
-    /*
-     * Static initialization and global config access
-     */
+    /* Static initialization and global config access */
     private static final Config config = loadConfig();
     
     /**
@@ -118,14 +112,10 @@ public final class Config {
         return config;
     }
     
-    /*
-     * Config object
-     */
+    /* Config object */
     
-    /*
-     * Note that a Config object is *effectively* immutable. The static config
-     * is therefore thread-safe after publication in the static initializer.
-     */
+    /* Note that a Config object is *effectively* immutable. The static config
+     * is therefore thread-safe after publication in the static initializer. */
     private boolean loadedFromConfigFile;
     private boolean cleanStackTracesEnabled;
     private String defaultArgumentName;
@@ -145,7 +135,7 @@ public final class Config {
         return loadedFromConfigFile;
     }
     
-    // TODO: Find a way to include default values from constants in Javadoc
+    // IMPROVE: Find a way to include default values from constants in Javadoc
     
     /**
      * Indicates whether stack trace cleaning is enabled. See the documentation
@@ -179,7 +169,7 @@ public final class Config {
      * Returns the exception message format for the given {@link MessageType}.
      * The formats are format strings defined by the {@link Formatter} class.
      * <p>
-     * Apart from the message type, a second parameter affects the exception
+     * Besides the message type, a second parameter affects the exception
      * message format: Whether or not the check was inverted. The messages for
      * inverted checks are also inverted, typically with an additional or
      * missing "not".
@@ -219,7 +209,7 @@ public final class Config {
         return messageFormats.get(type).getFormat(inverted);
     }
     
-    private static class FormatPair {
+    private static final class FormatPair {
         
         private static final Pattern POSITIVE_PATTERN = Pattern
                 .compile("\\+\\((.*)\\)\\+");
@@ -229,7 +219,7 @@ public final class Config {
         private final String positive;
         private final String negative;
         
-        public FormatPair(final String rawFormat) {
+        FormatPair(final String rawFormat) {
             final String negativeRemoved = NEGATIVE_PATTERN.matcher(rawFormat)
                     .replaceAll("");
             positive = POSITIVE_PATTERN.matcher(negativeRemoved).replaceAll(
@@ -240,7 +230,7 @@ public final class Config {
                     "$1");
         }
         
-        public String getFormat(final boolean inverted) {
+        String getFormat(final boolean inverted) {
             return inverted ? negative : positive;
         }
     }

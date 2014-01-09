@@ -12,25 +12,21 @@ public class ExceptionsTest extends CustomConfigTest {
     public void testIllegalArgumentException() {
         IllegalArgumentException exception = Exceptions
                 .illegalArgumentException(MessageType.ARG_EMPTY, false,
-                        new Object[] {"arg"});
+                        new Object[]{"arg"});
         
         assertEquals(Exceptions.formatMsg(MessageType.ARG_EMPTY, false, "arg"),
                 exception.getMessage());
         
-        /*
-         * Test that the stack trace is cleaned up to not contain elements from
-         * the better checks library
-         */
+        /* Test that the stack trace is cleaned up to not contain elements from
+         * the better checks library */
         StackTraceElement topElement = exception.getStackTrace()[0];
         assertEquals(ExceptionsTest.class.getName(), topElement.getClassName());
         assertEquals(ExceptionsTest.class.getSimpleName() + ".java", topElement
                 .getFileName());
         assertEquals("testIllegalArgumentException", topElement.getMethodName());
         
-        /*
-         * The help() method should not appear in the stack trace either as it's
-         * identified as being part of the library (it doesn't end with "Test")
-         */
+        /* The help() method should not appear in the stack trace either as it's
+         * identified as being part of the library (it doesn't end with "Test") */
         exception = ExceptionsTestHelper.help();
         topElement = exception.getStackTrace()[0];
         assertEquals(ExceptionsTest.class.getName(), topElement.getClassName());
@@ -38,13 +34,11 @@ public class ExceptionsTest extends CustomConfigTest {
                 .getFileName());
         assertEquals("testIllegalArgumentException", topElement.getMethodName());
         
-        /*
-         * Test disabling stack trace cleaning
-         */
+        /* Test disabling stack trace cleaning */
         useTestConfig();
         
         exception = Exceptions.illegalArgumentException(MessageType.ARG_EMPTY,
-                false, new Object[] {"arg"});
+                false, new Object[]{"arg"});
         topElement = exception.getStackTrace()[0];
         assertEquals(Exceptions.class.getName(), topElement.getClassName());
         assertEquals(Exceptions.class.getSimpleName() + ".java", topElement
@@ -59,7 +53,7 @@ public class ExceptionsTest extends CustomConfigTest {
         
         private static IllegalArgumentException help() {
             return Exceptions.illegalArgumentException(MessageType.ARG_NULL,
-                    false, new Object[] {"arg"});
+                    false, new Object[]{"arg"});
         }
     }
     

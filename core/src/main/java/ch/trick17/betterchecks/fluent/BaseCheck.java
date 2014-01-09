@@ -53,9 +53,7 @@ public abstract class BaseCheck<C extends BaseCheck<C>> {
         this.inverted = false;
     }
     
-    /*
-     * Modifier methods
-     */
+    /* Modifier methods */
     
     /**
      * Gives the argument to be checked a name. This name is used to provide
@@ -90,9 +88,7 @@ public abstract class BaseCheck<C extends BaseCheck<C>> {
         return me();
     }
     
-    /*
-     * Implementation methods
-     */
+    /* Implementation methods */
     
     /**
      * A convenience method for subclasses to use to assert the validity of the

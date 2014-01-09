@@ -166,9 +166,7 @@ public abstract class Exceptions {
         return Config.getConfig().getDefaultArgumentName();
     }
     
-    /*
-     * Implementation methods
-     */
+    /* Implementation methods */
     
     private static void cleanUpStackTrace(final Exception exception) {
         if(Config.getConfig().isCleanStackTracesEnabled()) {

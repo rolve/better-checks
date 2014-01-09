@@ -34,8 +34,7 @@ public class CustomConfigTest {
         }
     }
     
-    @Rule
-    public PowerMockRule powerMockRule = new PowerMockRule();
+    @Rule public PowerMockRule powerMockRule = new PowerMockRule();
     
     public static void useTestConfig() {
         try {

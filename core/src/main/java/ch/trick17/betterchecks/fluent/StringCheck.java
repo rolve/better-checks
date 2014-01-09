@@ -447,9 +447,7 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
             return Check.that((int) number).named(argName);
     }
     
-    /*
-     * Implementation methods
-     */
+    /* Implementation methods */
     
     private boolean testContainsAll(final CharSequence... sequences) {
         for(final CharSequence sequence : sequences) {

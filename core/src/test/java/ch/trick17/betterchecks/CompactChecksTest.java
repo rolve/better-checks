@@ -30,14 +30,14 @@ public class CompactChecksTest {
     
     @Test
     public void testCheckPrimitiveArray() {
-        assertEquals(check(new boolean[] {}), Check.that(new boolean[] {}));
-        assertEquals(check(new byte[] {}), Check.that(new byte[] {}));
-        assertEquals(check(new char[] {}), Check.that(new char[] {}));
-        assertEquals(check(new double[] {}), Check.that(new double[] {}));
-        assertEquals(check(new float[] {}), Check.that(new float[] {}));
-        assertEquals(check(new int[] {}), Check.that(new int[] {}));
-        assertEquals(check(new long[] {}), Check.that(new long[] {}));
-        assertEquals(check(new short[] {}), Check.that(new short[] {}));
+        assertEquals(check(new boolean[]{}), Check.that(new boolean[]{}));
+        assertEquals(check(new byte[]{}), Check.that(new byte[]{}));
+        assertEquals(check(new char[]{}), Check.that(new char[]{}));
+        assertEquals(check(new double[]{}), Check.that(new double[]{}));
+        assertEquals(check(new float[]{}), Check.that(new float[]{}));
+        assertEquals(check(new int[]{}), Check.that(new int[]{}));
+        assertEquals(check(new long[]{}), Check.that(new long[]{}));
+        assertEquals(check(new short[]{}), Check.that(new short[]{}));
     }
     
     @Test
