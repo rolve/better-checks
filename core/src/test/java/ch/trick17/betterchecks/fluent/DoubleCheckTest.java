@@ -12,7 +12,6 @@ import ch.trick17.betterchecks.MessageType;
 public class DoubleCheckTest {
     
     @Test
-    @SuppressWarnings("null")
     public void testIsPositive() {
         Check.that(1.5).isPositive();
         Check.that(2.5).isPositive();
@@ -47,7 +46,6 @@ public class DoubleCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsNegative() {
         Check.that(-1.5).isNegative();
         Check.that(-2.5).isNegative();
@@ -79,7 +77,6 @@ public class DoubleCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIs() {
         Check.that(1.5).is(1.5);
         Check.that(-2.0).is(-2);
@@ -103,7 +100,6 @@ public class DoubleCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsGreaterThan() {
         Check.that(1.5).isGreaterThan(0);
         Check.that(-2.5).isGreaterThan(-3);
@@ -139,7 +135,6 @@ public class DoubleCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsLessThan() {
         Check.that(1.5).isLessThan(2);
         Check.that(-2.5).isLessThan(1);
@@ -175,7 +170,6 @@ public class DoubleCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsBetween() {
         Check.that(1.5).isBetween(0, 2);
         Check.that(-1.9).isBetween(-2, 1);
@@ -211,7 +205,6 @@ public class DoubleCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsNotNaN() {
         Check.that(0.0).isNotNaN();
         Check.that(1.1).isNotNaN();
@@ -252,7 +245,6 @@ public class DoubleCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsNotInfinite() {
         Check.that(0.0).isNotInfinite();
         Check.that(1.1).isNotInfinite();

@@ -11,7 +11,6 @@ import ch.trick17.betterchecks.fluent.ObjectCheck;
 public class SimpleThreadLocalTest {
     
     @Test
-    @SuppressWarnings("null")
     public void testNoArgConstructorThreadLocal() {
         new SimpleThreadLocal<Object>(Object.class).get();
         new SimpleThreadLocal<Object>(String.class).get();

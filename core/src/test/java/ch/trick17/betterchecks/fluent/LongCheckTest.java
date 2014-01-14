@@ -12,7 +12,6 @@ import ch.trick17.betterchecks.MessageType;
 public class LongCheckTest {
     
     @Test
-    @SuppressWarnings("null")
     public void testIsPositive() {
         Check.that(1L).isPositive();
         Check.that(2L).isPositive();
@@ -44,7 +43,6 @@ public class LongCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsNegative() {
         Check.that(-1L).isNegative();
         Check.that(-2L).isNegative();
@@ -76,7 +74,6 @@ public class LongCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIs() {
         Check.that(1L).is(1);
         Check.that(-2L).is(-2);
@@ -100,7 +97,6 @@ public class LongCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsGreaterThan() {
         Check.that(1L).isGreaterThan(0);
         Check.that(-2L).isGreaterThan(-3);
@@ -134,7 +130,6 @@ public class LongCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsLessThan() {
         Check.that(1L).isLessThan(2);
         Check.that(-2L).isLessThan(1);
@@ -168,7 +163,6 @@ public class LongCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsBetween() {
         Check.that(1L).isBetween(0, 2);
         Check.that(-2L).isBetween(-2, 1);

@@ -15,7 +15,6 @@ import ch.trick17.betterchecks.MessageType;
 public class UrlCheckTest {
     
     @Test
-    @SuppressWarnings("null")
     public void testHasProtocol() throws MalformedURLException {
         Check.that(new URL("http://example.com")).hasProtocol("http");
         Check.that(new URL("ftp://example.com")).hasProtocol("ftp");

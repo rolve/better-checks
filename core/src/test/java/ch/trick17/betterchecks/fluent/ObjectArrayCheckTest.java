@@ -13,7 +13,6 @@ import ch.trick17.betterchecks.MessageType;
 public class ObjectArrayCheckTest {
     
     @Test
-    @SuppressWarnings("null")
     public void testIsNotEmpty() {
         Check.that(new String[]{"", ""}).isNotEmpty();
         Check.that(new String[]{""}).isNotEmpty();
@@ -52,7 +51,6 @@ public class ObjectArrayCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testHasLength() {
         Check.that(new String[]{"", "", "", "", ""}).hasLength(5);
         Check.that(new String[]{"", ""}).hasLength(2);
@@ -81,7 +79,6 @@ public class ObjectArrayCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testHasLengthBetween() {
         Check.that(new String[]{"", "", "", "", ""}).hasLengthBetween(5, 5);
         Check.that(new String[]{"", "", "", "", ""}).hasLengthBetween(0, 10);
@@ -128,7 +125,6 @@ public class ObjectArrayCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testHasLengthWhich() {
         Check.that(new Object[]{0, 1, 2, 3, 4}).hasLengthWhich().is(5);
         assertEquals("the length of "
@@ -152,7 +148,6 @@ public class ObjectArrayCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testContainsNoNull() {
         Check.that(new Object[]{"hello", "world"}).containsNoNull();
         Check.that(new Object[]{"hello"}).containsNoNull();

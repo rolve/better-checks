@@ -25,7 +25,6 @@ public class PrimitiveArrayCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsNotEmpty() {
         Check.that(new int[]{0, 0}).isNotEmpty();
         Check.that(new int[]{0}).isNotEmpty();
@@ -64,7 +63,6 @@ public class PrimitiveArrayCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testHasLength() {
         Check.that(new int[]{0, 0, 0, 0, 0}).hasLength(5);
         Check.that(new int[]{0, 0}).hasLength(2);
@@ -83,7 +81,6 @@ public class PrimitiveArrayCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testHasLengthBetween() {
         Check.that(new int[]{0, 0, 0, 0, 0}).hasLengthBetween(5, 5);
         Check.that(new int[]{0, 0, 0, 0, 0}).hasLengthBetween(0, 10);
@@ -120,7 +117,6 @@ public class PrimitiveArrayCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testHasLengthWhich() {
         Check.that(new int[]{0, 1, 2, 3, 4}).hasLengthWhich().is(5);
         assertEquals("the length of "

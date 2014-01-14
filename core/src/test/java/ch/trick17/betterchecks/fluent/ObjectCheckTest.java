@@ -14,7 +14,6 @@ import ch.trick17.betterchecks.MessageType;
 public class ObjectCheckTest {
     
     @Test
-    @SuppressWarnings("null")
     public void testIsNotNull() {
         Check.that(new Object()).isNotNull();
         
@@ -30,7 +29,6 @@ public class ObjectCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsInstanceOf() {
         Check.that(new Object()).isInstanceOf(Object.class);
         Check.that(new Object() {}).isInstanceOf(Object.class);
@@ -62,7 +60,6 @@ public class ObjectCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testHasClass() {
         Check.that(new Object()).hasClass(Object.class);
         Check.that("").hasClass(String.class);
@@ -134,7 +131,6 @@ public class ObjectCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testNot() {
         final Object object = new Object();
         Check.that((Object) null).not().isNotNull();
@@ -191,7 +187,6 @@ public class ObjectCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testNamed() {
         Exception thrown = null;
         try {

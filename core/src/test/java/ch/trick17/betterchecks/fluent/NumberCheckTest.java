@@ -16,7 +16,6 @@ import ch.trick17.betterchecks.MessageType;
 public class NumberCheckTest {
     
     @Test
-    @SuppressWarnings("null")
     public void testIsPositive() {
         Check.that((Number) 1).isPositive();
         Check.that((Number) Integer.MAX_VALUE).isPositive();
@@ -86,7 +85,6 @@ public class NumberCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsNegative() {
         Check.that((Number) (-1)).isNegative();
         Check.that((Number) Integer.MIN_VALUE).isNegative();
@@ -156,7 +154,6 @@ public class NumberCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIs() {
         Check.that((Number) 1).is(1);
         Check.that((Number) 1).is(1.0);
@@ -184,7 +181,6 @@ public class NumberCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsGreaterThan() {
         Check.that((Number) 1).isGreaterThan(0);
         Check.that((Number) 1).isGreaterThan(0.5);
@@ -263,7 +259,6 @@ public class NumberCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsLessThan() {
         Check.that((Number) (-1)).isLessThan(0);
         Check.that((Number) Integer.MIN_VALUE).isLessThan(0);
@@ -324,7 +319,6 @@ public class NumberCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsBetween() {
         Check.that((Number) 0).isBetween(-1, 1);
         Check.that((Number) 0).isBetween(0, 0);

@@ -14,7 +14,6 @@ import ch.trick17.betterchecks.MessageType;
 public class IntCheckTest {
     
     @Test
-    @SuppressWarnings("null")
     public void testIsPositive() {
         Check.that(1).isPositive();
         Check.that(2).isPositive();
@@ -46,7 +45,6 @@ public class IntCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsNegative() {
         Check.that(-1).isNegative();
         Check.that(-2).isNegative();
@@ -88,7 +86,6 @@ public class IntCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIs() {
         Check.that(1).is(1);
         Check.that(-2).is(-2);
@@ -112,7 +109,6 @@ public class IntCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsGreaterThan() {
         Check.that(1).isGreaterThan(0);
         Check.that(-2).isGreaterThan(-3);
@@ -146,7 +142,6 @@ public class IntCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsLessThan() {
         Check.that(1).isLessThan(2);
         Check.that(-2).isLessThan(1);
@@ -180,7 +175,6 @@ public class IntCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsBetween() {
         Check.that(1).isBetween(0, 2);
         Check.that(-2).isBetween(-2, 1);
@@ -214,7 +208,6 @@ public class IntCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsValidIndex() {
         Check.that(1).isValidIndex(2);
         Check.that(1).isValidIndex(new Object[]{1, 2});

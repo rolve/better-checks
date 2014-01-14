@@ -16,7 +16,6 @@ import ch.trick17.betterchecks.MessageType;
 public class StringCheckTest {
     
     @Test
-    @SuppressWarnings("null")
     public void testIsNotEmpty() {
         Check.that("bla").isNotEmpty();
         Check.that(" ").isNotEmpty();
@@ -55,7 +54,6 @@ public class StringCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsNotWhitespace() {
         Check.that("hello").isNotWhitespace();
         Check.that(" bla  ").isNotWhitespace();
@@ -92,7 +90,6 @@ public class StringCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testHasLength() {
         Check.that("hello").hasLength(5);
         Check.that("  ").hasLength(2);
@@ -120,7 +117,6 @@ public class StringCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testHasLengthBetween() {
         Check.that("hello").hasLengthBetween(5, 5);
         Check.that("hello").hasLengthBetween(0, 10);
@@ -167,7 +163,6 @@ public class StringCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testHasLengthWhich() {
         Check.that("hello").hasLengthWhich().is(5);
         assertEquals("the length of "
@@ -190,7 +185,6 @@ public class StringCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testStartsWith() {
         Check.that("hello").startsWith("h");
         Check.that("hello").startsWith("");
@@ -218,7 +212,6 @@ public class StringCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testEndsWith() {
         Check.that("hello").endsWith("o");
         Check.that("hello").endsWith("");
@@ -246,7 +239,6 @@ public class StringCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testContains() {
         Check.that("hello").contains("o");
         Check.that("hello").contains("");
@@ -274,7 +266,6 @@ public class StringCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testContainsAny() {
         Check.that("hello").containsAny("o");
         Check.that("hello").containsAny("o", "x", "y");
@@ -305,7 +296,6 @@ public class StringCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testContainsAll() {
         Check.that("hello").containsAll("o");
         Check.that("hello").containsAll("o", "h", "e");
@@ -337,7 +327,6 @@ public class StringCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testMatches() {
         Check.that("hello").matches("hello");
         Check.that("hello").matches("h.*");
@@ -365,7 +354,6 @@ public class StringCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testMatchesPattern() {
         Check.that("hello").matches(Pattern.compile("hello"));
         Check.that("hello").matches(Pattern.compile("h.*"));
@@ -393,7 +381,6 @@ public class StringCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIs() {
         Check.that("hello").is("hello");
         Check.that("").is("");
@@ -420,7 +407,6 @@ public class StringCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsUrl() {
         Check.that("http://").isUrl();
         Check.that("https://example").isUrl();
@@ -463,7 +449,6 @@ public class StringCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsUrlWhich() {
         Check.that("https://example").isUrlWhich().hasProtocol("https")
                 .hasHostWhich().is("example");
@@ -509,7 +494,6 @@ public class StringCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsInt() {
         Check.that("42").isInt();
         Check.that("0").isInt();
@@ -566,7 +550,6 @@ public class StringCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testIsIntWhich() {
         Check.that("42").isIntWhich().is(42);
         assertEquals(Config.getConfig().getDefaultArgumentName(), Check.that(

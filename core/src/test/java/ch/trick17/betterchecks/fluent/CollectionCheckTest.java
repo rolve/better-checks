@@ -16,7 +16,6 @@ import ch.trick17.betterchecks.MessageType;
 public class CollectionCheckTest {
     
     @Test
-    @SuppressWarnings("null")
     public void testIsNotEmpty() {
         Check.that(Arrays.asList(1)).isNotEmpty();
         Check.that(Arrays.asList(1, 2, 3)).isNotEmpty();
@@ -55,7 +54,6 @@ public class CollectionCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testHasSize() {
         Check.that(Arrays.asList(1, 2, 3, 4, 5)).hasSize(5);
         Check.that(Arrays.asList(1, 1)).hasSize(2);
@@ -74,7 +72,6 @@ public class CollectionCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testHasSizeBetween() {
         Check.that(Arrays.asList(1, 2, 3, 4, 5)).hasSizeBetween(5, 5);
         Check.that(Arrays.asList(1, 2, 3, 4, 5)).hasSizeBetween(0, 10);
@@ -111,7 +108,6 @@ public class CollectionCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testHasSizeWhich() {
         Check.that(Arrays.asList(1, 2, 3, 4, 5)).hasSizeWhich().is(5);
         assertEquals("the size of "
@@ -135,7 +131,6 @@ public class CollectionCheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testContainsNoNull() {
         Check.that(Arrays.asList("hello", "world")).containsNoNull();
         Check.that(Arrays.asList("hello")).containsNoNull();

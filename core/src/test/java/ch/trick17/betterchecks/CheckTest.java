@@ -8,7 +8,6 @@ import org.junit.Test;
 public class CheckTest {
     
     @Test
-    @SuppressWarnings("null")
     public void testThat() {
         Check.arguments(true, "Everything ok");
         
@@ -24,7 +23,6 @@ public class CheckTest {
     }
     
     @Test
-    @SuppressWarnings("null")
     public void testState() {
         Check.state(true, "Everything ok");
         
