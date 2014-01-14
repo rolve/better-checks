@@ -231,7 +231,7 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
      * object property check is {@link UrlCheck#hasHostWhich()}. It can be used
      * to write something like this:
      * <p>
-     * <code>Check.that(url).hasHostWhich().endsWith(".com");</code>
+     * <code>Check.that(url).hasHostWhich().endsWith(".ch");</code>
      * <p>
      * This method can only be used to create property checks for object
      * properties (as opposed to primitive properties). The
