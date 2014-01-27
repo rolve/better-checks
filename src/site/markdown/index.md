@@ -12,6 +12,6 @@ The actual checking methods, such as `matches(...)` or `hasSize(...)`, all throw
 
 ### Project Status
 
-The development of **Better Checks** has just started, meaning the library is not ready to use yet. You can have a look at the progression and the source code at the project&apos;s GitHub page:
+The first version of the library is feature-complete. You can download and play around with the source code at the project&apos;s GitHub page:
 
 <https://github.com/rolve/better-checks>
