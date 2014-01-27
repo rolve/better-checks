@@ -20,10 +20,10 @@ import ch.trick17.betterchecks.fluent.StringCheck;
 import ch.trick17.betterchecks.fluent.UrlCheck;
 
 /**
- * This is the primary entry point to the Better Checks library. Its intention
- * is to provide a lightweight and concise, but powerful way for precodition
- * checking, in particular for method arguments. Argument checks are written in
- * a fluent way like this:
+ * This is the primary entry point to the Better Checks library, which provides
+ * a lightweight and concise, but powerful way for precodition checking, in
+ * particular for method arguments. Argument checks are written in a fluent way
+ * like this:
  * <p>
  * <code>Check.that(<em>argument</em>).<em>check1</em>().<em>check2</em>()<em>...</em>;</code>
  * <p>
@@ -53,22 +53,21 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * {@link StringCheck#matches(String)}.
  * <p>
  * If there is no specific check class that matches the passed argument, a
- * generic {@link ObjectCheck} is returned, supporting only some basic checks
- * like {@link ObjectCheck#isNotNull()} or
- * {@link ObjectCheck#isInstanceOf(Class)} and the state-modifying methods (see
- * below).
+ * generic {@link ObjectCheck} is returned, providing basic checks like
+ * {@link ObjectCheck#isNotNull()} or {@link ObjectCheck#isInstanceOf(Class)}
+ * and the state-modifying methods (see below).
  * <h3>Check Modification</h3>
  * <p>
- * In addition to the checking methods, the check objects provide some modifier
- * methods that affect the subsequent checks. For example all checks by default
+ * In addition to the checking methods, the check objects provide a few modifier
+ * methods that affect subsequent checks. For example, all checks by default
  * also check that the argument is not <code>null</code>, throwing an exception
  * if it is. To allow <code>null</code> as an accepted value, you can prepend
- * the actual checks with <code>isNullOr()</code>, like in the second example
+ * your other checks with <code>isNullOr()</code>, like in the second example
  * above.
  * <p>
- * It is also possible to name the arguments that you are checking. By doing
- * this, the exception messages will be more meaningful and debugging becomes
- * easier. To name an argument, prepend all checks with
+ * It is also possible to name the arguments that you are checking. Doing so
+ * will make the exception messages more meaningful and debugging easier. To
+ * name an argument, prepend all checks with
  * <code>named("<em>argument name</em>")</code>, just like in the third example
  * at the top.
  * <p>
@@ -102,7 +101,7 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * are being thrown by the method using the checks itself.
  * <p>
  * The idea behind this is to make it clear that the arguments (or the state
- * respectively) are illegal with respect to the client method and not in
+ * respectively) are illegal with respect to the client method and not with
  * respect to the methods of the Better Checks library.
  * <p>
  * If stack trace cleaning is undesired, it can be turned off in the config
