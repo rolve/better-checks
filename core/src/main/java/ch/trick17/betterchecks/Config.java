@@ -13,8 +13,8 @@ import ch.trick17.betterchecks.fluent.ObjectCheck;
  * Provides access to the configuration of the Better Checks library.
  * <p>
  * As documented in the {@link Check} class, the library can only be configured
- * via a <code>better-checks-config.properties</code> file on the classpath.
- * Therefore, the runtime access to the configuration is read-only.
+ * via a <code>{@value #CONFIG_BASE_NAME}.properties</code> file on the
+ * classpath. Therefore, the runtime access to the configuration is read-only.
  * <p>
  * The config file is loaded when this class is initialized. To access the
  * config, use the static {@link #getConfig()} method that provides access to
@@ -27,9 +27,7 @@ public final class Config {
     
     /* Constants */
     
-    /**
-     * The base name of the config file for this library
-     */
+    /** The base name of the config file for this library */
     public static final String CONFIG_BASE_NAME = "better-checks-config";
     
     private static final String MSG_FORMAT_SUFFIX = ".format";
@@ -37,8 +35,20 @@ public final class Config {
     private static final String DEFAULT_ARG_NAME_KEY = "defaultArgumentName";
     
     /* Default values */
-    private static final String DEFAULT_DEFAULT_ARG_NAME = "the argument";
-    private static final boolean DEFAULT_CLEAN_STRACK_TRACES_ENABLED = true;
+    
+    /**
+     * The default setting for the default argument name, which is {@value} .
+     * (Yes, that is a meta-default.)
+     * 
+     * @see #getDefaultArgumentName()
+     */
+    public static final String DEFAULT_DEFAULT_ARG_NAME = "the argument";
+    /**
+     * The default setting for for stack trace cleaning, which is {@value} .
+     * 
+     * @see #isCleanStackTracesEnabled()
+     */
+    public static final boolean DEFAULT_CLEAN_STRACK_TRACES_ENABLED = true;
     
     /* Static initialization and global config access */
     private static final Config config = loadConfig();
@@ -136,14 +146,13 @@ public final class Config {
         return loadedFromConfigFile;
     }
     
-    // IMPROVE: Find a way to include default values from constants in Javadoc
-    
     /**
      * Indicates whether stack trace cleaning is enabled. See the documentation
      * of {@link Check} for more information.
      * <p>
-     * The default value is <code>true</code>. To override this, set the
-     * <code>cleanStackTraces</code> property in the config file.
+     * The default value is {@value #DEFAULT_CLEAN_STRACK_TRACES_ENABLED}. To
+     * override this, set the <code>cleanStackTraces</code> property in the
+     * config file.
      * 
      * @return <code>true</code> if stack trace cleaning is enabled.
      */
@@ -157,7 +166,7 @@ public final class Config {
      * {@link ObjectCheck#named(String)} modifier.
      * <p>
      * The default value (meaning the <em>default</em> default name</em>) is
-     * "the argument". To override this, set the
+     * {@value #DEFAULT_DEFAULT_ARG_NAME}. To override this, set the
      * <code>defaultArgumentName</code> property in the config file.
      * 
      * @return The default argument name for exception messages

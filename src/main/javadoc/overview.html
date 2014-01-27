@@ -1,0 +1,22 @@
+<body>
+The Better Checks library provides a lightweight and concise, but powerful way for precodition
+checking, in particular for method arguments. Argument checks are written in a fluent way like
+this:
+<p>
+{@link ch.trick17.betterchecks.Check}<code>.that(<em>argument</em>).<em>check1</em>().<em>check2</em>()<em>...</em>;</code>
+<p>
+Examples:
+<p>
+{@link ch.trick17.betterchecks.Check}{@link ch.trick17.betterchecks.Check#that(java.lang.String) .that(greeting)}{@link ch.trick17.betterchecks.fluent.StringCheck#matches(java.lang.String) .matches("hello .*!")}{@link ch.trick17.betterchecks.fluent.StringCheck#hasLengthBetween(int,int) .hasLenghtBetween(0, 20)}<code>;</code><br>
+{@link ch.trick17.betterchecks.Check}{@link ch.trick17.betterchecks.Check#that(java.util.Collection) .that(list)}{@link ch.trick17.betterchecks.fluent.CollectionCheck#isNullOr .isNullOr()}{@link ch.trick17.betterchecks.fluent.CollectionCheck#hasSize(int) .hasSize(0)}<code>;</code><br>
+{@link ch.trick17.betterchecks.Check}{@link ch.trick17.betterchecks.Check#that(java.lang.Object[]) .that(names)}{@link ch.trick17.betterchecks.fluent.ObjectArrayCheck#named(java.lang.String) .named("list of names")}{@link ch.trick17.betterchecks.fluent.ObjectArrayCheck#isNotEmpty() .isNotEmpty()}<code>;</code>
+<p>
+The check methods, such as {@link ch.trick17.betterchecks.fluent.StringCheck#matches(java.lang.String) matches(...)}
+or {@link ch.trick17.betterchecks.fluent.CollectionCheck#hasSize(int) hasSize(...)}, throw an
+exception if the check fails. The exact type of exception depends on the kind of check that is
+called but in most cases it is {@link java.lang.IllegalArgumentException}.
+<p>
+More documentation can be found in the {@link ch.trick17.betterchecks.Check} class, the primary
+entry point to the library.
+@author Michael Faes
+</body>

@@ -20,10 +20,8 @@ import ch.trick17.betterchecks.fluent.StringCheck;
 import ch.trick17.betterchecks.fluent.UrlCheck;
 
 /**
- * This is the primary entry point to the Better Checks library, which provides
- * a lightweight and concise, but powerful way for precodition checking, in
- * particular for method arguments. Argument checks are written in a fluent way
- * like this:
+ * The primary entry point to the Better Checks library. Argument checks are
+ * written like this:
  * <p>
  * <code>Check.that(<em>argument</em>).<em>check1</em>().<em>check2</em>()<em>...</em>;</code>
  * <p>
@@ -34,8 +32,8 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * <code>Check.that(list).isNullOr().hasSize(0);</code><br>
  * <code>Check.that(names).named("list of names").isNotEmpty();</code>
  * <p>
- * The check methods (such as <code>matches(...)</code> or
- * <code>hasSize(...)</code>) throw an exception if the check fails. The exact
+ * The check methods, such as <code>matches(...)</code> or
+ * <code>hasSize(...)</code>, throw an exception if the check fails. The exact
  * type of exception depends on the kind of check that is called but in most
  * cases it is {@link IllegalArgumentException}.
  * <h3>Check Objects</h3>
@@ -106,10 +104,12 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * <p>
  * If stack trace cleaning is undesired, it can be turned off in the config
  * file. See below for more information.
- * <h3>Compact Syntax</h3>
+ * <h3>Compact and Simple Checks</h3>
  * <p>
- * Instead of the <code>Check.that(...)</code> syntax, you can use a even more
- * compact syntax, provided by the {@link CompactChecks} class.
+ * Instead of the <code>Check.that(...)</code> syntax, you can use an even more
+ * compact syntax, provided by the {@link CompactChecks} class. Also, in
+ * addition to the fluent checks, there are also a few simple check methods,
+ * like {@link #arguments(boolean, String)} and {@link #state(boolean, String)}.
  * <h3>Configuration and Use in Libraries</h3>
  * <p>
  * It is intentionally not possible to configure the type of exception the

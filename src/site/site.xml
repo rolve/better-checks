@@ -5,7 +5,7 @@
         <menu name="${project.name}">
             <item href="index.html" name="Overview"/>
             <item href="project-summary.html" name="Project Summary" />
-            <item href="apidocs/index.html" name="Javadoc API Documentation" />
+            <item href="apidocs/overview-summary.html" name="Javadoc API Documentation" />
             <item href="issue-tracking.html" name="Issues" />
             <item href="license.html" name="License" />
         </menu>

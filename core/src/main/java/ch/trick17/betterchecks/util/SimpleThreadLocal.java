@@ -5,7 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 
 /**
  * A {@link ThreadLocal} that uses the no-arg constructor of the class passed to
- * it at creation time to create an {@link #initialValue()}.
+ * it at creation time to create an {@linkplain #initialValue() initial value}.
  * 
  * @author Michael Faes
  * @param <T>
