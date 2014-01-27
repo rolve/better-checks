@@ -26,6 +26,7 @@ import ch.trick17.betterchecks.fluent.ObjectCheck;
 public final class Config {
     
     /* Constants */
+    
     /**
      * The base name of the config file for this library
      */
@@ -49,7 +50,7 @@ public final class Config {
      * 
      * @return The loaded config
      */
-    protected static Config loadConfig() {
+    static Config loadConfig() {
         final Config theConfig = new Config();
         
         ResourceBundle bundle;
@@ -175,7 +176,7 @@ public final class Config {
      * missing "not".
      * <p>
      * To combine two such message formats, the library internally makes use of
-     * a "meta" format that encompasses both versions. This meta format is very
+     * a "meta" format that encompasses both versions. This meta format is
      * simple: message parts that should only be used in the positive
      * (non-inverted) version are enclosed in <code>+(</code> and
      * <code>)+</code>. Analogically, parts for the negative (inverted) version

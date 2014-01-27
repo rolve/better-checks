@@ -4,12 +4,12 @@ package ch.trick17.betterchecks;
  * The MessageType enum defines the types of exception messages that are used in
  * the exceptions thrown by the various checks of the Better Checks library.
  * <p>
- * So far, each message type only has a message format associated with it. Use
- * {@link #getDefaultFormat()} to get the default format. It can be overridden
- * in the config file. See the documentation of {@link Config} or {@link Check}
- * for more information about configuration of the Better Checks library and
- * {@link Config#getMessageFormat(MessageType, boolean)} to learn more about
- * message formats.
+ * So far, the only thing associated with a message type is the message format.
+ * Use {@link #getDefaultFormat()} to get the default format. It can be
+ * overridden in the config file. See the documentation of {@link Config} or
+ * {@link Check} for more information about configuration of the Better Checks
+ * library and {@link Config#getMessageFormat(MessageType, boolean)} to learn
+ * more about message formats.
  * 
  * @author Michael Faes
  */

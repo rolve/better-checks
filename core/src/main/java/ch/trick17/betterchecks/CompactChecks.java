@@ -15,8 +15,8 @@ import ch.trick17.betterchecks.fluent.StringCheck;
 import ch.trick17.betterchecks.fluent.UrlCheck;
 
 /**
- * This class provides the same functionality as the {@link Check} class, but
- * with even more compact syntax.
+ * This class provides the same functionality as the {@link Check} class,
+ * allowing an even more compact syntax.
  * <p>
  * To use it, statically import the {@link CompactChecks#check(Object)} method
  * and write your checks like this:
