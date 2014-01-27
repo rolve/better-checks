@@ -19,7 +19,7 @@ import ch.trick17.betterchecks.MessageType;
  * 
  * @author Michael Faes
  */
-public class IntCheck extends PrimitiveBaseCheck<IntCheck> {
+public final class IntCheck extends PrimitiveBaseCheck<IntCheck> {
     
     private int arg;
     
@@ -36,7 +36,7 @@ public class IntCheck extends PrimitiveBaseCheck<IntCheck> {
      * @param argument
      *            The new argument to be checked
      */
-    protected final void reset(final int argument) {
+    protected void reset(final int argument) {
         reset();
         this.arg = argument;
     }

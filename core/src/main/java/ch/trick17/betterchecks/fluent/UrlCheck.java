@@ -15,7 +15,7 @@ import ch.trick17.betterchecks.MessageType;
  * 
  * @author Michael Faes
  */
-public class UrlCheck extends ObjectBaseCheck<URL, UrlCheck> {
+public final class UrlCheck extends ObjectBaseCheck<URL, UrlCheck> {
     
     /**
      * Default constructor, for internal use only.

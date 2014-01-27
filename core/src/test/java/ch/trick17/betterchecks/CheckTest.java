@@ -8,7 +8,7 @@ import org.junit.Test;
 public class CheckTest {
     
     @Test
-    public void testThat() {
+    public void testArguments() {
         Check.arguments(true, "Everything ok");
         
         Exception thrown = null;

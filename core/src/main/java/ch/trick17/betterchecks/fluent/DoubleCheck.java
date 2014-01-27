@@ -16,7 +16,7 @@ import ch.trick17.betterchecks.MessageType;
  * 
  * @author Michael Faes
  */
-public class DoubleCheck extends PrimitiveBaseCheck<DoubleCheck> {
+public final class DoubleCheck extends PrimitiveBaseCheck<DoubleCheck> {
     
     private double arg;
     
@@ -33,7 +33,7 @@ public class DoubleCheck extends PrimitiveBaseCheck<DoubleCheck> {
      * @param argument
      *            The new argument to be checked
      */
-    protected final void reset(final double argument) {
+    protected void reset(final double argument) {
         reset();
         this.arg = argument;
     }

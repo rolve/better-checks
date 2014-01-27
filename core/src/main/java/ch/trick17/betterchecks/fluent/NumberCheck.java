@@ -15,13 +15,12 @@ import ch.trick17.betterchecks.MessageType;
  * <code>byte, short, int, long, float, double</code>). These types have their
  * own check classes ({@link IntCheck} for example) with additional checks.
  * <p>
- * This class provides methods like {@link #isPositive()},
- * {@link #isGreaterThan(Number)} or {@link #isBetween(Number, Number)} in
- * addition to the {@link ObjectBaseCheck} checks.
+ * This class provides check methods like {@link #isPositive()},
+ * {@link #isGreaterThan(Number)} or {@link #isBetween(Number, Number)}.
  * <p>
- * <strong>Attention:</strong> As there is (in general) no way to compare two
- * arbitrary Number instances, there is no guarantee that the implementations of
- * this class' check methods handle instances of custom Number subclasses
+ * <strong>Attention:</strong> As there is no way to compare two arbitrary
+ * Number instances in general, there is no guarantee that the implementations
+ * of this class' check methods handle instances of custom Number subclasses
  * correctly. However, you can expect them to handle all Number classes provided
  * by the JDK (including {@link BigInteger} and {@link BigDecimal}) correctly.
  * For custom subclasses, read the following implementation notes.
@@ -32,7 +31,7 @@ import ch.trick17.betterchecks.MessageType;
  * special cases for most of the JDK classes and a default implementation
  * covering the rest. This implementation uses the number's
  * {@link Number#toString() toString} method to construct a BigDecimal. So to
- * make sure your custom subclasses are handled correctly, make sure that their
+ * make sure your custom subclasses are handled correctly, ensure that their
  * String representation can be parsed by the
  * {@link BigDecimal#BigDecimal(String) BigDecimal(String)} constructor.
  * <p>

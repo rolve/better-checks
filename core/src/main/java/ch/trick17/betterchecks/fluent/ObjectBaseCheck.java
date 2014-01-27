@@ -148,6 +148,8 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
                 argName, clazz, argClass);
     }
     
+    // IMPROVE: hasClassWhich
+    
     /* Implementation methods */
     
     /**

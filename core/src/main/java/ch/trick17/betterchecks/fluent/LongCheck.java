@@ -13,7 +13,7 @@ import ch.trick17.betterchecks.MessageType;
  * 
  * @author Michael Faes
  */
-public class LongCheck extends PrimitiveBaseCheck<LongCheck> {
+public final class LongCheck extends PrimitiveBaseCheck<LongCheck> {
     
     private long arg;
     
@@ -30,7 +30,7 @@ public class LongCheck extends PrimitiveBaseCheck<LongCheck> {
      * @param argument
      *            The new argument to be checked
      */
-    protected final void reset(final long argument) {
+    protected void reset(final long argument) {
         reset();
         this.arg = argument;
     }

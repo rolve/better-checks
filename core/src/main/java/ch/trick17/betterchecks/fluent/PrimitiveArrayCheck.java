@@ -12,7 +12,7 @@ import ch.trick17.betterchecks.MessageType;
  * The check class for all types of primitive arrays. There is no separate class
  * for each primitive type of array. In addition to the array argument itself, a
  * check of this class stores the length of the array, which is the only thing
- * needed for all the supported checks.
+ * needed for the checks this class provides.
  * 
  * @author Michael Faes
  */

@@ -20,7 +20,7 @@ import ch.trick17.betterchecks.util.SimpleThreadLocal;
  * 
  * @author Michael Faes
  */
-public class FluentChecks {
+public final class FluentChecks {
     
     // IMPROVE: Replace map with individual fields for better performance
     
@@ -39,12 +39,14 @@ public class FluentChecks {
         objectChecks = Collections.unmodifiableMap(map);
     }
     
+    private FluentChecks() {}
+    
     /**
      * Returns the check object of the given class, with the given argument
      * "imprinted" and the rest of the state reset. Only checks that are
      * subclasses of {@link ObjectCheck} and not {@link PrimitiveArrayCheck} are
      * supported. Because arguments with a primitive type or a primitive array
-     * type can not be handled with generics, they have their own methods.
+     * type cannot be handled with generics, they have their own methods.
      * 
      * @param checkClass
      *            The class of the desired check object
