@@ -1,6 +1,6 @@
 package ch.trick17.betterchecks.util;
 
-import static junit.framework.Assert.*;
+import static org.junit.Assert.*;
 
 import java.lang.reflect.InvocationTargetException;
 
