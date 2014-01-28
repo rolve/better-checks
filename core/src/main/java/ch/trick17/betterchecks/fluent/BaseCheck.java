@@ -4,7 +4,6 @@ import static ch.trick17.betterchecks.Exceptions.defaultArgName;
 import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.CompactChecks;
 import ch.trick17.betterchecks.Exceptions;
-import ch.trick17.betterchecks.InvalidCheckException;
 
 /**
  * The base class for <em>all</em> checks. It manages the state common to all
@@ -89,29 +88,6 @@ public abstract class BaseCheck<C extends BaseCheck<C>> {
     }
     
     /* Implementation methods */
-    
-    /**
-     * A convenience method for subclasses to use to assert the validity of the
-     * parameters of a check (<em>not</em> the argument to be checked). For
-     * example, the {@link IntCheck#isBetween(int, int) isBetween(int, int)}
-     * check uses this method to assert that no invalid range is used, which
-     * would make passing the check infeasible.
-     * <p>
-     * <strong>Note:</strong> Currently, the validity of checks is not checked,
-     * meaning this method is not used yet. This may change in later releases of
-     * the Better Checks library.
-     * 
-     * @param valid
-     *            The validity condition
-     * @param message
-     *            The exception message
-     * @throws InvalidCheckException
-     *             if the condition is <code>false</code>
-     */
-    protected static void checkValid(final boolean valid, final String message) {
-        if(!valid)
-            throw new InvalidCheckException(message);
-    }
     
     /**
      * Simply casts this check to the <code>C</code> type parameter (which

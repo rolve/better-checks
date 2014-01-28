@@ -15,7 +15,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.rule.PowerMockRule;
 
 @PrepareForTest(Config.class)
-public class CustomConfigTest {
+public class CustomConfig {
     
     private static final String TEST_CONFIG = "cleanStackTraces = false\n"
             + "defaultArgumentName = your argument\n"
@@ -33,8 +33,6 @@ public class CustomConfigTest {
             throw new RuntimeException(e);
         }
     }
-    
-    @Rule public PowerMockRule powerMockRule = new PowerMockRule();
     
     public static void useTestConfig() {
         try {
@@ -61,4 +59,6 @@ public class CustomConfigTest {
             }
         }
     }
+    
+    @Rule public PowerMockRule powerMockRule = new PowerMockRule();
 }

@@ -22,6 +22,15 @@ public class PrimitiveArrayCheckTest {
         Check.that(new int[]{1}).isNotEmpty();
         Check.that(new long[]{1}).isNotEmpty();
         Check.that(new short[]{1}).isNotEmpty();
+        
+        Check.that((boolean[]) null).not().isNotNull();
+        Check.that((byte[]) null).not().isNotNull();
+        Check.that((char[]) null).not().isNotNull();
+        Check.that((double[]) null).not().isNotNull();
+        Check.that((float[]) null).not().isNotNull();
+        Check.that((int[]) null).not().isNotNull();
+        Check.that((long[]) null).not().isNotNull();
+        Check.that((short[]) null).not().isNotNull();
     }
     
     @Test

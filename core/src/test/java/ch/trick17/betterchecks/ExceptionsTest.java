@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-public class ExceptionsTest extends CustomConfigTest {
+public class ExceptionsTest extends CustomConfig {
     
     @Test
     public void testIllegalArgumentException() {
@@ -33,6 +33,16 @@ public class ExceptionsTest extends CustomConfigTest {
         assertEquals(ExceptionsTest.class.getSimpleName() + ".java", topElement
                 .getFileName());
         assertEquals("testIllegalArgumentException", topElement.getMethodName());
+        
+        /* Test with non-ch.trick17.betterchecks-class as well */
+        exception = ch.trick17.helper.ExceptionsTestHelper.help();
+        topElement = exception.getStackTrace()[0];
+        assertEquals(ch.trick17.helper.ExceptionsTestHelper.class.getName(),
+                topElement.getClassName());
+        assertEquals(ch.trick17.helper.ExceptionsTestHelper.class
+                .getSimpleName()
+                + ".java", topElement.getFileName());
+        assertEquals("help", topElement.getMethodName());
         
         /* Test disabling stack trace cleaning */
         useTestConfig();

@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class ConfigTest extends CustomConfigTest {
+public class ConfigTest extends CustomConfig {
     
     @Test
     public void testIsLoadedFromConfigFile() {
@@ -20,9 +20,7 @@ public class ConfigTest extends CustomConfigTest {
     @Test
     public void testGetCleanStackTraces() {
         assertEquals(true, Config.getConfig().isCleanStackTracesEnabled());
-        
         useTestConfig();
-        
         assertEquals(false, Config.getConfig().isCleanStackTracesEnabled());
     }
     
@@ -30,9 +28,7 @@ public class ConfigTest extends CustomConfigTest {
     public void testGetDefaultArgumentName() {
         assertEquals("the argument", Config.getConfig()
                 .getDefaultArgumentName());
-        
         useTestConfig();
-        
         assertEquals("your argument", Config.getConfig()
                 .getDefaultArgumentName());
     }

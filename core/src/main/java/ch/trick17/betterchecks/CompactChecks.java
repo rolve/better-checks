@@ -34,7 +34,9 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * 
  * @author Michael Faes
  */
-public abstract class CompactChecks {
+public final class CompactChecks {
+    
+    private CompactChecks() {}
     
     /**
      * See {@link Check#that(Object)}

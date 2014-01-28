@@ -24,7 +24,9 @@ import java.util.Arrays;
  * 
  * @author Michael Faes
  */
-public abstract class Exceptions {
+public final class Exceptions {
+    
+    private Exceptions() {}
     
     private static final String BASE_PACKAGE = Check.class.getPackage()
             .getName();
@@ -41,24 +43,6 @@ public abstract class Exceptions {
             final String message) {
         final IllegalArgumentException exception = new IllegalArgumentException(
                 message);
-        cleanUpStackTrace(exception);
-        return exception;
-    }
-    
-    /**
-     * Returns an {@link IllegalArgumentException} with the given exception
-     * message, the given cause and a cleaned-up stack trace (if enabled).
-     * 
-     * @param message
-     *            The exception message
-     * @param cause
-     *            The cause of the exception
-     * @return such an exception
-     */
-    public static IllegalArgumentException illegalArgumentException(
-            final String message, final Throwable cause) {
-        final IllegalArgumentException exception = new IllegalArgumentException(
-                message, cause);
         cleanUpStackTrace(exception);
         return exception;
     }
@@ -171,15 +155,10 @@ public abstract class Exceptions {
     private static void cleanUpStackTrace(final Exception exception) {
         if(Config.getConfig().isCleanStackTracesEnabled()) {
             StackTraceElement[] trace = exception.getStackTrace();
-            int minIndex = 0;
-            for(int i = 0; i < trace.length; i++) {
-                if(isBetterChecksElement(trace[i]))
-                    minIndex = i + 1;
-                else
-                    break;
-            }
-            if(minIndex > 0)
-                trace = Arrays.copyOfRange(trace, minIndex, trace.length);
+            int index = 0;
+            while(isBetterChecksElement(trace[index]))
+                index++;
+            trace = Arrays.copyOfRange(trace, index, trace.length);
             exception.setStackTrace(trace);
         }
     }

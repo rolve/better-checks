@@ -137,7 +137,9 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * @author Michael Faes
  * @see CompactChecks
  */
-public abstract class Check {
+public final class Check {
+    
+    private Check() {}
     
     /* Simple checks */
     

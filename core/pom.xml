@@ -9,7 +9,7 @@
     <artifactId>better-checks-core</artifactId>
     <name>Better Checks Core</name>
     <properties>
-        <powermock.version>1.4.12</powermock.version>
+        <powermock.version>1.5.2</powermock.version>
     </properties>
     <dependencies>
         <dependency>
@@ -34,6 +34,12 @@
             <groupId>org.powermock</groupId>
             <artifactId>powermock-classloading-xstream</artifactId>
             <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.trajano.commons</groupId>
+            <artifactId>commons-testing</artifactId>
+            <version>1.0.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
