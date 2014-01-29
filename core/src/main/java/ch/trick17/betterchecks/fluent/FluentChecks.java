@@ -123,7 +123,6 @@ public final class FluentChecks {
     private static <C extends BaseCheck<C>> C getCheck(final Class<C> checkClass) {
         @SuppressWarnings("unchecked") final ThreadLocal<C> threadLocal = (ThreadLocal<C>) objectChecks
                 .get(checkClass);
-        assert threadLocal != null;
         return threadLocal.get();
     }
 }

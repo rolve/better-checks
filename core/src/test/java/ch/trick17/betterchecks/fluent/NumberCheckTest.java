@@ -21,14 +21,19 @@ public class NumberCheckTest {
         Check.that((Number) Integer.MAX_VALUE).isPositive();
         Check.that(new Integer(1)).isPositive();
         
-        Check.that((Number) 1).isPositive();
+        Check.that((Number) 1L).isPositive();
         Check.that((Number) (short) 1).isPositive();
         Check.that((Number) (byte) 1).isPositive();
         
-        Check.that(1.0).isPositive();
-        Check.that(Double.MIN_VALUE).isPositive();
-        Check.that(Double.MAX_VALUE).isPositive();
-        Check.that(Double.POSITIVE_INFINITY).isPositive();
+        Check.that((Number) 1.0).isPositive();
+        Check.that((Number) Double.MIN_VALUE).isPositive();
+        Check.that((Number) Double.MAX_VALUE).isPositive();
+        Check.that((Number) Double.POSITIVE_INFINITY).isPositive();
+        
+        Check.that((Number) 1.0f).isPositive();
+        Check.that((Number) Float.MIN_VALUE).isPositive();
+        Check.that((Number) Float.MAX_VALUE).isPositive();
+        Check.that((Number) Float.POSITIVE_INFINITY).isPositive();
         
         Check.that(new AtomicInteger(1)).isPositive();
         Check.that(
@@ -90,14 +95,19 @@ public class NumberCheckTest {
         Check.that((Number) Integer.MIN_VALUE).isNegative();
         Check.that(new Integer(-1)).isNegative();
         
-        Check.that((Number) (-1)).isNegative();
+        Check.that((Number) (-1L)).isNegative();
         Check.that((Number) (short) -1).isNegative();
         Check.that((Number) (byte) -1).isNegative();
         
-        Check.that((-1.0)).isNegative();
-        Check.that(-Double.MIN_VALUE).isNegative();
-        Check.that(-Double.MAX_VALUE).isNegative();
-        Check.that(Double.NEGATIVE_INFINITY).isNegative();
+        Check.that((Number) (-1.0)).isNegative();
+        Check.that((Number) (-Double.MIN_VALUE)).isNegative();
+        Check.that((Number) (-Double.MAX_VALUE)).isNegative();
+        Check.that((Number) Double.NEGATIVE_INFINITY).isNegative();
+        
+        Check.that((Number) (-1.0f)).isNegative();
+        Check.that((Number) (-Float.MIN_VALUE)).isNegative();
+        Check.that((Number) (-Float.MAX_VALUE)).isNegative();
+        Check.that((Number) Float.NEGATIVE_INFINITY).isNegative();
         
         Check.that(new AtomicInteger(-1)).isNegative();
         Check.that(
@@ -158,6 +168,10 @@ public class NumberCheckTest {
         Check.that((Number) 1).is(1);
         Check.that((Number) 1).is(1.0);
         Check.that((Number) 0).is(new BigDecimal("0"));
+        /* This might seem odd, but Double.compare() and Float.compare() work
+         * like this: */
+        Check.that((Number) Double.NaN).is(Double.NaN);
+        Check.that((Number) Float.NaN).is(Float.NaN);
         
         Exception thrown = null;
         try {
@@ -183,6 +197,7 @@ public class NumberCheckTest {
     @Test
     public void testIsGreaterThan() {
         Check.that((Number) 1).isGreaterThan(0);
+        Check.that((Number) 1L).isGreaterThan(0);
         Check.that((Number) 1).isGreaterThan(0.5);
         Check.that((Number) Integer.MAX_VALUE).isGreaterThan(
                 Integer.MAX_VALUE - 1);
@@ -194,10 +209,15 @@ public class NumberCheckTest {
         Check.that((Number) (byte) 2).isGreaterThan(1);
         Check.that((Number) 2).isGreaterThan(1);
         
-        Check.that(2.0).isGreaterThan(1.99999);
-        Check.that(Double.MIN_VALUE).isGreaterThan(0);
-        Check.that(Double.MAX_VALUE).isGreaterThan(0);
-        Check.that(Double.POSITIVE_INFINITY).isGreaterThan(0);
+        Check.that((Number) 2.0).isGreaterThan(1.99999);
+        Check.that((Number) Double.MIN_VALUE).isGreaterThan(0);
+        Check.that((Number) Double.MAX_VALUE).isGreaterThan(0);
+        Check.that((Number) Double.POSITIVE_INFINITY).isGreaterThan(0);
+        
+        Check.that((Number) 2.0f).isGreaterThan(1.99999);
+        Check.that((Number) Float.MIN_VALUE).isGreaterThan(0);
+        Check.that((Number) Float.MAX_VALUE).isGreaterThan(0);
+        Check.that((Number) Float.POSITIVE_INFINITY).isGreaterThan(0);
         
         Check.that(new AtomicInteger(1)).isGreaterThan(0);
         
@@ -261,6 +281,7 @@ public class NumberCheckTest {
     @Test
     public void testIsLessThan() {
         Check.that((Number) (-1)).isLessThan(0);
+        Check.that((Number) (-1L)).isLessThan(0);
         Check.that((Number) Integer.MIN_VALUE).isLessThan(0);
         Check.that(new Integer(-1)).isLessThan(0);
         
@@ -269,10 +290,15 @@ public class NumberCheckTest {
         Check.that((Number) (byte) -1).isLessThan(0);
         Check.that((Number) (-1)).isLessThan(0);
         
-        Check.that((-1.0)).isLessThan(0);
-        Check.that((-Double.MIN_VALUE)).isLessThan(0);
-        Check.that((-Double.MAX_VALUE)).isLessThan(0);
-        Check.that(Double.NEGATIVE_INFINITY).isLessThan(0);
+        Check.that((Number) (-1.0)).isLessThan(0);
+        Check.that((Number) (-Double.MIN_VALUE)).isLessThan(0);
+        Check.that((Number) (-Double.MAX_VALUE)).isLessThan(0);
+        Check.that((Number) Double.NEGATIVE_INFINITY).isLessThan(0);
+        
+        Check.that((Number) (-1.0f)).isLessThan(0);
+        Check.that((Number) (-Float.MIN_VALUE)).isLessThan(0);
+        Check.that((Number) (-Float.MAX_VALUE)).isLessThan(0);
+        Check.that((Number) Float.NEGATIVE_INFINITY).isLessThan(0);
         
         Check.that(new AtomicInteger(-1)).isLessThan(0);
         Check.that(
@@ -322,7 +348,7 @@ public class NumberCheckTest {
     public void testIsBetween() {
         Check.that((Number) 0).isBetween(-1, 1);
         Check.that((Number) 0).isBetween(0, 0);
-        Check.that(0.1f).isBetween(Double.NEGATIVE_INFINITY,
+        Check.that((Number) 0.1f).isBetween(Double.NEGATIVE_INFINITY,
                 Double.POSITIVE_INFINITY);
         
         Exception thrown = null;

@@ -217,7 +217,18 @@ public final class NumberCheck extends ObjectBaseCheck<Number, NumberCheck> {
     /* Implementation methods */
     
     private static int compare(final Number x, final Number y) {
-        return toBigDecimal(x).compareTo(toBigDecimal(y));
+        if(isSpecial(x) || isSpecial(y))
+            return Double.compare(x.doubleValue(), y.doubleValue());
+        else
+            return toBigDecimal(x).compareTo(toBigDecimal(y));
+    }
+    
+    private static boolean isSpecial(final Number x) {
+        final boolean specialDouble = x instanceof Double
+                && (Double.isNaN((Double) x) || Double.isInfinite((Double) x));
+        final boolean specialFloat = x instanceof Float
+                && (Float.isNaN((Float) x) || Float.isInfinite((Float) x));
+        return specialDouble || specialFloat;
     }
     
     private static BigDecimal toBigDecimal(final Number number) {

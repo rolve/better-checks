@@ -69,6 +69,16 @@ public class CollectionCheckTest {
         assertEquals(Exceptions.formatMsg(MessageType.ARG_SIZE, false,
                 Exceptions.defaultArgName(), 2, Arrays.asList(1)), thrown
                 .getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((Collection<?>) null).hasSize(2);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
     }
     
     @Test
@@ -105,6 +115,17 @@ public class CollectionCheckTest {
         assertEquals(Exceptions.formatMsg(MessageType.ARG_SIZE_BETWEEN, false,
                 Exceptions.defaultArgName(), 4, Integer.MAX_VALUE, Arrays
                         .asList(1, 2, 3)), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((Collection<?>) null).hasSizeBetween(Integer.MIN_VALUE,
+                    Integer.MAX_VALUE);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
     }
     
     @Test

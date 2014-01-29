@@ -10,6 +10,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import ch.trick17.betterchecks.fluent.FluentChecks;
+
 @RunWith(Parameterized.class)
 public class UtilityClassesTest {
     
@@ -17,7 +19,8 @@ public class UtilityClassesTest {
     public static List<?> parameters() {
         return Arrays.asList(new Object[]{Check.class},
                 new Object[]{CompactChecks.class},
-                new Object[]{Exceptions.class});
+                new Object[]{Exceptions.class},
+                new Object[]{FluentChecks.class});
     }
     
     public UtilityClassesTest(final Class<?> utilClass) {
