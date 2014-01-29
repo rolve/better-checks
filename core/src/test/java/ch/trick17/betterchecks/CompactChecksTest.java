@@ -3,8 +3,11 @@ package ch.trick17.betterchecks;
 import static ch.trick17.betterchecks.CompactChecks.check;
 import static org.junit.Assert.assertEquals;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Test;
 
@@ -47,7 +50,30 @@ public class CompactChecksTest {
     }
     
     @Test
-    public void testCheckNumber() {
+    public void testCheckDouble() {
         assertEquals(check(1.0), Check.that(1.0));
     }
+    
+    @Test
+    public void testCheckInt() {
+        assertEquals(check(1), Check.that(1));
+    }
+    
+    @Test
+    public void testCheckLong() {
+        assertEquals(check(1L), Check.that(1L));
+    }
+    
+    @Test
+    public void testCheckNumber() {
+        final AtomicInteger atomicInt = new AtomicInteger();
+        assertEquals(check(atomicInt), Check.that(atomicInt));
+    }
+    
+    @Test
+    public void testCheckURL() throws MalformedURLException {
+        final URL url = new URL("http://localhost");
+        assertEquals(check(url), Check.that(1L));
+    }
+    
 }

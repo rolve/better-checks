@@ -11,28 +11,53 @@ import ch.trick17.betterchecks.fluent.ObjectCheck;
 public class SimpleThreadLocalTest {
     
     @Test
-    public void testNoArgConstructorThreadLocal() {
+    public void testSimpleThreadLocal() {
         new SimpleThreadLocal<Object>(Object.class).get();
-        new SimpleThreadLocal<Object>(String.class).get();
-        new SimpleThreadLocal<Object>(ObjectCheck.class).get();
-        
+        new SimpleThreadLocal<String>(String.class).get();
+        new SimpleThreadLocal<ObjectCheck>(ObjectCheck.class).get();
+    }
+    
+    @Test
+    public void testSimpleThreadLocalNoConstructor() {
         RuntimeException thrown = null;
         try {
-            final Object threadLocal = new SimpleThreadLocal<Integer>(
+            @SuppressWarnings("unused") final Object tl = new SimpleThreadLocal<Integer>(
                     Integer.class);
-            threadLocal.toString();
         } catch(final RuntimeException e) {
             thrown = e;
         }
         assertNotNull(thrown);
         assertEquals(
-                "Class java.lang.Integer does not have a no-arg constructor",
+                "Class java.lang.Integer does not have a public no-arg constructor",
                 thrown.getMessage());
         assertTrue(thrown.getCause() instanceof NoSuchMethodException);
-        
-        thrown = null;
-        final ThreadLocal<ThrowingHelper> threadLocal = new SimpleThreadLocal<ThrowingHelper>(
-                ThrowingHelper.class);
+    }
+    
+    @Test
+    public void testSimpleThreadLocalPrivateConstructor() {
+        RuntimeException thrown = null;
+        try {
+            @SuppressWarnings("unused") final Object tl = new SimpleThreadLocal<PrivateConstructor>(
+                    PrivateConstructor.class);
+        } catch(final RuntimeException e) {
+            thrown = e;
+        }
+        assertNotNull(thrown);
+        assertEquals("Class " + PrivateConstructor.class.getName()
+                + " does not have a public no-arg constructor", thrown
+                .getMessage());
+        assertTrue(thrown.getCause() instanceof NoSuchMethodException);
+    }
+    
+    private static class PrivateConstructor {
+        private PrivateConstructor() {}
+    }
+    
+    @Test
+    public void testSimpleThreadLocalException() {
+        RuntimeException thrown = null;
+        final ThreadLocal<?> threadLocal = new SimpleThreadLocal<ThrowsException>(
+                ThrowsException.class);
         try {
             threadLocal.get();
         } catch(final RuntimeException e) {
@@ -40,16 +65,37 @@ public class SimpleThreadLocalTest {
         }
         assertNotNull(thrown);
         assertEquals(
-                "Could not create initial value for ThreadLocal with class: ch.trick17.betterchecks.util.SimpleThreadLocalTest$ThrowingHelper",
-                thrown.getMessage());
+                "Could not create initial value for ThreadLocal with class: "
+                        + ThrowsException.class.getName(), thrown.getMessage());
         assertTrue(thrown.getCause() instanceof InvocationTargetException);
     }
     
-    private static class ThrowingHelper {
-        
+    private static class ThrowsException {
         @SuppressWarnings("unused")
-        public ThrowingHelper() {
+        public ThrowsException() {
             throw new RuntimeException();
         }
+    }
+    
+    @Test
+    public void testSimpleThreadLocalAbstractClass() {
+        RuntimeException thrown = null;
+        final ThreadLocal<?> threadLocal = new SimpleThreadLocal<Abstract>(
+                Abstract.class);
+        try {
+            threadLocal.get();
+        } catch(final RuntimeException e) {
+            thrown = e;
+        }
+        assertNotNull(thrown);
+        assertEquals(
+                "Could not create initial value for ThreadLocal with class: "
+                        + Abstract.class.getName(), thrown.getMessage());
+        assertTrue(thrown.getCause() instanceof InstantiationException);
+    }
+    
+    private static abstract class Abstract {
+        @SuppressWarnings("unused")
+        public Abstract() {}
     }
 }

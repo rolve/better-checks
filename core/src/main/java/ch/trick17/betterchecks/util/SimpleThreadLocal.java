@@ -33,7 +33,7 @@ public final class SimpleThreadLocal<T> extends ThreadLocal<T> {
             constructor = clazz.getConstructor();
         } catch(final NoSuchMethodException e) {
             final String msg = "Class " + clazz.getName()
-                    + " does not have a no-arg constructor";
+                    + " does not have a public no-arg constructor";
             throw new IllegalArgumentException(msg, e);
         }
     }
@@ -63,9 +63,7 @@ public final class SimpleThreadLocal<T> extends ThreadLocal<T> {
         try {
             return constructor.newInstance();
         } catch(final IllegalAccessException e) {
-            final String msg = "Could not create initial value for ThreadLocal with class: "
-                    + constructor.getDeclaringClass().getName();
-            throw new RuntimeException(msg, e);
+            throw new AssertionError(e); // Not possible
         } catch(final InvocationTargetException e) {
             final String msg = "Could not create initial value for ThreadLocal with class: "
                     + constructor.getDeclaringClass().getName();
