@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ResourceBundle;
 
@@ -24,13 +25,33 @@ public class CustomConfig {
     protected static final File CONFIG_FILE;
     
     static {
-        final String resourceName = "/" + Config.CONFIG_BASE_NAME
-                + ".properties";
         try {
-            CONFIG_FILE = new File(ConfigTest.class.getResource(resourceName)
-                    .toURI());
+            final URI resourceTxtUri = ConfigTest.class.getResource(
+                    "/resource.txt").toURI();
+            CONFIG_FILE = new File(resourceTxtUri
+                    .resolve(Config.CONFIG_BASE_NAME + ".properties"));
         } catch(final URISyntaxException e) {
             throw new RuntimeException(e);
+        }
+    }
+    
+    public static void useEmptyConfig() {
+        try {
+            /* Write empty config file */
+            new FileWriter(CONFIG_FILE).close();
+            ResourceBundle.clearCache();
+            
+            /* Load it */
+            final Config testConfig = Config.loadConfig();
+            
+            /* Stub it into Config class */
+            spy(Config.class);
+            when(Config.getConfig()).thenReturn(testConfig);
+        } catch(final IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            /* Delete config file after loading for future runs */
+            CONFIG_FILE.delete();
         }
     }
     
@@ -51,12 +72,8 @@ public class CustomConfig {
         } catch(final IOException e) {
             throw new RuntimeException(e);
         } finally {
-            /* Clear config file after loading for future runs */
-            try {
-                new FileWriter(CONFIG_FILE).close();
-            } catch(final IOException e) {
-                throw new RuntimeException(e);
-            }
+            /* Delete config file after loading for future runs */
+            CONFIG_FILE.delete();
         }
     }
     

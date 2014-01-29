@@ -73,7 +73,7 @@ public class CompactChecksTest {
     @Test
     public void testCheckURL() throws MalformedURLException {
         final URL url = new URL("http://localhost");
-        assertEquals(check(url), Check.that(1L));
+        assertEquals(check(url), Check.that(url));
     }
     
 }
