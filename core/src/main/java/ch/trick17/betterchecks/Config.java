@@ -13,13 +13,29 @@ import ch.trick17.betterchecks.fluent.ObjectCheck;
  * Provides access to the configuration of the Better Checks library.
  * <p>
  * As documented in the {@link Check} class, the library can only be configured
- * via a <code>{@value #CONFIG_BASE_NAME}.properties</code> file on the
- * classpath. Therefore, the runtime access to the configuration is read-only.
+ * via a config file on the classpath. The file must be named
+ * <code>{@value #CONFIG_BASE_NAME}.properties</code> (without the quotes, of
+ * course!) and must be located in the classpath root. The config file is loaded
+ * via {@link ResourceBundle}s, so localization is supported. However, it is
+ * questionable to display exception messages directly to the user, so this
+ * might not be commonly used.
  * <p>
- * The config file is loaded when this class is initialized. To access the
- * config, use the static {@link #getConfig()} method that provides access to
- * the config singleton. To assert that the your config file has been loaded,
- * you may use the {@link #isLoadedFromConfigFile()} method.
+ * Here is what a config file might look like:
+ * 
+ * <pre>
+ * cleanStackTraces = false
+ * defaultArgumentName = le argument
+ * ARG_POSITIVE.format = %s should -(not )-be positive
+ * ARG_NEGATIVE.format = %s should -(not )-be negative
+ * </pre>
+ * 
+ * The {@link #getConfig()} method provides read access to the config singleton.
+ * To assert that the your config file has been loaded, you may use the
+ * {@link #isLoadedFromConfigFile()} method.
+ * <p>
+ * For more information, refer to the documentation of the
+ * {@link #isCleanStackTracesEnabled()}, {@link #getDefaultArgumentName()} and
+ * {@link #getMessageFormat(MessageType, boolean)} methods.
  * 
  * @author Michael Faes
  */
@@ -27,14 +43,26 @@ public final class Config {
     
     /* Constants */
     
-    /** The base name of the config file for this library */
+    /** The base name of the config file for this library: <code>{@value}</code> */
     public static final String CONFIG_BASE_NAME = "better-checks-config";
     
-    private static final String MSG_FORMAT_SUFFIX = ".format";
-    private static final String CLEAN_STACK_TRACES_ENABLED_KEY = "cleanStackTraces";
-    private static final String DEFAULT_ARG_NAME_KEY = "defaultArgumentName";
+    /**
+     * The key for disabling stack trace cleaning in the config file:
+     * <code>{@value}</code> (without quotes).
+     * 
+     * @see #isCleanStackTracesEnabled()
+     */
+    public static final String CLEAN_STACK_TRACES_ENABLED_KEY = "cleanStackTraces";
     
-    /* Default values */
+    /**
+     * The key for setting the default argument name in the config file:
+     * <code>{@value}</code> (without quotes).
+     * 
+     * @see #getDefaultArgumentName()
+     */
+    public static final String DEFAULT_ARG_NAME_KEY = "defaultArgumentName";
+    
+    private static final String MSG_FORMAT_SUFFIX = ".format";
     
     /**
      * The default setting for the default argument name, which is {@value} .
@@ -50,6 +78,7 @@ public final class Config {
      */
     public static final boolean DEFAULT_CLEAN_STRACK_TRACES_ENABLED = true;
     
+    /* The config singleton */
     private static final Config config = loadConfig();
     
     /**
@@ -150,7 +179,8 @@ public final class Config {
      * of {@link Check} for more information.
      * <p>
      * The default value is {@value #DEFAULT_CLEAN_STRACK_TRACES_ENABLED}. To
-     * override this, set the <code>cleanStackTraces</code> property in the
+     * override this, set the
+     * <code>{@value #CLEAN_STACK_TRACES_ENABLED_KEY}</code> property in the
      * config file.
      * 
      * @return <code>true</code> if stack trace cleaning is enabled.
@@ -160,13 +190,13 @@ public final class Config {
     }
     
     /**
-     * Returns the default argument name used in the exception messages. This
-     * name is used when arguments are not explicitly named using the
+     * Returns the default argument name used in exception messages. This name
+     * is used when arguments are not explicitly named using the
      * {@link ObjectCheck#named(String)} modifier.
      * <p>
      * The default value (meaning the <em>default</em> default name</em>) is
      * {@value #DEFAULT_DEFAULT_ARG_NAME}. To override this, set the
-     * <code>defaultArgumentName</code> property in the config file.
+     * <code>{@value #DEFAULT_ARG_NAME_KEY}</code> property in the config file.
      * 
      * @return The default argument name for exception messages
      */

@@ -379,8 +379,6 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
         return urlCheck;
     }
     
-    // IMPROVE: isNumber, isNumberWhich
-    
     /**
      * Checks that the string argument is is a valid <code>int</code>, throwing
      * an exception otherwise. Note that numbers outside of the <code>int</code>
@@ -452,6 +450,8 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
         else
             return Check.that((int) number).named(argName);
     }
+    
+    // IMPROVE: isDouble, isDoubleWhich
     
     /* Implementation methods */
     

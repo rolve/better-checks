@@ -5,7 +5,6 @@ import static ch.trick17.betterchecks.Exceptions.illegalStateException;
 
 import java.net.URL;
 import java.util.Collection;
-import java.util.ResourceBundle;
 
 import ch.trick17.betterchecks.fluent.CollectionCheck;
 import ch.trick17.betterchecks.fluent.DoubleCheck;
@@ -118,21 +117,14 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * that the application reconfigures the behavior of the library methods,
  * possibly breaking their specification.
  * <p>
- * In general, the configuration possibilities of this library are rather
- * limited. You can customize the exception messages and disable stack trace
- * cleaning. The only way to configure those settings is via a properties file
- * on the classpath. This is also a design decision that makes it possible to
- * safely use Better Checks in libraries and, more generally, in all code that
- * potentially runs before the application's initialization, such as static
- * initializers.
+ * The configuration possibilities of this library are rather limited. You can
+ * customize the exception messages and disable stack trace cleaning. The only
+ * way to configure those settings is via a properties file on the classpath.
+ * This is also a design decision that makes it possible to safely use Better
+ * Checks in libraries and, more generally, in all code that potentially runs
+ * before the application's initialization, such as static initializers.
  * <p>
- * The config file must be named <code>better-checks-config.properties</code>
- * and must be located in the classpath root. The config file is loaded via
- * {@link ResourceBundle}s, so localization is supported. However, it is
- * questionable to display exception messages directly to the user, so this
- * might not be commonly used.
- * <p>
- * TODO: Config file options
+ * See the documentation of the {@link Config} class for more information.
  * 
  * @author Michael Faes
  * @see CompactChecks
