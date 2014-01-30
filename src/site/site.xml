@@ -4,10 +4,13 @@
     <body>
         <menu name="${project.name}">
             <item href="index.html" name="Overview"/>
-            <item href="project-summary.html" name="Project Summary" />
-            <item href="apidocs/overview-summary.html" name="Javadoc API Documentation" />
-            <item href="issue-tracking.html" name="Issues" />
+            <item href="project-reports.html" name="Documentation &amp; Reports">
+                <item href="apidocs/index.html" name="JavaDocs" />
+                <item href="surefire-report.html" name="Surefire Report" />
+                <item href="cobertura/index.html" name="Cobertura Test Coverage" />
+            </item>
             <item href="license.html" name="License" />
+            <item href="issue-tracking.html" name="Issues" />
         </menu>
     </body>
     <skin>
