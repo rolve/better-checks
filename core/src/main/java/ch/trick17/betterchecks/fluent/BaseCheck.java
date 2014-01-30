@@ -4,6 +4,7 @@ import static ch.trick17.betterchecks.Exceptions.defaultArgName;
 import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.CompactChecks;
 import ch.trick17.betterchecks.Exceptions;
+import ch.trick17.betterchecks.InvalidCheckException;
 
 /**
  * The base class for <em>all</em> checks. It manages the state common to all
@@ -85,6 +86,17 @@ public abstract class BaseCheck<C extends BaseCheck<C>> {
     public final C not() {
         inverted = !inverted;
         return me();
+    }
+    
+    /**
+     * Asserts that the check is not inverted, throwing an
+     * {@link InvalidCheckException} otherwise. This should be done before each
+     * conversion, e.g., with {@link StringCheck#isIntWhich()}.
+     */
+    protected final void checkConversion() {
+        if(inverted)
+            throw new InvalidCheckException(
+                    "Check inversion (not()) must not be followed by a check conversion (isSomethingWhich()). It is too unintuitive...");
     }
     
     /* Implementation methods */

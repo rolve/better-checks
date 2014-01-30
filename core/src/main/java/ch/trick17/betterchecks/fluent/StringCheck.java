@@ -2,12 +2,12 @@ package ch.trick17.betterchecks.fluent;
 
 import static ch.trick17.betterchecks.MessageType.*;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import ch.trick17.betterchecks.Check;
+import ch.trick17.betterchecks.InvalidCheckException;
 import ch.trick17.betterchecks.MessageType;
 
 /**
@@ -331,19 +331,16 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
      *             if the check argument is not a valid URL
      */
     public StringCheck isUrl() {
-        checkNull();
         URL url = null;
         Exception cause = null;
         try {
             url = new URL(arg);
-        } catch(final MalformedURLException e) {
+        } catch(final Exception e) {
             cause = e;
         }
         return checkWithCause(arg == null || url != null, ARG_URL, cause,
                 argName, arg);
     }
-    
-    // TODO: What about check inversion before *con*version?
     
     /**
      * First checks that the string argument is a valid URL and then "converts"
@@ -362,14 +359,17 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
      * 
      * @return An URL check for asserting properties of the URL represented by
      *         the string argument
+     * @throws InvalidCheckException
+     *             If this check has just been inverted using {@link #not()}.
+     *             This is prohibited as it would allow unintuitive checks.
      */
     public UrlCheck isUrlWhich() {
-        checkNull();
+        checkConversion();
         URL url = null;
         Exception cause = null;
         try {
             url = new URL(arg);
-        } catch(final MalformedURLException e) {
+        } catch(final Exception e) {
             cause = e;
         }
         checkWithCause(arg == null || url != null, ARG_URL, cause, argName, arg);
@@ -403,7 +403,7 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
         Exception cause = null;
         try {
             number = new Integer(arg);
-        } catch(final NumberFormatException e) {
+        } catch(final Exception e) {
             cause = e;
         }
         return checkWithCause(arg == null || number != null, ARG_INT, cause,
@@ -431,14 +431,18 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
      * 
      * @return An <code>int</code> check for asserting properties of the
      *         <code>int</code> represented by the string argument
+     * @throws InvalidCheckException
+     *             If this check has just been inverted using {@link #not()}.
+     *             This is prohibited as it would allow unintuitive checks.
      */
     public IntCheck isIntWhich() {
+        checkConversion();
         checkNull();
         Integer number = null;
         Exception cause = null;
         try {
             number = new Integer(arg);
-        } catch(final NumberFormatException e) {
+        } catch(final Exception e) {
             cause = e;
         }
         checkWithCause(arg == null || number != null, ARG_INT, cause, argName,

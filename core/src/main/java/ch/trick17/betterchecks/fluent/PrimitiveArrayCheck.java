@@ -151,10 +151,8 @@ public final class PrimitiveArrayCheck extends
             return Arrays.toString((int[]) arg);
         if(arg instanceof long[])
             return Arrays.toString((long[]) arg);
-        if(arg instanceof short[])
+        else
+            // arg instanceof short[]
             return Arrays.toString((short[]) arg);
-        
-        throw new RuntimeException("argument is not an primitive array: " + arg
-                + " of class " + arg.getClass().getName());
     }
 }

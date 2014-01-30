@@ -87,6 +87,16 @@ public class PrimitiveArrayCheckTest {
         assertEquals(Exceptions.formatMsg(MessageType.ARG_LENGTH, false,
                 Exceptions.defaultArgName(), 2, "[1, 2, 3]"), thrown
                 .getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((int[]) null).hasLength(2);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
     }
     
     @Test
@@ -123,6 +133,17 @@ public class PrimitiveArrayCheckTest {
         assertEquals(Exceptions.formatMsg(MessageType.ARG_LENGTH_BETWEEN,
                 false, Exceptions.defaultArgName(), 4, Integer.MAX_VALUE,
                 "[-1, -2, -3]"), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((int[]) null).hasLengthBetween(4, Integer.MAX_VALUE);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName(), Integer.MAX_VALUE), thrown
+                .getMessage());
     }
     
     @Test

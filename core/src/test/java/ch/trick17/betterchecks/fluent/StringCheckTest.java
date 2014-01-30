@@ -11,6 +11,7 @@ import org.junit.Test;
 import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.Config;
 import ch.trick17.betterchecks.Exceptions;
+import ch.trick17.betterchecks.InvalidCheckException;
 import ch.trick17.betterchecks.MessageType;
 
 public class StringCheckTest {
@@ -414,6 +415,8 @@ public class StringCheckTest {
         Check.that("file://file").isUrl();
         Check.that("ftp://me:pw@example.com:8080/some%20path/?and-a-query=1")
                 .isUrl();
+        Check.that("hello world!").not().isUrl();
+        Check.that("https://example").isNullOr().isUrl();
         
         Exception thrown = null;
         try {
@@ -440,6 +443,18 @@ public class StringCheckTest {
         
         thrown = null;
         try {
+            Check.that("http://example.com").not().isUrl();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_URL, true, Exceptions
+                .defaultArgName(), "http://example.com"), thrown.getMessage());
+        
+        Check.that((String) null).isNullOr().isUrl();
+        
+        thrown = null;
+        try {
             Check.that((String) null).isUrl();
         } catch(final Exception e) {
             thrown = e;
@@ -457,6 +472,8 @@ public class StringCheckTest {
                 "https://example").isUrlWhich().argName);
         assertEquals("url", Check.that("https://example").named("url")
                 .isUrlWhich().argName);
+        Check.that("https://example").isNullOr().isUrlWhich().hasProtocol(
+                "https");
         
         Exception thrown = null;
         try {
@@ -480,7 +497,6 @@ public class StringCheckTest {
                 "invalid"), thrown.getMessage());
         assertTrue(thrown.getCause() instanceof MalformedURLException);
         
-        Check.that((String) null).isNullOr().isUrlWhich();
         Check.that((String) null).isNullOr().isUrlWhich().hasProtocol("http");
         
         thrown = null;
@@ -492,6 +508,14 @@ public class StringCheckTest {
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
                 Exceptions.defaultArgName()), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that("hello").not().isUrlWhich();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof InvalidCheckException);
     }
     
     @Test
@@ -502,6 +526,8 @@ public class StringCheckTest {
         Check.that("-1").isInt();
         Check.that(String.valueOf(Integer.MAX_VALUE)).isInt();
         Check.that(String.valueOf(Integer.MIN_VALUE)).isInt();
+        Check.that("").not().isInt();
+        Check.that("42").isNullOr().isInt();
         
         Exception thrown = null;
         try {
@@ -537,6 +563,16 @@ public class StringCheckTest {
                 .getMessage());
         assertTrue(thrown.getCause() instanceof NumberFormatException);
         
+        thrown = null;
+        try {
+            Check.that("0").not().isInt();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_INT, true, Exceptions
+                .defaultArgName(), "0"), thrown.getMessage());
+        
         Check.that((String) null).isNullOr().isInt();
         
         thrown = null;
@@ -557,6 +593,7 @@ public class StringCheckTest {
                 "42").isIntWhich().argName);
         assertEquals("number",
                 Check.that("42").named("number").isIntWhich().argName);
+        Check.that("42").isNullOr().isIntWhich().is(42);
         
         Exception thrown = null;
         try {
@@ -580,7 +617,6 @@ public class StringCheckTest {
                 "invalid"), thrown.getMessage());
         assertTrue(thrown.getCause() instanceof NumberFormatException);
         
-        Check.that((String) null).isNullOr().isIntWhich();
         Check.that((String) null).isNullOr().isIntWhich().is(0);
         
         thrown = null;
@@ -592,5 +628,13 @@ public class StringCheckTest {
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
                 Exceptions.defaultArgName()), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that("hello").not().isIntWhich();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof InvalidCheckException);
     }
 }
