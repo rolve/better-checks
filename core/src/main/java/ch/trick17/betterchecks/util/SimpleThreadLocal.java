@@ -4,8 +4,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * A {@link ThreadLocal} that uses the no-arg constructor of the class passed to
- * it at creation time to create an {@linkplain #initialValue() initial value}.
+ * A {@link ThreadLocal} that uses the public no-arg constructor of the given
+ * class to create an {@linkplain #initialValue() initial value}.
  * 
  * @author Michael Faes
  * @param <T>

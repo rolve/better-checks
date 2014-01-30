@@ -171,6 +171,7 @@ public class StringCheckTest {
         assertEquals("the length of string", Check.that("hello")
                 .named("string").hasLengthWhich().argName);
         
+        Check.that("hello").isNullOr().hasLengthWhich().is(5);
         Check.that((String) null).isNullOr().hasLengthWhich().is(100);
         
         Exception thrown = null;

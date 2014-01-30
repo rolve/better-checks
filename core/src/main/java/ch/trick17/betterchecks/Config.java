@@ -50,7 +50,7 @@ public final class Config {
      */
     public static final boolean DEFAULT_CLEAN_STRACK_TRACES_ENABLED = true;
     
-    private static Config config;
+    private static final Config config = loadConfig();
     
     /**
      * Loads the config from the {@link #CONFIG_BASE_NAME} file. If no such file
@@ -119,11 +119,6 @@ public final class Config {
      * @see Config
      */
     public static Config getConfig() {
-        if(config == null)
-            synchronized(Config.class) {
-                if(config == null)
-                    config = loadConfig();
-            }
         return config;
     }
     

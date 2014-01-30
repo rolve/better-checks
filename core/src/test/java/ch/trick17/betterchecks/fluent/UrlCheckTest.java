@@ -42,7 +42,7 @@ public class UrlCheckTest {
     }
     
     @Test
-    public void testHasProtocolWhich() throws MalformedURLException {
+    public void testHasEverythingWhich() throws MalformedURLException {
         final URL url = new URL(
                 "http://rolve@example.com:8080/the-path/?the-query#the-anchor");
         Check.that(url).hasProtocolWhich().is("http");
@@ -54,5 +54,20 @@ public class UrlCheckTest {
         Check.that(url).hasPathWhich().is("/the-path/");
         Check.that(url).hasUserInfoWhich().is("rolve");
         Check.that(url).hasRefWhich().is("the-anchor");
+    }
+    
+    @Test
+    public void testNullHasEverythingWhich() {
+        final URL url = null;
+        Check.that(url).isNullOr().hasProtocolWhich().is("http");
+        Check.that(url).isNullOr().hasHostWhich().is("example.com");
+        Check.that(url).isNullOr().hasPortWhich().is(8080);
+        Check.that(url).isNullOr().hasFileWhich().is("/the-path/?the-query");
+        Check.that(url).isNullOr().hasQueryWhich().is("the-query");
+        Check.that(url).isNullOr().hasAuthorityWhich().is(
+                "rolve@example.com:8080");
+        Check.that(url).isNullOr().hasPathWhich().is("/the-path/");
+        Check.that(url).isNullOr().hasUserInfoWhich().is("rolve");
+        Check.that(url).isNullOr().hasRefWhich().is("the-anchor");
     }
 }

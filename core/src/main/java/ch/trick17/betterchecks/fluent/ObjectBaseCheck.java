@@ -225,7 +225,6 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
         if(!nullAllowed && arg == null)
             throw illegalArgumentException(ARG_NULL, nullAllowed,
                     new Object[]{argName});
-        assert arg == null ? nullAllowed : true;
     }
     
     /**

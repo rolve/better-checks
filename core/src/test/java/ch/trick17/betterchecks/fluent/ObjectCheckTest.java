@@ -87,15 +87,15 @@ public class ObjectCheckTest {
                 thrown.getMessage());
         
         thrown = null;
-        final Object anon = new Object() {};
+        final Object o = new Object() {};
         try {
-            Check.that(anon).hasClass(Object.class);
+            Check.that(o).hasClass(Object.class);
         } catch(final Exception e) {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MessageType.ARG_CLASS, false,
-                Exceptions.defaultArgName(), Object.class, anon.getClass()),
+                Exceptions.defaultArgName(), Object.class, o.getClass()),
                 thrown.getMessage());
         
         thrown = null;

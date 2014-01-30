@@ -346,9 +346,9 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
     // TODO: What about check inversion before *con*version?
     
     /**
-     * First checks that the string argument is a valid URL and "converts" this
-     * check into an {@link UrlCheck} and returns it. This can be used to create
-     * checks involving properties of the URL. For example:
+     * First checks that the string argument is a valid URL and then "converts"
+     * this check into an {@link UrlCheck} and returns it. This can be used to
+     * create checks involving properties of the URL. For example:
      * <p>
      * <code>Check.that(string).isUrlWhich().hasProtocol("http");</code>
      * <p>
@@ -378,6 +378,8 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
             urlCheck.isNullOr();
         return urlCheck;
     }
+    
+    // IMPROVE: isNumber, isNumberWhich
     
     /**
      * Checks that the string argument is is a valid <code>int</code>, throwing
@@ -410,9 +412,9 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
     
     /**
      * First checks that the string argument is a valid <code>int</code> and
-     * "converts" this check into an {@link IntCheck} and returns it. This can
-     * be used to create checks involving properties of the <code>int</code>.
-     * For example:
+     * then "converts" this check into an {@link IntCheck} and returns it. This
+     * can be used to create checks involving properties of the <code>int</code>
+     * . For example:
      * <p>
      * <code>Check.that(string).isIntWhich().isPositive();</code>
      * <p>
