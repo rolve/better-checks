@@ -1,6 +1,7 @@
 package ch.trick17.betterchecks.fluent;
 
-import java.util.Arrays;
+import static java.util.Arrays.asList;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -23,18 +24,17 @@ import ch.trick17.betterchecks.util.SimpleThreadLocal;
 public final class FluentChecks {
     
     // IMPROVE: Replace map with individual fields for better performance
-    
-    @SuppressWarnings("unchecked") private static final List<Class<? extends BaseCheck<?>>> CHECK_CLASSES = Arrays
-            .asList(ObjectCheck.class, StringCheck.class,
-                    ObjectArrayCheck.class, PrimitiveArrayCheck.class,
-                    CollectionCheck.class, NumberCheck.class, UrlCheck.class,
-                    IntCheck.class, LongCheck.class, DoubleCheck.class);
-    
     private static final Map<Class<?>, SimpleThreadLocal<? extends BaseCheck<?>>> objectChecks;
     
     static {
+        @SuppressWarnings("unchecked") final List<Class<? extends BaseCheck<?>>> checkClasses = asList(
+                ObjectCheck.class, StringCheck.class, ObjectArrayCheck.class,
+                PrimitiveArrayCheck.class, CollectionCheck.class,
+                NumberCheck.class, UrlCheck.class, IntCheck.class,
+                LongCheck.class, DoubleCheck.class);
+        
         final Map<Class<?>, SimpleThreadLocal<? extends BaseCheck<?>>> map = new HashMap<Class<?>, SimpleThreadLocal<? extends BaseCheck<?>>>();
-        for(final Class<? extends BaseCheck<?>> checkClass : CHECK_CLASSES)
+        for(final Class<? extends BaseCheck<?>> checkClass : checkClasses)
             map.put(checkClass, new SimpleThreadLocal<BaseCheck<?>>(checkClass));
         objectChecks = Collections.unmodifiableMap(map);
     }
