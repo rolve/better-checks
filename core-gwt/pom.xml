@@ -1,0 +1,113 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ch.trick17.better-checks</groupId>
+        <artifactId>better-checks</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>better-checks-core-gwt</artifactId>
+    <name>Better Checks Core GWT</name>
+
+    <properties>
+        <gwtVersion>2.6.0</gwtVersion>
+        <maven.main.skip>true</maven.main.skip>
+        <maven.test.skip>true</maven.test.skip>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
+        <source.skip>true</source.skip>
+        <cobertura.skip>true</cobertura.skip>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>ch.trick17.better-checks</groupId>
+            <artifactId>better-checks-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>${gwtVersion}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>${project.build.directory}/gwt-sources</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.8</version>
+                <executions>
+                    <execution>
+                        <id>unpack-core-sources</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeArtifactIds>better-checks-core</includeArtifactIds>
+                            <classifier>sources</classifier>
+                            <overWrite>true</overWrite>
+                            <excludes>META-INF/MANIFEST.MF</excludes>
+                            <outputDirectory>${project.build.directory}/core-sources</outputDirectory>
+                            <silent>false</silent>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target name="copy-gwt-sources">
+                                <copy toDir="${project.build.directory}/gwt-sources" overwrite="true">
+                                    <fileset
+                                        dir="${project.build.directory}/core-sources">
+                                        <contains text="@GwtCompatible" />
+                                    </fileset>
+                                </copy>
+                                <copy toDir="${project.build.directory}/gwt-sources" overwrite="true">
+                                    <fileset dir="${project.build.sourceDirectory}">
+                                        <contains text="@GwtCompatible" />
+                                    </fileset>
+                                </copy>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>gwt-maven-plugin</artifactId>
+                <version>${gwtVersion}</version>
+                <executions>
+                    <execution>
+                        <id>gwt-compile</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <module>ch.trick17.betterchecks.ForceCompilation</module>
+                            <strict>true</strict>
+                            <validateOnly>true</validateOnly>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
