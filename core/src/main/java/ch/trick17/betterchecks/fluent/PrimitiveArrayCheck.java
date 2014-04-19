@@ -7,6 +7,7 @@ import java.util.Arrays;
 import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.CompactChecks;
 import ch.trick17.betterchecks.MessageType;
+import ch.trick17.betterchecks.util.GwtCompatible;
 
 /**
  * The check class for all types of primitive arrays. There is no separate class
@@ -16,6 +17,7 @@ import ch.trick17.betterchecks.MessageType;
  * 
  * @author Michael Faes
  */
+@GwtCompatible
 public final class PrimitiveArrayCheck extends
         ObjectBaseCheck<Object, PrimitiveArrayCheck> {
     

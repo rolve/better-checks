@@ -5,6 +5,7 @@ import static ch.trick17.betterchecks.MessageType.*;
 import java.util.Collection;
 
 import ch.trick17.betterchecks.MessageType;
+import ch.trick17.betterchecks.util.GwtCompatible;
 
 /**
  * The check class for all {@link Collection} types. It provides a functionality
@@ -16,6 +17,7 @@ import ch.trick17.betterchecks.MessageType;
  * 
  * @author Michael Faes
  */
+@GwtCompatible
 public final class CollectionCheck extends
         ObjectBaseCheck<Collection<?>, CollectionCheck> {
     

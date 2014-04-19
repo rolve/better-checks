@@ -2,6 +2,7 @@ package ch.trick17.betterchecks.fluent;
 
 import static ch.trick17.betterchecks.Exceptions.illegalArgumentException;
 import ch.trick17.betterchecks.MessageType;
+import ch.trick17.betterchecks.util.GwtCompatible;
 
 /**
  * The base class for all primitive value checks. It manages the state and
@@ -16,6 +17,7 @@ import ch.trick17.betterchecks.MessageType;
  *            fluent interface of all checks.
  * @see ObjectBaseCheck
  */
+@GwtCompatible
 public class PrimitiveBaseCheck<C extends PrimitiveBaseCheck<C>> extends
         BaseCheck<C> {
     

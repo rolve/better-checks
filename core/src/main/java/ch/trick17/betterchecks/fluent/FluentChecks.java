@@ -9,6 +9,7 @@ import java.util.Map;
 
 import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.CompactChecks;
+import ch.trick17.betterchecks.util.GwtCompatible;
 import ch.trick17.betterchecks.util.SimpleThreadLocal;
 
 /**
@@ -21,6 +22,7 @@ import ch.trick17.betterchecks.util.SimpleThreadLocal;
  * 
  * @author Michael Faes
  */
+@GwtCompatible
 public final class FluentChecks {
     
     // IMPROVE: Replace map with individual fields for better performance

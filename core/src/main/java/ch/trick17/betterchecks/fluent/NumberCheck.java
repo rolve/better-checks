@@ -7,6 +7,7 @@ import java.math.BigInteger;
 
 import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.MessageType;
+import ch.trick17.betterchecks.util.GwtCompatible;
 
 /**
  * The check class for {@link Number} arguments. It should be (and <em>is</em> -
@@ -41,6 +42,7 @@ import ch.trick17.betterchecks.MessageType;
  * 
  * @author Michael Faes
  */
+@GwtCompatible
 public final class NumberCheck extends ObjectBaseCheck<Number, NumberCheck> {
     
     /**

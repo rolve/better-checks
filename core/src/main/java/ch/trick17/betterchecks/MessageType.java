@@ -1,5 +1,7 @@
 package ch.trick17.betterchecks;
 
+import ch.trick17.betterchecks.util.GwtCompatible;
+
 /**
  * The MessageType enum defines the types of exception messages that are used in
  * the exceptions thrown by the various checks of the Better Checks library.
@@ -13,6 +15,7 @@ package ch.trick17.betterchecks;
  * 
  * @author Michael Faes
  */
+@GwtCompatible
 public enum MessageType {
     
     ARG_NULL("%s must +(not )+be null-( (value: %s))-"),

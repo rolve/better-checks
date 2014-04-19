@@ -3,6 +3,7 @@ package ch.trick17.betterchecks.fluent;
 import java.util.Collection;
 
 import ch.trick17.betterchecks.Check;
+import ch.trick17.betterchecks.util.GwtCompatible;
 
 /**
  * The most general check class, which supports all non-primitive arguments.
@@ -17,6 +18,7 @@ import ch.trick17.betterchecks.Check;
  * 
  * @author Michael Faes
  */
+@GwtCompatible
 public final class ObjectCheck extends ObjectBaseCheck<Object, ObjectCheck> {
     
     /**

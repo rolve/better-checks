@@ -5,6 +5,8 @@ import static ch.trick17.betterchecks.MessageType.*;
 import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.CompactChecks;
 import ch.trick17.betterchecks.MessageType;
+import ch.trick17.betterchecks.util.GwtCompatible;
+import ch.trick17.betterchecks.util.GwtIncompatible;
 
 /**
  * The base class for all object checks (as opposed to primitive value checks).
@@ -22,6 +24,7 @@ import ch.trick17.betterchecks.MessageType;
  *            fluent interface of all checks.
  * @see PrimitiveBaseCheck
  */
+@GwtCompatible
 public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
         extends BaseCheck<C> {
     
@@ -124,6 +127,7 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
      * @throws IllegalArgumentException
      *             if the argument is not an instance of the given type
      */
+    @GwtIncompatible("Class.isAssignableFrom")
     public final C isInstanceOf(final Class<?> type) {
         return check(arg == null || type.isAssignableFrom(arg.getClass()),
                 ARG_INSTANCE, argName, type, argClass);

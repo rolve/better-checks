@@ -5,6 +5,7 @@ import static ch.trick17.betterchecks.MessageType.*;
 import java.util.Arrays;
 
 import ch.trick17.betterchecks.MessageType;
+import ch.trick17.betterchecks.util.GwtCompatible;
 
 /**
  * The check class for object arrays. It supports all non-primitive arrays, not
@@ -16,6 +17,7 @@ import ch.trick17.betterchecks.MessageType;
  * 
  * @author Michael Faes
  */
+@GwtCompatible
 public final class ObjectArrayCheck extends
         ObjectBaseCheck<Object[], ObjectArrayCheck> {
     

@@ -7,6 +7,7 @@ import java.util.Collection;
 import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.CompactChecks;
 import ch.trick17.betterchecks.MessageType;
+import ch.trick17.betterchecks.util.GwtCompatible;
 
 /**
  * The check class for <code>int</code> arguments. It can also be (and
@@ -19,6 +20,7 @@ import ch.trick17.betterchecks.MessageType;
  * 
  * @author Michael Faes
  */
+@GwtCompatible
 public final class IntCheck extends PrimitiveBaseCheck<IntCheck> {
     
     private int arg;

@@ -1,5 +1,7 @@
 package ch.trick17.betterchecks;
 
+import ch.trick17.betterchecks.util.GwtCompatible;
+
 /**
  * Indicates that the contract of a check object has been violated. This is the
  * fault of the "server" (the method that does the check) and not of the client
@@ -19,6 +21,7 @@ package ch.trick17.betterchecks;
  * 
  * @author Michael Faes
  */
+@GwtCompatible
 public class InvalidCheckException extends RuntimeException {
     
     private static final long serialVersionUID = 1072035677940869197L;

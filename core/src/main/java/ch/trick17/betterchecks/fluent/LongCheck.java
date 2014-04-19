@@ -4,6 +4,7 @@ import static ch.trick17.betterchecks.MessageType.*;
 import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.CompactChecks;
 import ch.trick17.betterchecks.MessageType;
+import ch.trick17.betterchecks.util.GwtCompatible;
 
 /**
  * The check class for <code>long</code> arguments.
@@ -13,6 +14,7 @@ import ch.trick17.betterchecks.MessageType;
  * 
  * @author Michael Faes
  */
+@GwtCompatible
 public final class LongCheck extends PrimitiveBaseCheck<LongCheck> {
     
     private long arg;

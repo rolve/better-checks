@@ -2,6 +2,8 @@ package ch.trick17.betterchecks;
 
 import java.util.Arrays;
 
+import ch.trick17.betterchecks.util.GwtCompatible;
+
 /**
  * Helper class that provides several methods for creating exceptions and
  * formatting exception messages. It is intended only for internal and testing
@@ -24,6 +26,7 @@ import java.util.Arrays;
  * 
  * @author Michael Faes
  */
+@GwtCompatible
 public final class Exceptions {
     
     private Exceptions() {}

@@ -13,6 +13,8 @@ import ch.trick17.betterchecks.fluent.ObjectCheck;
 import ch.trick17.betterchecks.fluent.PrimitiveArrayCheck;
 import ch.trick17.betterchecks.fluent.StringCheck;
 import ch.trick17.betterchecks.fluent.UrlCheck;
+import ch.trick17.betterchecks.util.GwtCompatible;
+import ch.trick17.betterchecks.util.GwtIncompatible;
 
 /**
  * Provides the same functionality as the {@link Check} class, allowing an even
@@ -34,6 +36,7 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * 
  * @author Michael Faes
  */
+@GwtCompatible
 public final class CompactChecks {
     
     private CompactChecks() {}
@@ -146,6 +149,7 @@ public final class CompactChecks {
      * See {@link Check#that(URL)}
      */
     @SuppressWarnings("javadoc")
+    @GwtIncompatible("java.net.URL")
     public static UrlCheck check(final URL argument) {
         return Check.that(argument);
     }

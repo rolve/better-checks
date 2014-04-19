@@ -5,6 +5,7 @@ import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.CompactChecks;
 import ch.trick17.betterchecks.Exceptions;
 import ch.trick17.betterchecks.InvalidCheckException;
+import ch.trick17.betterchecks.util.GwtCompatible;
 
 /**
  * The base class for <em>all</em> checks. It manages the state common to all
@@ -24,6 +25,7 @@ import ch.trick17.betterchecks.InvalidCheckException;
  *            itself (with the correct static type), which is necessary for the
  *            fluent interface of all checks.
  */
+@GwtCompatible
 public abstract class BaseCheck<C extends BaseCheck<C>> {
     
     /**

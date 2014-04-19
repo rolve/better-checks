@@ -5,9 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-import java.util.regex.Pattern;
 
 import ch.trick17.betterchecks.fluent.ObjectCheck;
+import ch.trick17.betterchecks.util.FormatPair;
+import ch.trick17.betterchecks.util.GwtCompatible;
+import ch.trick17.betterchecks.util.GwtIncompatible;
 
 /**
  * Provides access to the configuration of the Better Checks library.
@@ -39,12 +41,13 @@ import ch.trick17.betterchecks.fluent.ObjectCheck;
  * 
  * @author Michael Faes
  */
+@GwtCompatible
 public final class Config {
     
     /* Constants */
     
     /** The base name of the config file for this library: <code>{@value}</code> */
-    public static final String CONFIG_BASE_NAME = "better-checks-config";
+    @GwtIncompatible("Configuration not supported with GWT") public static final String CONFIG_BASE_NAME = "better-checks-config";
     
     /**
      * The key for disabling stack trace cleaning in the config file:
@@ -52,7 +55,7 @@ public final class Config {
      * 
      * @see #isCleanStackTracesEnabled()
      */
-    public static final String CLEAN_STACK_TRACES_ENABLED_KEY = "cleanStackTraces";
+    @GwtIncompatible("Configuration not supported with GWT") public static final String CLEAN_STACK_TRACES_ENABLED_KEY = "cleanStackTraces";
     
     /**
      * The key for setting the default argument name in the config file:
@@ -60,7 +63,7 @@ public final class Config {
      * 
      * @see #getDefaultArgumentName()
      */
-    public static final String DEFAULT_ARG_NAME_KEY = "defaultArgumentName";
+    @GwtIncompatible("Configuration not supported with GWT") public static final String DEFAULT_ARG_NAME_KEY = "defaultArgumentName";
     
     private static final String MSG_FORMAT_SUFFIX = ".format";
     
@@ -88,6 +91,7 @@ public final class Config {
      * 
      * @return The loaded config
      */
+    @GwtIncompatible("Configuration not supported with GWT")
     static Config loadConfig() {
         final Config theConfig = new Config();
         
@@ -105,7 +109,7 @@ public final class Config {
                 CLEAN_STACK_TRACES_ENABLED_KEY,
                 DEFAULT_CLEAN_STRACK_TRACES_ENABLED);
         
-        theConfig.messageFormats = new HashMap<MessageType, Config.FormatPair>();
+        theConfig.messageFormats = new HashMap<MessageType, FormatPair>();
         for(final MessageType msgType : MessageType.values()) {
             final String key = msgType.name() + MSG_FORMAT_SUFFIX;
             final String format = getFromBundle(bundle, key, msgType
@@ -246,31 +250,5 @@ public final class Config {
     public String getMessageFormat(final MessageType type,
             final boolean inverted) {
         return messageFormats.get(type).getFormat(inverted);
-    }
-    
-    private static final class FormatPair {
-        
-        private static final Pattern POSITIVE_PATTERN = Pattern
-                .compile("\\+\\((.*)\\)\\+");
-        private static final Pattern NEGATIVE_PATTERN = Pattern
-                .compile("-\\((.*)\\)-");
-        
-        private final String positive;
-        private final String negative;
-        
-        FormatPair(final String rawFormat) {
-            final String negativeRemoved = NEGATIVE_PATTERN.matcher(rawFormat)
-                    .replaceAll("");
-            positive = POSITIVE_PATTERN.matcher(negativeRemoved).replaceAll(
-                    "$1");
-            final String positiveRemoved = POSITIVE_PATTERN.matcher(rawFormat)
-                    .replaceAll("");
-            negative = NEGATIVE_PATTERN.matcher(positiveRemoved).replaceAll(
-                    "$1");
-        }
-        
-        String getFormat(final boolean inverted) {
-            return inverted ? negative : positive;
-        }
     }
 }

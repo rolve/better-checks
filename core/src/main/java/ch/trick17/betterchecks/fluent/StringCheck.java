@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
 import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.InvalidCheckException;
 import ch.trick17.betterchecks.MessageType;
+import ch.trick17.betterchecks.util.GwtCompatible;
+import ch.trick17.betterchecks.util.GwtIncompatible;
 
 /**
  * The check class for {@link String} arguments.
@@ -21,10 +23,11 @@ import ch.trick17.betterchecks.MessageType;
  * The simple checks include methods like {@link #isNotEmpty()} or
  * {@link #hasLength(int)} . But there are also more powerful checks like
  * {@link #containsAll(CharSequence...) containsAll(CharSequence...)},
- * {@link #matches(Pattern)} or even {@link #isUrl()}.
+ * {@link #matches(String)} or even {@link #isInt()}.
  * 
  * @author Michael Faes
  */
+@GwtCompatible
 public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
     
     /**
@@ -289,6 +292,7 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
      *             regular expression
      * @see #matches(Pattern)
      */
+    @GwtIncompatible("java.util.regex.Pattern")
     public StringCheck matches(final Pattern regex) {
         return check(arg == null || regex.matcher(arg).matches(), ARG_MATCHES,
                 argName, regex, arg);
@@ -330,6 +334,7 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
      * @throws IllegalArgumentException
      *             if the check argument is not a valid URL
      */
+    @GwtIncompatible("java.net.URL")
     public StringCheck isUrl() {
         URL url = null;
         Exception cause = null;
@@ -363,6 +368,7 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
      *             If this check has just been inverted using {@link #not()}.
      *             This is prohibited as it would allow unintuitive checks.
      */
+    @GwtIncompatible("java.net.URL")
     public UrlCheck isUrlWhich() {
         checkConversion();
         URL url = null;

@@ -4,6 +4,7 @@ import static ch.trick17.betterchecks.MessageType.*;
 import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.CompactChecks;
 import ch.trick17.betterchecks.MessageType;
+import ch.trick17.betterchecks.util.GwtCompatible;
 
 /**
  * The check class for <code>double</code> arguments. It can also be (and
@@ -16,6 +17,7 @@ import ch.trick17.betterchecks.MessageType;
  * 
  * @author Michael Faes
  */
+@GwtCompatible
 public final class DoubleCheck extends PrimitiveBaseCheck<DoubleCheck> {
     
     private double arg;

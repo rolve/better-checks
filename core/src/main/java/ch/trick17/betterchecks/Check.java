@@ -17,6 +17,8 @@ import ch.trick17.betterchecks.fluent.ObjectCheck;
 import ch.trick17.betterchecks.fluent.PrimitiveArrayCheck;
 import ch.trick17.betterchecks.fluent.StringCheck;
 import ch.trick17.betterchecks.fluent.UrlCheck;
+import ch.trick17.betterchecks.util.GwtCompatible;
+import ch.trick17.betterchecks.util.GwtIncompatible;
 
 /**
  * The primary entry point to the Better Checks library. Argument checks are
@@ -51,8 +53,8 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * <p>
  * If there is no specific check class that matches the passed argument, a
  * generic {@link ObjectCheck} is returned, providing basic checks like
- * {@link ObjectCheck#isNotNull()} or {@link ObjectCheck#isInstanceOf(Class)}
- * and the state-modifying methods (see below).
+ * {@link ObjectCheck#isNotNull()} or {@link ObjectCheck#hasClass(Class)} and
+ * the state-modifying methods (see below).
  * <h3>Check Modification</h3>
  * <p>
  * In addition to the checking methods, the check objects provide a few modifier
@@ -129,6 +131,7 @@ import ch.trick17.betterchecks.fluent.UrlCheck;
  * @author Michael Faes
  * @see CompactChecks
  */
+@GwtCompatible
 public final class Check {
     
     private Check() {}
@@ -184,7 +187,7 @@ public final class Check {
     /**
      * Returns a generic {@link ObjectCheck} which can be use to check basic
      * properties of all objects, e.g. {@link ObjectCheck#isNotNull()} or
-     * {@link ObjectCheck#isInstanceOf(Class)}.
+     * {@link ObjectCheck#hasClass(Class)}.
      * 
      * @param argument
      *            The argument to check
@@ -408,6 +411,7 @@ public final class Check {
      * @return A check object with the argument "imprinted"
      * @see UrlCheck
      */
+    @GwtIncompatible("java.net.URL")
     public static UrlCheck that(final URL argument) {
         return FluentChecks.getObjectCheck(UrlCheck.class, argument);
     }
