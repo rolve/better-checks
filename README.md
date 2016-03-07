@@ -1,6 +1,4 @@
-# Better Checks
-
-[![build status](https://travis-ci.org/rolve/better-checks.svg)](https://travis-ci.org/rolve/better-checks)
+# Better Checks [![build status](https://travis-ci.org/rolve/better-checks.svg)](https://travis-ci.org/rolve/better-checks)
 
 The **Better Checks** library provides a lightweight and concise, but powerful way for precodition checking in Java, in particular for method arguments. Checks are written in a fluent way.
 
