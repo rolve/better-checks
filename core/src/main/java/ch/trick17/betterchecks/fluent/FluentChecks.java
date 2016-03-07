@@ -26,6 +26,7 @@ import ch.trick17.betterchecks.util.SimpleThreadLocal;
 public final class FluentChecks {
     
     // IMPROVE: Replace map with individual fields for better performance
+    // IMPROVE: Ignore above and check if just creating a new object performs better (which I suspect)
     private static final Map<Class<?>, SimpleThreadLocal<? extends BaseCheck<?>>> objectChecks;
     
     static {
