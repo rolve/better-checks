@@ -299,14 +299,15 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
     }
     
     /**
-     * Checks that the string argument is equal to the given string, throwing an
-     * exception otherwise. This check method exists merely for using with a
+     * Checks that the string argument is the same string as the given one, throwing an
+     * exception otherwise. This check method exists primarily for using with a
      * property check. See {@link UrlCheck#hasHostWhich()} for example. However,
      * in conjunction with inversion (see {@link #not()}), this method can also
      * be used to exclude a single value.
      * <p>
-     * The message type used for exceptions thrown by this method is
-     * {@link MessageType#ARG_IS}.
+     * Note that this check behaves like {@link #isEqualTo(Object)}, but is
+     * shorter, accepts only String arguments, and uses the {@link MessageType#ARG_IS}
+     * message type.
      * 
      * @param string
      *            The string this argument must be equal to
@@ -316,7 +317,7 @@ public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
      */
     public StringCheck is(final String string) {
         return check(arg == null || arg.equals(string), ARG_IS, argName,
-                string, arg);
+               string, arg);
     }
     
     /**

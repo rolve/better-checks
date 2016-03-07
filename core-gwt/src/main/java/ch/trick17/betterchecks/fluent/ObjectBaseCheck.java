@@ -1,8 +1,8 @@
 package ch.trick17.betterchecks.fluent;
 
 import static ch.trick17.betterchecks.Exceptions.illegalArgumentException;
-import static ch.trick17.betterchecks.MessageType.ARG_CLASS;
-import static ch.trick17.betterchecks.MessageType.ARG_NULL;
+import static ch.trick17.betterchecks.MessageType.*;
+
 import ch.trick17.betterchecks.Check;
 import ch.trick17.betterchecks.CompactChecks;
 import ch.trick17.betterchecks.MessageType;
@@ -111,6 +111,39 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
         inverted = false;
         return me();
     }
+
+    /**
+     * Checks that the argument is the same instance as the given object,
+     * throwing an exception otherwise. This check probably only makes sense
+     * if used together with {@link #not()}.
+     * <p>
+     * The message type used for exceptions thrown by this method is
+     * {@link MessageType#ARG_SAME_AS}.
+     * 
+     * @return This check
+     * @throws IllegalArgumentException
+     *             if the argument is not the same as the given object
+     */
+    public final C isSameAs(Object object) {
+        return check(arg == null || arg == object, ARG_SAME_AS, argName, object, arg);
+    }
+
+    /**
+     * Checks that the argument is {@linkplain Object#equals(Object) equal to} the
+     * given object, throwing an exception otherwise. 
+     * <p>
+     * The message type used for exceptions thrown by this method is
+     * {@link MessageType#ARG_EQUAL_TO}.
+     * 
+     * @return This check
+     * @throws IllegalArgumentException
+     *             if the argument is not equal to the given object
+     */
+    public final C isEqualTo(Object object) {
+        return check(arg == null || arg.equals(object), ARG_EQUAL_TO, argName, object, arg);
+    }
+    
+    // IMPROVE: isOneOf, isEqualToOneOf
     
     /**
      * Checks that the argument has the given class, throwing an exception

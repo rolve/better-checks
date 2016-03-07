@@ -4,7 +4,7 @@ The **Better Checks** library provides a lightweight and concise, but powerful w
 
 Examples:
 
-    Check.that(name).matches("hello .*!").hasLenghtBetween(0, 20);
+    Check.that(name).matches("hello .*!").hasLengthBetween(0, 20);
     Check.that(list).isNullOr().hasSize(0);
     Check.that(args).named("arguments").isNotEmpty();
 

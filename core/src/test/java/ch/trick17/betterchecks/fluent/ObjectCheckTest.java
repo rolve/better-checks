@@ -29,6 +29,60 @@ public class ObjectCheckTest {
     }
     
     @Test
+    public void testIsSameAs() {
+        Object object = new Object();
+        Object other = new Object();
+        Check.that(object).isSameAs(object);
+        
+        Exception thrown = null;
+        try {
+            Check.that((Object) null).isSameAs(other);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that(object).isSameAs(other);
+        } catch(Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_SAME_AS, false,
+                Exceptions.defaultArgName(), other, object), thrown.getMessage());
+    }
+    
+    @Test
+    public void testIsEqualTo() {
+        Object object = new String("Hello");
+        Check.that(object).isEqualTo(new String("Hello"));
+        
+        Exception thrown = null;
+        try {
+            Check.that((Object) null).isEqualTo(Object.class);
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NULL, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+        
+        thrown = null;
+        Object other = new Object();
+        try {
+            Check.that(object).isEqualTo(other);
+        } catch(Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_EQUAL_TO, false,
+                Exceptions.defaultArgName(), other, object), thrown.getMessage());
+    }
+    
+    @Test
     public void testIsInstanceOf() {
         Check.that(new Object()).isInstanceOf(Object.class);
         Check.that(new Object() {}).isInstanceOf(Object.class);
@@ -54,7 +108,7 @@ public class ObjectCheckTest {
             thrown = e;
         }
         assertTrue(thrown instanceof IllegalArgumentException);
-        assertEquals(Exceptions.formatMsg(MessageType.ARG_INSTANCE, false,
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_INSTANCE_OF, false,
                 Exceptions.defaultArgName(), String.class, Object.class),
                 thrown.getMessage());
     }

@@ -92,12 +92,16 @@
                 <configuration>
                     <aggregate>true</aggregate>
                     <format>xml</format>
+                    <check>
+                        <branchRate>100</branchRate>
+                        <totalLineRate>99</totalLineRate>
+                    </check>
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>package</phase>
                         <goals>
                             <goal>cobertura</goal>
+                            <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>

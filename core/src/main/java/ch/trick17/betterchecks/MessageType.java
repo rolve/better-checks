@@ -19,7 +19,9 @@ import ch.trick17.betterchecks.util.GwtCompatible;
 public enum MessageType {
     
     ARG_NULL("%s must +(not )+be null-( (value: %s))-"),
-    ARG_INSTANCE("%s must -(not )-be an instance of class %s (class: %s)"),
+    ARG_SAME_AS("%s must -(not )-be the same as %s (value: %s)"),
+    ARG_EQUAL_TO("%s must -(not )-be equal to %s (value: %s)"),
+    ARG_INSTANCE_OF("%s must -(not )-be an instance of class %s (class: %s)"),
     ARG_CLASS("%s must -(not )-have the class %s (class: %s)"),
     ARG_EMPTY("%s must +(not )+be empty-( (value: %s))-"),
     ARG_WHITESPACE("%s must +(not )+consist of whitespace only"),
