@@ -92,7 +92,7 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
     
     /**
      * Checks that the argument is not <code>null</code>, throwing an exception
-     * otherwise. This check is sensible to both the {@link #isNotNull()} and
+     * otherwise. This check is sensitive to both the {@link #isNullOr()} and
      * the {@link #not()} modifier. If the former is called before this one,
      * this check is redundant. The later however, changes this check to
      * <em>only</em> accept <code>null</code> as a value.
