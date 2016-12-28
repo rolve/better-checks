@@ -1,6 +1,7 @@
 package ch.trick17.betterchecks.fluent;
 
 import static ch.trick17.betterchecks.Exceptions.illegalArgumentException;
+
 import ch.trick17.betterchecks.MessageType;
 import ch.trick17.betterchecks.util.GwtCompatible;
 
@@ -27,16 +28,7 @@ public class PrimitiveBaseCheck<C extends PrimitiveBaseCheck<C>> extends
      * 
      * @see ObjectBaseCheck#intPropertyCheck(int, String)
      */
-    private boolean disabled;
-    
-    /**
-     * Resets the common state of this check class. This method must be called
-     * by the subclasses' more specific <code>reset(...)</code> methods.
-     */
-    protected final void reset() {
-        baseReset();
-        disabled = false;
-    }
+    private boolean disabled = false;
     
     /**
      * Disables all checks that are called on this check object. This is used

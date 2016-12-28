@@ -3,8 +3,6 @@ package ch.trick17.betterchecks.fluent;
 import static ch.trick17.betterchecks.Exceptions.illegalArgumentException;
 import static ch.trick17.betterchecks.MessageType.*;
 
-import ch.trick17.betterchecks.Check;
-import ch.trick17.betterchecks.CompactChecks;
 import ch.trick17.betterchecks.MessageType;
 import ch.trick17.betterchecks.util.GwtCompatible;
 
@@ -29,18 +27,9 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
         extends BaseCheck<C> {
     
     /**
-     * The argument that is currently checked. It is initialized by the
-     * {@link #reset(Object)} method.
+     * The argument that is checked.
      */
-    protected T arg;
-    
-    /**
-     * The class of the argument. Note that this may also be a subclass of the
-     * <code>C</code> type parameter (as opposed to exactly <code>C</code>). It
-     * is initialized by the {@link #reset(Object)} method and used for the
-     * {@link #hasClass(Class)} check.
-     */
-    protected Class<?> argClass;
+    protected final T arg;
     
     /**
      * This flag indicates that <code>null</code> is a valid value for the
@@ -54,22 +43,8 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
      */
     protected boolean nullAllowed;
     
-    /**
-     * Resets all state of this check. This method must be called every time
-     * before this check object is returned by one of the {@link Check} or
-     * {@link CompactChecks} methods.
-     * 
-     * @param argument
-     *            The argument to be checked
-     */
-    protected final void reset(final T argument) {
-        baseReset();
-        this.arg = argument;
-        if(argument == null)
-            argClass = null;
-        else
-            argClass = argument.getClass();
-        this.nullAllowed = false;
+    protected ObjectBaseCheck(T arg) {
+        this.arg = arg;
     }
     
     /* Modifier methods */
@@ -160,7 +135,7 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
      */
     public final C hasClass(final Class<?> clazz) {
         return check(arg == null || arg.getClass() == clazz, ARG_CLASS,
-                argName, clazz, argClass);
+                argName, clazz, arg == null ? null : arg.getClass());
     }
     
     // IMPROVE: hasClassWhich
@@ -243,38 +218,6 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
     }
     
     /**
-     * Creates an object property check for this argument. An example of an
-     * object property check is {@link UrlCheck#hasHostWhich()}. It can be used
-     * to write something like this:
-     * <p>
-     * <code>Check.that(url).hasHostWhich().endsWith(".ch");</code>
-     * <p>
-     * This method can only be used to create property checks for object
-     * properties (as opposed to primitive properties). The
-     * {@link #intPropertyCheck(int, String)} method can be used to create
-     * checks for <code>int</code> checks. Other primitive types are not
-     * supported (or needed) yet.
-     * 
-     * @param checkClass
-     *            The class of the property check
-     * @param property
-     *            The property to be checked
-     * @param propertyName
-     *            The name of the property. This is used to provide meaningful
-     *            exception messages for property checks
-     * @return A check of the given class for the given property
-     */
-    protected final <T1, C1 extends ObjectBaseCheck<T1, C1>> C1 objectPropertyCheck(
-            final Class<C1> checkClass, final T1 property,
-            final String propertyName) {
-        checkNull();
-        final C1 check = FluentChecks.getObjectCheck(checkClass, property);
-        if(nullAllowed)
-            check.isNullOr();
-        return check.named("the " + propertyName + " of " + argName);
-    }
-    
-    /**
      * Creates an <code>int</code> property check for this argument. An example
      * of an <code>int</code> property check is
      * {@link StringCheck#hasLengthWhich()}. It can be used to write something
@@ -292,7 +235,7 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
     protected final IntCheck intPropertyCheck(final int property,
             final String propertyName) {
         checkNull();
-        final IntCheck check = FluentChecks.getIntCheck(property);
+        final IntCheck check = new IntCheck(property);
         if(nullAllowed && arg == null)
             check.disable();
         return check.named("the " + propertyName + " of " + argName);

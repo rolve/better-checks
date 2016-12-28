@@ -22,7 +22,9 @@ import ch.trick17.betterchecks.util.GwtCompatible;
 public final class ObjectCheck extends ObjectBaseCheck<Object, ObjectCheck> {
     
     /**
-     * Default constructor, for internal use only.
+     * For internal use only.
      */
-    public ObjectCheck() {}
+    public ObjectCheck(Object arg) {
+        super(arg);
+    }
 }

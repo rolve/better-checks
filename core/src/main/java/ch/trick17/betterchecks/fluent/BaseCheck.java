@@ -1,8 +1,7 @@
 package ch.trick17.betterchecks.fluent;
 
 import static ch.trick17.betterchecks.Exceptions.defaultArgName;
-import ch.trick17.betterchecks.Check;
-import ch.trick17.betterchecks.CompactChecks;
+
 import ch.trick17.betterchecks.Exceptions;
 import ch.trick17.betterchecks.InvalidCheckException;
 import ch.trick17.betterchecks.util.GwtCompatible;
@@ -12,11 +11,6 @@ import ch.trick17.betterchecks.util.GwtCompatible;
  * checks: the argument name and the inverted flag. This class has two abstract
  * subclasses which all concrete checks inherit from: {@link ObjectBaseCheck}
  * and {@link PrimitiveBaseCheck}.
- * <p>
- * Because checks are reused, they must be reset using a <code>reset(...)</code>
- * method defined by the subclass before they are returned from one of the
- * {@link Check} or {@link CompactChecks} methods. These <code>reset(...)</code>
- * methods must call {@link #baseReset()}, defined by this class.
  * 
  * @author Michael Faes
  * @param <C>
@@ -33,7 +27,7 @@ public abstract class BaseCheck<C extends BaseCheck<C>> {
      * {@link Exceptions#defaultArgName()} and can be changed using the
      * {@link #named(String)} modifier method.
      */
-    protected String argName;
+    protected String argName = defaultArgName();
     
     /**
      * The inverted flag. If it is <code>true</code>, the condition of the next
@@ -42,18 +36,7 @@ public abstract class BaseCheck<C extends BaseCheck<C>> {
      * <p>
      * Note that each check must reset this flag to <code>false</code>.
      */
-    protected boolean inverted;
-    
-    /**
-     * Resets the base state of this check. It must be called by a
-     * <code>reset(...)</code> method of the subclass to make sure the base
-     * state is reset before this check is returned from one of the
-     * {@link Check} or {@link CompactChecks} methods.
-     */
-    protected final void baseReset() {
-        this.argName = defaultArgName();
-        this.inverted = false;
-    }
+    protected boolean inverted = false;
     
     /* Modifier methods */
     

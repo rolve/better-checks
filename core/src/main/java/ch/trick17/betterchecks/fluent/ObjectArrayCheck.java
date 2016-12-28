@@ -22,9 +22,11 @@ public final class ObjectArrayCheck extends
         ObjectBaseCheck<Object[], ObjectArrayCheck> {
     
     /**
-     * Default constructor, for internal use only.
+     * For internal use only.
      */
-    public ObjectArrayCheck() {}
+    public ObjectArrayCheck(Object[] arg) {
+        super(arg);
+    }
     
     /**
      * Checks that the array argument is not empty (meaning it has a length

@@ -1,11 +1,11 @@
 package ch.trick17.betterchecks.fluent;
 
-import static ch.trick17.betterchecks.MessageType.*;
+import static ch.trick17.betterchecks.MessageType.ARG_EMPTY;
+import static ch.trick17.betterchecks.MessageType.ARG_LENGTH;
+import static ch.trick17.betterchecks.MessageType.ARG_LENGTH_BETWEEN;
 
 import java.util.Arrays;
 
-import ch.trick17.betterchecks.Check;
-import ch.trick17.betterchecks.CompactChecks;
 import ch.trick17.betterchecks.MessageType;
 import ch.trick17.betterchecks.util.GwtCompatible;
 
@@ -21,28 +21,14 @@ import ch.trick17.betterchecks.util.GwtCompatible;
 public final class PrimitiveArrayCheck extends
         ObjectBaseCheck<Object, PrimitiveArrayCheck> {
     
-    private int argLength;
+    private final int argLength;
     
     /**
-     * Default constructor, for internal use only.
+     * For internal use only.
      */
-    public PrimitiveArrayCheck() {}
-    
-    /**
-     * Resets all state of this check. This method (instead of the
-     * {@link #reset(Object)} method!) must be called every time before this
-     * check object is returned by one of the {@link Check} or
-     * {@link CompactChecks} methods.
-     * 
-     * @param argument
-     *            The array argument to be checked
-     * @param argumentLength
-     *            The length of the array. If the array is <code>null</code>,
-     *            the value may be arbitrary.
-     */
-    protected void reset(final Object argument, final int argumentLength) {
-        reset(argument);
-        argLength = argumentLength;
+    public PrimitiveArrayCheck(Object arg, int argLength) {
+        super(arg);
+        this.argLength = argLength;
     }
     
     /* Checks */

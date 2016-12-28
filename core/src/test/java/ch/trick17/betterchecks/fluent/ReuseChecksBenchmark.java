@@ -4,6 +4,8 @@ import static ch.trick17.betterchecks.Exceptions.defaultArgName;
 import static org.openjdk.jmh.annotations.Mode.Throughput;
 import static org.openjdk.jmh.annotations.Scope.Thread;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,8 +18,6 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
-
-import ch.trick17.betterchecks.util.SimpleThreadLocal;
 
 @BenchmarkMode(Throughput)
 @Fork(1)
@@ -73,5 +73,37 @@ public class ReuseChecksBenchmark {
         Options options = new OptionsBuilder().include(ReuseChecksBenchmark.class.getSimpleName())
                 .warmupIterations(5).measurementIterations(20).build();
         new Runner(options).run();
+    }
+    
+    private static class SimpleThreadLocal<T> extends ThreadLocal<T> {
+        
+        private Constructor<? extends T> constructor;
+        
+        public SimpleThreadLocal(final Class<? extends T> clazz) {
+            try {
+                constructor = clazz.getConstructor();
+            } catch(final NoSuchMethodException e) {
+                final String msg = "Class " + clazz.getName()
+                        + " does not have a public no-arg constructor";
+                throw new IllegalArgumentException(msg, e);
+            }
+        }
+        
+        @Override
+        protected T initialValue() {
+            try {
+                return constructor.newInstance();
+            } catch(final IllegalAccessException e) {
+                throw new AssertionError(e); // Not possible
+            } catch(final InvocationTargetException e) {
+                final String msg = "Could not create initial value for ThreadLocal with class: "
+                        + constructor.getDeclaringClass().getName();
+                throw new RuntimeException(msg, e);
+            } catch(final InstantiationException e) {
+                final String msg = "Could not create initial value for ThreadLocal with class: "
+                        + constructor.getDeclaringClass().getName();
+                throw new RuntimeException(msg, e);
+            }
+        }
     }
 }

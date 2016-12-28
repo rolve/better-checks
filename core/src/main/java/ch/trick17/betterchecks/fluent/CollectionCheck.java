@@ -22,9 +22,11 @@ public final class CollectionCheck extends
         ObjectBaseCheck<Collection<?>, CollectionCheck> {
     
     /**
-     * Default constructor, for internal use only.
+     * For internal use only.
      */
-    public CollectionCheck() {}
+    public CollectionCheck(Collection<?> arg) {
+        super(arg);
+    }
     
     /**
      * Checks that the collection argument is not empty (meaning it has a size

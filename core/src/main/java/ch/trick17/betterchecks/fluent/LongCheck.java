@@ -1,8 +1,7 @@
 package ch.trick17.betterchecks.fluent;
 
 import static ch.trick17.betterchecks.MessageType.*;
-import ch.trick17.betterchecks.Check;
-import ch.trick17.betterchecks.CompactChecks;
+
 import ch.trick17.betterchecks.MessageType;
 import ch.trick17.betterchecks.util.GwtCompatible;
 
@@ -17,24 +16,13 @@ import ch.trick17.betterchecks.util.GwtCompatible;
 @GwtCompatible
 public final class LongCheck extends PrimitiveBaseCheck<LongCheck> {
     
-    private long arg;
+    private final long arg;
     
     /**
-     * Default constructor, for internal use only.
+     * For internal use only.
      */
-    public LongCheck() {}
-    
-    /**
-     * Resets all state of this check. This method must be called every time
-     * before this check object is returned by one of the {@link Check} or
-     * {@link CompactChecks} methods.
-     * 
-     * @param argument
-     *            The new argument to be checked
-     */
-    protected void reset(final long argument) {
-        reset();
-        this.arg = argument;
+    public LongCheck(long arg) {
+        this.arg = arg;
     }
     
     /**

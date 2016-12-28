@@ -29,9 +29,11 @@ import ch.trick17.betterchecks.util.GwtCompatible;
 public final class StringCheck extends ObjectBaseCheck<String, StringCheck> {
     
     /**
-     * Default constructor, for internal use only.
+     * For internal use only.
      */
-    public StringCheck() {}
+    public StringCheck(String arg) {
+        super(arg);
+    }
     
     /**
      * Checks that the string argument is not empty, throwing an exception

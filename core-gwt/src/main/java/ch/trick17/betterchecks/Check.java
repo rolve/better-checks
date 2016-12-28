@@ -7,7 +7,6 @@ import java.util.Collection;
 
 import ch.trick17.betterchecks.fluent.CollectionCheck;
 import ch.trick17.betterchecks.fluent.DoubleCheck;
-import ch.trick17.betterchecks.fluent.FluentChecks;
 import ch.trick17.betterchecks.fluent.IntCheck;
 import ch.trick17.betterchecks.fluent.LongCheck;
 import ch.trick17.betterchecks.fluent.NumberCheck;
@@ -76,19 +75,6 @@ import ch.trick17.betterchecks.util.GwtCompatible;
  * null check. In the above example this would mean that message must still be
  * non-null. So null check inversion with <code>isNullOr()</code> is completely
  * independent of check inversion with <code>not()</code>.
- * <h3>Intended Use and Thread Safety</h3>
- * <p>
- * To provide optimal performance, the <code>that(...)</code> methods do not
- * create a new check object for every call. Instead, each overloaded method
- * always returns the same (but modified) object (in a given thread). Therefore,
- * you should always use those objects right after getting them by using the
- * fluent API. Never should you store a check object and use it later, not even
- * in local variables, as <em>any</em> method that is called in between may also
- * use and therefore modify it.
- * <p>
- * Thread safety is guaranteed by means of thread confinement. As each thread
- * receives its own check objects, and as long as they are not shared, the use
- * of those objects is thread safe.
  * <h3>Stack Trace Cleaning</h3>
  * <p>
  * To make the Better Checks library as unintrusive as possible, the stack
@@ -192,7 +178,7 @@ public final class Check {
      * @see ObjectCheck
      */
     public static ObjectCheck that(final Object argument) {
-        return FluentChecks.getObjectCheck(ObjectCheck.class, argument);
+        return new ObjectCheck(argument);
     }
     
     /**
@@ -206,7 +192,7 @@ public final class Check {
      * @see StringCheck
      */
     public static StringCheck that(final String argument) {
-        return FluentChecks.getObjectCheck(StringCheck.class, argument);
+        return new StringCheck(argument);
     }
     
     /**
@@ -226,7 +212,7 @@ public final class Check {
      * @see ObjectArrayCheck
      */
     public static ObjectArrayCheck that(final Object[] argument) {
-        return FluentChecks.getObjectCheck(ObjectArrayCheck.class, argument);
+        return new ObjectArrayCheck(argument);
     }
     
     /**
@@ -241,7 +227,7 @@ public final class Check {
      * @see PrimitiveArrayCheck
      */
     public static PrimitiveArrayCheck that(final boolean[] argument) {
-        return FluentChecks.getPrimitiveArrayCheck(argument,
+        return new PrimitiveArrayCheck(argument,
                 argument != null ? argument.length : -1);
     }
     
@@ -257,7 +243,7 @@ public final class Check {
      * @see PrimitiveArrayCheck
      */
     public static PrimitiveArrayCheck that(final byte[] argument) {
-        return FluentChecks.getPrimitiveArrayCheck(argument,
+        return new PrimitiveArrayCheck(argument,
                 argument != null ? argument.length : -1);
     }
     
@@ -273,7 +259,7 @@ public final class Check {
      * @see PrimitiveArrayCheck
      */
     public static PrimitiveArrayCheck that(final char[] argument) {
-        return FluentChecks.getPrimitiveArrayCheck(argument,
+        return new PrimitiveArrayCheck(argument,
                 argument != null ? argument.length : -1);
     }
     
@@ -289,7 +275,7 @@ public final class Check {
      * @see PrimitiveArrayCheck
      */
     public static PrimitiveArrayCheck that(final double[] argument) {
-        return FluentChecks.getPrimitiveArrayCheck(argument,
+        return new PrimitiveArrayCheck(argument,
                 argument != null ? argument.length : -1);
     }
     
@@ -305,7 +291,7 @@ public final class Check {
      * @see PrimitiveArrayCheck
      */
     public static PrimitiveArrayCheck that(final float[] argument) {
-        return FluentChecks.getPrimitiveArrayCheck(argument,
+        return new PrimitiveArrayCheck(argument,
                 argument != null ? argument.length : -1);
     }
     
@@ -321,7 +307,7 @@ public final class Check {
      * @see PrimitiveArrayCheck
      */
     public static PrimitiveArrayCheck that(final int[] argument) {
-        return FluentChecks.getPrimitiveArrayCheck(argument,
+        return new PrimitiveArrayCheck(argument,
                 argument != null ? argument.length : -1);
     }
     
@@ -337,7 +323,7 @@ public final class Check {
      * @see PrimitiveArrayCheck
      */
     public static PrimitiveArrayCheck that(final long[] argument) {
-        return FluentChecks.getPrimitiveArrayCheck(argument,
+        return new PrimitiveArrayCheck(argument,
                 argument != null ? argument.length : -1);
     }
     
@@ -353,7 +339,7 @@ public final class Check {
      * @see PrimitiveArrayCheck
      */
     public static PrimitiveArrayCheck that(final short[] argument) {
-        return FluentChecks.getPrimitiveArrayCheck(argument,
+        return new PrimitiveArrayCheck(argument,
                 argument != null ? argument.length : -1);
     }
     
@@ -369,8 +355,7 @@ public final class Check {
      * @see CollectionCheck
      */
     public static CollectionCheck that(final Collection<?> argument) {
-        return FluentChecks.<Collection<?>, CollectionCheck> getObjectCheck(
-                CollectionCheck.class, argument);
+        return new CollectionCheck(argument);
     }
     
     // IMPROVE: Create MapCheck
@@ -392,7 +377,7 @@ public final class Check {
      * @see NumberCheck
      */
     public static NumberCheck that(final Number argument) {
-        return FluentChecks.getObjectCheck(NumberCheck.class, argument);
+        return new NumberCheck(argument);
     }
     
     /**
@@ -411,7 +396,7 @@ public final class Check {
      * @see IntCheck
      */
     public static IntCheck that(final int argument) {
-        return FluentChecks.getIntCheck(argument);
+        return new IntCheck(argument);
     }
     
     /**
@@ -425,7 +410,7 @@ public final class Check {
      * @see LongCheck
      */
     public static LongCheck that(final long argument) {
-        return FluentChecks.getLongCheck(argument);
+        return new LongCheck(argument);
     }
     
     /**
@@ -445,6 +430,6 @@ public final class Check {
      * @see DoubleCheck
      */
     public static DoubleCheck that(final double argument) {
-        return FluentChecks.getDoubleCheck(argument);
+        return new DoubleCheck(argument);
     }
 }

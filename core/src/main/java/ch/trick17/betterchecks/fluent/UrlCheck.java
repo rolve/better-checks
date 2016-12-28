@@ -18,9 +18,11 @@ import ch.trick17.betterchecks.MessageType;
 public final class UrlCheck extends ObjectBaseCheck<URL, UrlCheck> {
     
     /**
-     * Default constructor, for internal use only.
+     * For internal use only.
      */
-    public UrlCheck() {}
+    public UrlCheck(URL arg) {
+        super(arg);
+    }
     
     /**
      * Checks that the {@link URL} argument has the given protocol, throwing an

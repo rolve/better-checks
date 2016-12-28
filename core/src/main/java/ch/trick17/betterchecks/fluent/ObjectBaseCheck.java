@@ -2,8 +2,7 @@ package ch.trick17.betterchecks.fluent;
 
 import static ch.trick17.betterchecks.Exceptions.illegalArgumentException;
 import static ch.trick17.betterchecks.MessageType.*;
-import ch.trick17.betterchecks.Check;
-import ch.trick17.betterchecks.CompactChecks;
+
 import ch.trick17.betterchecks.MessageType;
 import ch.trick17.betterchecks.util.GwtCompatible;
 import ch.trick17.betterchecks.util.GwtIncompatible;
@@ -29,18 +28,9 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
         extends BaseCheck<C> {
     
     /**
-     * The argument that is currently checked. It is initialized by the
-     * {@link #reset(Object)} method.
+     * The argument that is checked.
      */
-    protected T arg;
-    
-    /**
-     * The class of the argument. Note that this may also be a subclass of the
-     * <code>C</code> type parameter (as opposed to exactly <code>C</code>). It
-     * is initialized by the {@link #reset(Object)} method and used for the
-     * {@link #hasClass(Class)} check.
-     */
-    protected Class<?> argClass;
+    protected final T arg;
     
     /**
      * This flag indicates that <code>null</code> is a valid value for the
@@ -52,24 +42,10 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
      * the condition passed to it must always start with "
      * <code>arg == null ||</code>" to not cause a {@link NullPointerException}.
      */
-    protected boolean nullAllowed;
+    protected boolean nullAllowed = false;
     
-    /**
-     * Resets all state of this check. This method must be called every time
-     * before this check object is returned by one of the {@link Check} or
-     * {@link CompactChecks} methods.
-     * 
-     * @param argument
-     *            The argument to be checked
-     */
-    protected final void reset(final T argument) {
-        baseReset();
-        this.arg = argument;
-        if(argument == null)
-            argClass = null;
-        else
-            argClass = argument.getClass();
-        this.nullAllowed = false;
+    protected ObjectBaseCheck(T arg) {
+        this.arg = arg;
     }
     
     /* Modifier methods */
@@ -163,7 +139,7 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
     @GwtIncompatible("Class.isAssignableFrom")
     public final C isInstanceOf(final Class<?> type) {
         return check(arg == null || type.isAssignableFrom(arg.getClass()),
-                ARG_INSTANCE_OF, argName, type, argClass);
+                ARG_INSTANCE_OF, argName, type, arg == null ? null : arg.getClass());
     }
     
     /**
@@ -182,7 +158,7 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
      */
     public final C hasClass(final Class<?> clazz) {
         return check(arg == null || arg.getClass() == clazz, ARG_CLASS,
-                argName, clazz, argClass);
+                argName, clazz, arg == null ? null : arg.getClass());
     }
     
     // IMPROVE: hasClassWhich
@@ -286,11 +262,19 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
      *            exception messages for property checks
      * @return A check of the given class for the given property
      */
+    @SuppressWarnings("unchecked")
     protected final <T1, C1 extends ObjectBaseCheck<T1, C1>> C1 objectPropertyCheck(
             final Class<C1> checkClass, final T1 property,
             final String propertyName) {
         checkNull();
-        final C1 check = FluentChecks.getObjectCheck(checkClass, property);
+        
+        C1 check;
+        try {
+            check = (C1) checkClass.getConstructors()[0].newInstance(property);
+        } catch(Exception e) {
+            throw new AssertionError("could not instantiate class" + checkClass.getName());
+        }
+        
         if(nullAllowed)
             check.isNullOr();
         return check.named("the " + propertyName + " of " + argName);
@@ -314,7 +298,7 @@ public abstract class ObjectBaseCheck<T, C extends ObjectBaseCheck<T, C>>
     protected final IntCheck intPropertyCheck(final int property,
             final String propertyName) {
         checkNull();
-        final IntCheck check = FluentChecks.getIntCheck(property);
+        final IntCheck check = new IntCheck(property);
         if(nullAllowed && arg == null)
             check.disable();
         return check.named("the " + propertyName + " of " + argName);

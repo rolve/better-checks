@@ -46,9 +46,11 @@ import ch.trick17.betterchecks.util.GwtCompatible;
 public final class NumberCheck extends ObjectBaseCheck<Number, NumberCheck> {
     
     /**
-     * Default constructor, for internal use only.
+     * For internal use only.
      */
-    public NumberCheck() {}
+    public NumberCheck(Number arg) {
+        super(arg);
+    }
     
     /**
      * Checks that the argument is positive, throwing an exception otherwise.
