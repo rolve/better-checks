@@ -10,7 +10,7 @@
     <name>Better Checks Core</name>
     <properties>
         <powermock.version>1.5.2</powermock.version>
-        <jmh.version>1.17.3</jmh.version>
+        <jmh.version>1.16</jmh.version>
     </properties>
     <dependencies>
         <dependency>
