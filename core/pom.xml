@@ -10,6 +10,7 @@
     <name>Better Checks Core</name>
     <properties>
         <powermock.version>1.5.2</powermock.version>
+        <jmh.version>1.17.3</jmh.version>
     </properties>
     <dependencies>
         <dependency>
@@ -40,6 +41,18 @@
             <groupId>net.trajano.commons</groupId>
             <artifactId>commons-testing</artifactId>
             <version>1.0.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>${jmh.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <version>${jmh.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
