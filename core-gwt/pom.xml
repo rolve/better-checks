@@ -13,16 +13,14 @@
         <gwtVersion>2.6.0</gwtVersion>
         <maven.main.skip>true</maven.main.skip>
         <maven.test.skip>true</maven.test.skip>
-        <maven.javadoc.skip>true</maven.javadoc.skip>
-        <source.skip>true</source.skip>
         <cobertura.skip>true</cobertura.skip>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>ch.trick17.better-checks</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>better-checks-core</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.gwt</groupId>
@@ -75,15 +73,13 @@
                         <configuration>
                             <target name="copy-gwt-sources">
                                 <copy toDir="${project.build.directory}/gwt-sources" overwrite="true">
-                                    <fileset
-                                        dir="${project.build.directory}/core-sources">
+                                    <fileset dir="${project.build.directory}/core-sources">
                                         <contains text="@GwtCompatible" />
                                     </fileset>
-                                </copy>
-                                <copy toDir="${project.build.directory}/gwt-sources" overwrite="true">
-                                    <fileset dir="${project.build.sourceDirectory}">
-                                        <contains text="@GwtCompatible" />
+                                    <fileset dir="${project.build.directory}/core-sources">
+                                        <include name="**/package-info.java" />
                                     </fileset>
+                                    <fileset dir="${project.build.sourceDirectory}" />
                                 </copy>
                             </target>
                         </configuration>
@@ -107,6 +103,14 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <configuration>
+                    <sourcepath>${project.build.directory}/gwt-sources</sourcepath>
+                </configuration>
             </plugin>
         </plugins>
     </build>

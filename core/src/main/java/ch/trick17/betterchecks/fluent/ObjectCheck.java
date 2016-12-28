@@ -13,8 +13,7 @@ import ch.trick17.betterchecks.util.GwtCompatible;
  * {@link CollectionCheck} for {@link Collection}s.
  * <p>
  * This class provides check methods that are common to all non-primitive types
- * like {@link #isNotNull()}, {@link #isInstanceOf(Class)} or
- * {@link #hasClass(Class)}.
+ * like {@link #isNotNull()} or {@link #hasClass(Class)}.
  * 
  * @author Michael Faes
  */

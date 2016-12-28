@@ -110,7 +110,7 @@ public final class Config {
      * is used when arguments are not explicitly named using the
      * {@link ObjectCheck#named(String)} modifier.
      * <p>
-     * The default value (meaning the <em>default</em> default name</em>) is
+     * The default value (meaning the <em>default</em> default name) is
      * {@value #DEFAULT_DEFAULT_ARG_NAME}.
      * 
      * @return The default argument name for exception messages
