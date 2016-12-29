@@ -52,7 +52,7 @@
         <site>
             <id>better-checks.trick17.ch</id>
             <name>Better Checks Website</name>
-            <url>ftp://trick17.ch/html/better-checks.trick17.ch</url>
+            <url>ftp://trick17.ch/</url> <!-- Use with user that has only access to correct sub dir  -->
         </site>
     </distributionManagement>
     <build>
