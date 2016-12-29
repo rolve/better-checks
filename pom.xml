@@ -29,6 +29,12 @@
             <email>michael@trick17.ch</email>
         </developer>
     </developers>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
     <scm>
         <url>https://github.com/rolve/better-checks</url>
         <connection>scm:git:https://github.com/rolve/better-checks.git</connection>
@@ -52,7 +58,7 @@
         <site>
             <id>better-checks.trick17.ch</id>
             <name>Better Checks Website</name>
-            <url>ftp://trick17.ch/</url> <!-- Use with user that has only access to correct sub dir  -->
+            <url>ftp://trick17.ch/</url> <!-- Use with user that has only access to correct sub dir -->
         </site>
     </distributionManagement>
     <build>
