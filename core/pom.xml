@@ -11,6 +11,8 @@
     <properties>
         <powermock.version>1.5.2</powermock.version>
         <jmh.version>1.16</jmh.version>
+        <maven.site.skip>true</maven.site.skip>
+        <maven.site.deploy.skip>true</maven.site.deploy.skip>
     </properties>
     <dependencies>
         <dependency>
@@ -56,16 +58,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.9.1</version>
-                <configuration>
-                    <javadocDirectory>${project.basedir}/../src/main/javadoc</javadocDirectory>
-                    <overview>${project.basedir}/../src/main/javadoc/overview.html</overview>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
