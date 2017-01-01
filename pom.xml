@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.trick17.better-checks</groupId>
     <artifactId>better-checks</artifactId>
@@ -39,6 +38,7 @@
         <url>https://github.com/rolve/better-checks</url>
         <connection>scm:git:https://github.com/rolve/better-checks.git</connection>
         <developerConnection>scm:git:https://github.com/rolve/better-checks.git</developerConnection>
+        <tag>HEAD</tag>
     </scm>
     <issueManagement>
         <system>Github</system>
@@ -122,6 +122,11 @@
                 <version>2.5.3</version>
                 <configuration>
                     <mavenExecutorId>forked-path</mavenExecutorId>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <pushChanges>false</pushChanges>
+                    <localCheckout>true</localCheckout>
+                    <goals>deploy</goals>
                 </configuration>
             </plugin>
         </plugins>
