@@ -3,7 +3,7 @@
     <parent>
         <groupId>ch.trick17.better-checks</groupId>
         <artifactId>better-checks</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
     <artifactId>better-checks-core</artifactId>
     <name>Better Checks Core</name>
