@@ -52,6 +52,8 @@ public enum MessageType {
     ARG_INDEX(
             "%s must -(not )-be a valid index for a list or array of size %s (value: %s)"),
     ARG_NAN("%s must +(not )+be NaN"),
+    ARG_NUMBER("%s must -(not )-be a number (+(not )+NaN)"),
+    ARG_FINITE("%s must -(not )-be finite (value: %s)"),
     ARG_INFINITE("%s must +(not )+be infinite (value: %s)"),
     ARG_PROTOCOL("%s must -(not )-have the protocol %s (value: %s)");
     

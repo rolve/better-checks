@@ -43,6 +43,16 @@ public class DoubleCheckTest {
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MessageType.ARG_POSITIVE, false,
                 Exceptions.defaultArgName(), -1.5), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that(Double.NaN).isPositive();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_POSITIVE, false,
+                Exceptions.defaultArgName(), Double.NaN), thrown.getMessage());
     }
     
     @Test
@@ -74,6 +84,16 @@ public class DoubleCheckTest {
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MessageType.ARG_NEGATIVE, false,
                 Exceptions.defaultArgName(), 1.5), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that(Double.NaN).isNegative();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NEGATIVE, false,
+                Exceptions.defaultArgName(), Double.NaN), thrown.getMessage());
     }
     
     @Test
@@ -205,6 +225,7 @@ public class DoubleCheckTest {
     }
     
     @Test
+    @SuppressWarnings("deprecation")
     public void testIsNotNaN() {
         Check.that(0.0).isNotNaN();
         Check.that(1.1).isNotNaN();
@@ -242,6 +263,133 @@ public class DoubleCheckTest {
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MessageType.ARG_NAN, true, Exceptions
                 .defaultArgName()), thrown.getMessage());
+    }
+    
+    @Test
+    public void testIsNumber() {
+        Check.that(0.0).isNumber();
+        Check.that(1.1).isNumber();
+        Check.that(Double.POSITIVE_INFINITY).isNumber();
+        Check.that(Double.MIN_VALUE).isNumber();
+        
+        Check.that(Double.NaN).not().isNumber();
+        
+        Exception thrown = null;
+        try {
+            Check.that(Double.NaN).isNumber();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NUMBER, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that(Float.NaN).isNumber();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NUMBER, false,
+                Exceptions.defaultArgName()), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that(0.0).not().isNumber();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_NUMBER, true, Exceptions
+                .defaultArgName()), thrown.getMessage());
+    }
+    
+    @Test
+    public void testIsFinite() {
+        Check.that(0.0).isFinite();
+        Check.that(1.1).isFinite();
+        Check.that(Double.MAX_VALUE).isFinite();
+        
+        Check.that(Double.POSITIVE_INFINITY).not().isFinite();
+        Check.that(Double.NEGATIVE_INFINITY).not().isFinite();
+        Check.that(Double.NaN).not().isFinite();
+        
+        Exception thrown = null;
+        try {
+            Check.that(Double.POSITIVE_INFINITY).isFinite();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_FINITE, false,
+                Exceptions.defaultArgName(), Double.POSITIVE_INFINITY), thrown
+                .getMessage());
+
+        thrown = null;
+        try {
+            Check.that(Double.NEGATIVE_INFINITY).isFinite();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_FINITE, false,
+                Exceptions.defaultArgName(), Double.NEGATIVE_INFINITY), thrown
+                .getMessage());
+        
+        thrown = null;
+        try {
+            Check.that(Double.NaN).isFinite();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_FINITE, false,
+                Exceptions.defaultArgName(), Double.NaN), thrown
+                .getMessage());
+        
+        thrown = null;
+        try {
+            Check.that(Float.POSITIVE_INFINITY).isFinite();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_FINITE, false,
+                Exceptions.defaultArgName(), Double.POSITIVE_INFINITY), thrown
+                .getMessage());
+
+        thrown = null;
+        try {
+            Check.that(Float.NEGATIVE_INFINITY).isFinite();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_FINITE, false,
+                Exceptions.defaultArgName(), Double.NEGATIVE_INFINITY), thrown
+                .getMessage());
+
+        thrown = null;
+        try {
+            Check.that(Float.NaN).isFinite();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_FINITE, false,
+                Exceptions.defaultArgName(), Double.NaN), thrown
+                .getMessage());
+        
+        thrown = null;
+        try {
+            Check.that(0.0).not().isFinite();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(Exceptions.formatMsg(MessageType.ARG_FINITE, true,
+                Exceptions.defaultArgName(), 0.0), thrown.getMessage());
     }
     
     @Test

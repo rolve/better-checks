@@ -155,8 +155,8 @@ public final class DoubleCheck extends PrimitiveBaseCheck<DoubleCheck> {
     }
     
     /**
-     * Checks that the <code>double</code> argument is not NaN (not a number,
-     * see {@link Double#NaN}), throwing an exception otherwise.
+     * Checks that the <code>double</code> argument is not {@linkplain Double#NaN NaN},
+     * throwing an exception otherwise.
      * <p>
      * The message type used for exceptions thrown by this method is
      * {@link MessageType#ARG_NAN}.
@@ -164,14 +164,52 @@ public final class DoubleCheck extends PrimitiveBaseCheck<DoubleCheck> {
      * @return This check
      * @throws IllegalArgumentException
      *             if argument is NaN
+     * @deprecated use {@link #isNumber()} instead.
      */
+    @Deprecated
     public DoubleCheck isNotNaN() {
         return check(!Double.isNaN(arg), ARG_NAN, argName);
     }
     
     /**
-     * Checks that the <code>double</code> argument is not infinite (positive or
-     * negative), throwing an exception otherwise.
+     * Checks that the <code>double</code> argument is a number (as opposed to 
+     * {@linkplain Double#NaN NaN}), throwing an exception otherwise.
+     * <p>
+     * The message type used for exceptions thrown by this method is
+     * {@link MessageType#ARG_NUMBER}.
+     * 
+     * @return This check
+     * @throws IllegalArgumentException
+     *             if argument is NaN
+     */
+    public DoubleCheck isNumber() {
+        return check(!Double.isNaN(arg), ARG_NUMBER, argName);
+    }
+    
+    /**
+     * Checks that the <code>double</code> argument is finite, throwing an
+     * exception otherwise. A <code>double</code> value is finite if it is
+     * not {@linkplain Double#isInfinite(double) infinite} and not
+     * {@linkplain Double#NaN NaN}.
+     * <p>
+     * The message type used for exceptions thrown by this method is
+     * {@link MessageType#ARG_FINITE}.
+     * 
+     * @return This check
+     * @throws IllegalArgumentException
+     *             if argument is not finite
+     */
+    public DoubleCheck isFinite() {
+        return check(!Double.isNaN(arg) && !Double.isInfinite(arg), ARG_FINITE,
+                argName, arg);
+    }
+    
+    /**
+     * Checks that the <code>double</code> argument is not an infinite number
+     * (positive or negative), throwing an exception otherwise. Note that
+     * {@linkplain Double#NaN NaN}, by definition, is not an infinite number
+     * either, so it will <strong>not</strong> be rejected by this check.
+     * If you want to reject NaN too, use {@link #isFinite()} instead.
      * <p>
      * The message type used for exceptions thrown by this method is
      * {@link MessageType#ARG_INFINITE}.
