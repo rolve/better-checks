@@ -273,7 +273,7 @@ public class DoubleCheckTest {
         }
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MessageType.ARG_INFINITE, false,
-                Exceptions.defaultArgName(), Double.POSITIVE_INFINITY), thrown
+                Exceptions.defaultArgName(), Double.NEGATIVE_INFINITY), thrown
                 .getMessage());
         
         thrown = null;
@@ -295,7 +295,7 @@ public class DoubleCheckTest {
         }
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(Exceptions.formatMsg(MessageType.ARG_INFINITE, false,
-                Exceptions.defaultArgName(), Double.POSITIVE_INFINITY), thrown
+                Exceptions.defaultArgName(), Double.NEGATIVE_INFINITY), thrown
                 .getMessage());
         
         thrown = null;
