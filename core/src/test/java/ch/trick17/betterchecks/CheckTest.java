@@ -7,12 +7,15 @@ import org.junit.Test;
 
 public class CheckTest {
     
+    @SuppressWarnings("deprecation")
     @Test
     public void testArguments() {
+        Check.args(true, "Everything ok");
         Check.arguments(true, "Everything ok");
         
         Exception thrown = null;
         try {
+            Check.args(false, "Those arguments are no good");
             Check.arguments(false, "Those arguments are no good");
         } catch(final Exception e) {
             thrown = e;

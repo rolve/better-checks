@@ -141,9 +141,32 @@ public final class Check {
      *             if the condition is <code>false</code>
      * @see Check#state(boolean, String)
      */
-    public static void arguments(final boolean condition, final String message) {
+    public static void args(final boolean condition, final String message) {
         if(!condition)
             throw illegalArgumentException(message);
+    }
+    
+    /**
+     * A simple argument check that throws an {@link IllegalArgumentException}
+     * with the given message if the given condition is <code>false</code>.
+     * <p>
+     * Use this as a fallback option if you have to check something that the
+     * fluent checks don't provide or if you have to check two arguments
+     * together. Otherwise the fluent checks will probably be more readable and
+     * concise as you don't have to provide the exception message.
+     * 
+     * @param condition
+     *            The condition that must hold for the method arguments
+     * @param message
+     *            The exception message
+     * @throws IllegalArgumentException
+     *             if the condition is <code>false</code>
+     * @see Check#state(boolean, String)
+     * @deprecated Use the shorter {@link #args(boolean, String)} instead
+     */
+    @Deprecated
+    public static void arguments(final boolean condition, final String message) {
+        args(condition, message);
     }
     
     /**
