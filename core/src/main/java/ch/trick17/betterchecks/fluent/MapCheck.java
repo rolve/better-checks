@@ -137,5 +137,21 @@ public final class MapCheck extends ObjectBaseCheck<Map<?, ?>, MapCheck> {
                 arg);
     }
     
+    /**
+     * Checks that the map argument does not contain any <code>null</code> elements, i.e., key or
+     * values, throwing an exception otherwise. An empty map is considered valid by this check.
+     * <p>
+     * The message type used for exceptions thrown by this method is
+     * {@link MessageType#ARG_CONTAINS_NULL}.
+     * 
+     * @return This check
+     * @throws IllegalArgumentException
+     *             If the map contains one or more <code>null</code> elements
+     */
+    public MapCheck containsNoNull() {
+        return check(arg == null || (!arg.keySet().contains(null) && !arg.values().contains(null)),
+                ARG_CONTAINS_NULL, argName, arg);
+    }
+    
     // IMPROVE: allKeysOfType, allValuesOfType
 }

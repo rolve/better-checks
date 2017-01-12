@@ -211,4 +211,42 @@ public class MapCheckTest {
         assertTrue(thrown instanceof IllegalArgumentException);
         assertEquals(formatMsg(ARG_NULL, false, defaultArgName()), thrown.getMessage());
     }
+    
+    @Test
+    public void testContainsNoNull() {
+        Check.that(asMap("hello", 1, "world", 2)).containsNoNull();
+        Check.that(asMap("hello", 1)).containsNoNull();
+        Check.that(asMap()).containsNoNull();
+        
+        Check.that((Map<?, ?>) null).isNullOr().containsNoNull();
+        
+        Exception thrown = null;
+        try {
+            Check.that(asMap("a", 1, "b", 2, null, 3)).containsNoNull();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(formatMsg(ARG_CONTAINS_NULL, false, defaultArgName(),
+                "{a=1, b=2, null=3}"), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that(asMap("a", 1, "b", 2, "c", null)).containsNoNull();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(formatMsg(ARG_CONTAINS_NULL, false, defaultArgName(),
+                "{a=1, b=2, c=null}"), thrown.getMessage());
+        
+        thrown = null;
+        try {
+            Check.that((Map<?, ?>) null).containsNoNull();
+        } catch(final Exception e) {
+            thrown = e;
+        }
+        assertTrue(thrown instanceof IllegalArgumentException);
+        assertEquals(formatMsg(ARG_NULL, false, defaultArgName()), thrown.getMessage());
+    }
 }
