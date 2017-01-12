@@ -39,6 +39,8 @@ public enum MessageType {
     ARG_CONTAINS_ALL(
             "%s must -(not )-contain all of the following sequences: %s (value: %s)"),
     ARG_CONTAINS_NULL("%s must +(not )+contain any null elements (value: %s)"),
+    ARG_CONTAINS_NULL_KEY("%s must +(not )+contain the null key (value: %s)"),
+    ARG_CONTAINS_NULL_VALUES("%s must +(not )+contain any null values (value: %s)"),
     ARG_MATCHES("%s must -(not )-match the regex pattern \"%s\" (value: %s)"),
     ARG_URL("%s must -(not )-be a valid url (value: %s)"),
     ARG_INT("%s must -(not )-be a valid integer between " + Integer.MIN_VALUE

@@ -1,11 +1,13 @@
 package ch.trick17.betterchecks;
 
 import java.util.Collection;
+import java.util.Map;
 
 import ch.trick17.betterchecks.fluent.CollectionCheck;
 import ch.trick17.betterchecks.fluent.DoubleCheck;
 import ch.trick17.betterchecks.fluent.IntCheck;
 import ch.trick17.betterchecks.fluent.LongCheck;
+import ch.trick17.betterchecks.fluent.MapCheck;
 import ch.trick17.betterchecks.fluent.NumberCheck;
 import ch.trick17.betterchecks.fluent.ObjectArrayCheck;
 import ch.trick17.betterchecks.fluent.ObjectCheck;
@@ -131,6 +133,14 @@ public final class CompactChecks {
      */
     @SuppressWarnings("javadoc")
     public static CollectionCheck check(final Collection<?> argument) {
+        return Check.that(argument);
+    }
+    
+    /**
+     * See {@link Check#that(Map)}
+     */
+    @SuppressWarnings("javadoc")
+    public static MapCheck check(final Map<?, ?> argument) {
         return Check.that(argument);
     }
     

@@ -4,11 +4,13 @@ import static ch.trick17.betterchecks.Exceptions.illegalArgumentException;
 import static ch.trick17.betterchecks.Exceptions.illegalStateException;
 
 import java.util.Collection;
+import java.util.Map;
 
 import ch.trick17.betterchecks.fluent.CollectionCheck;
 import ch.trick17.betterchecks.fluent.DoubleCheck;
 import ch.trick17.betterchecks.fluent.IntCheck;
 import ch.trick17.betterchecks.fluent.LongCheck;
+import ch.trick17.betterchecks.fluent.MapCheck;
 import ch.trick17.betterchecks.fluent.NumberCheck;
 import ch.trick17.betterchecks.fluent.ObjectArrayCheck;
 import ch.trick17.betterchecks.fluent.ObjectCheck;
@@ -380,8 +382,21 @@ public final class Check {
     public static CollectionCheck that(final Collection<?> argument) {
         return new CollectionCheck(argument);
     }
-    
-    // IMPROVE: Create MapCheck
+
+    /**
+     * Returns a {@link MapCheck} which can be use to check various
+     * properties of a {@link Map}, e.g.
+     * {@link MapCheck#hasSize(int)} or
+     * {@link MapCheck#containsNoNullKey()}.
+     * 
+     * @param argument
+     *            The Map argument to check
+     * @return A check object with the argument "imprinted"
+     * @see MapCheck
+     */
+    public static MapCheck that(final Map<?, ?> argument) {
+        return new MapCheck(argument);
+    }
     
     /**
      * Returns a {@link NumberCheck} which can be use to check various
