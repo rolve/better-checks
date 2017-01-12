@@ -130,19 +130,9 @@ public final class CollectionCheck extends
      *             elements
      */
     public CollectionCheck containsNoNull() {
-        return check(arg == null || testContainsNoNull(), ARG_CONTAINS_NULL,
+        return check(arg == null || !arg.contains(null), ARG_CONTAINS_NULL,
                 argName, arg);
     }
     
     // IMPROVE: allElementsOfType
-    
-    /* Implementation methods */
-    
-    private boolean testContainsNoNull() {
-        for(final Object element : arg) {
-            if(element == null)
-                return false;
-        }
-        return true;
-    }
 }
