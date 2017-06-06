@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.trick17.better-checks</groupId>
     <artifactId>better-checks</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1</version>
     <name>Better Checks</name>
     <description>The Better Checks library aims to provide a lightweight and concise, but powerful way for precondition checking, in particular for method arguments.</description>
     <packaging>pom</packaging>
@@ -38,7 +38,7 @@
         <url>https://github.com/rolve/better-checks</url>
         <connection>scm:git:https://github.com/rolve/better-checks.git</connection>
         <developerConnection>scm:git:https://github.com/rolve/better-checks.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>v1.1</tag>
     </scm>
     <issueManagement>
         <system>Github</system>
